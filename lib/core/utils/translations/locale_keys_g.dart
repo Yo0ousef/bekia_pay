@@ -1,0 +1,56 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+// ignore_for_file: constant_identifier_names
+
+abstract class  LocaleKeys {
+  static const welcome = 'welcome';
+  static const on_boarding_title_1 = 'on_boarding_title_1';
+  static const on_boarding_description_1 = 'on_boarding_description_1';
+  static const on_boarding_title_2 = 'on_boarding_title_2';
+  static const on_boarding_description_2 = 'on_boarding_description_2';
+  static const on_boarding_title_3 = 'on_boarding_title_3';
+  static const on_boarding_description_3 = 'on_boarding_description_3';
+  static const on_boarding_title_4 = 'on_boarding_title_4';
+  static const on_boarding_description_4 = 'on_boarding_description_4';
+  static const get_started = 'get_started';
+  static const skip = 'skip';
+  static const do_not_have_an_account = 'do_not_have_an_account';
+  static const create_new_account = 'create_new_account';
+  static const sign_up = 'sign_up';
+  static const sign_in = 'sign_in';
+  static const email = 'email';
+  static const password = 'password';
+  static const forgot_password = 'forgot_password';
+  static const required = 'required';
+  static const welcome_back = 'welcome_back';
+  static const happy_to_see_you = 'happy_to_see_you';
+  static const please_enter_valid_email = 'please_enter_valid_email';
+  static const unsupported_email_domain = 'unsupported_email_domain';
+  static const session_creation_failed = 'session_creation_failed';
+  static const invaild_email_password = 'invaild_email_password';
+  static const please_verify_email = 'please_verify_email';
+  static const invaild_email_format = 'invaild_email_format';
+  static const too_many_login_attempts = 'too_many_login_attempts';
+  static const no_internet_connection = 'no_internet_connection';
+  static const email_already_used = 'email_already_used';
+  static const password_too_weak = 'password_too_weak';
+  static const passwords_do_not_match = 'passwords_do_not_match';
+  static const hello_get_started = 'hello_get_started';
+  static const create_and_join = 'create_and_join';
+  static const already_have_account = 'already_have_account';
+  static const please_enter_valid_number = 'please_enter_valid_number';
+  static const password_must_be_at_least_8_characters = 'password_must_be_at_least_8_characters';
+  static const must_contain_uppercase = 'must_contain_uppercase';
+  static const must_contain_lowercase = 'must_contain_lowercase';
+  static const must_contain_number = 'must_contain_number';
+  static const phone_number = 'phone_number';
+  static const name = 'name';
+  static const governorate = 'governorate';
+  static const city = 'city';
+  static const street = 'street';
+  static const house_number = 'house_number';
+  static const floor = 'floor';
+  static const apartment_number = 'apartment_number';
+  static const confirm_password = 'confirm_password';
+
+}

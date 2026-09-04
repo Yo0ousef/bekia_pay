@@ -1,0 +1,120 @@
+// DO NOT EDIT. This is code generated via package:easy_localization/generate.dart
+
+// ignore_for_file: prefer_single_quotes, avoid_renaming_method_parameters, constant_identifier_names
+
+import 'dart:ui';
+
+import 'package:easy_localization/easy_localization.dart' show AssetLoader;
+
+class CodegenLoader extends AssetLoader{
+  const CodegenLoader();
+
+  @override
+  Future<Map<String, dynamic>?> load(String path, Locale locale) {
+    return Future.value(mapLocales[locale.toString()]);
+  }
+
+  static const Map<String,dynamic> _ar = {
+  "welcome": "مرحباً بك في",
+  "on_boarding_title_1": "حوِّل النفايات إلى كنز",
+  "on_boarding_description_1": "أعد تدوير نفايات منزلك بسهولة واحصل على نقاط قيّمة يمكنك استخدامها في سوق التطبيق",
+  "on_boarding_title_2": "استبدل النفايات بالطعام",
+  "on_boarding_description_2": "اجمع المواد القابلة لإعادة التدوير، وحدّد موعداً لجمعها، واكسب نقاط 'بكية' لتصرفها على الطعام وسلع أخرى",
+  "on_boarding_title_3": "ساهم في بناء عالمٍ أكثر خضرة",
+  "on_boarding_description_3": "كل كيس من المواد القابلة للتدوير تقدمه يساعد في حماية البيئة ويدعم أسلوب حياةٍ مستدام للجميع",
+  "on_boarding_title_4": "هل أنت مستعد للبدء؟",
+  "on_boarding_description_4": " انضم إلى تطبيق 'Bekia Pay' واجعل نفاياتك تعمل لصالحك!",
+  "get_started": "ابدأ الآن",
+  "skip": "تخطي",
+  "do_not_have_an_account": "لا تمتلك حساب؟",
+  "create_new_account": "إنشاء حساب",
+  "sign_up": "إنشاء حساب",
+  "sign_in": "تسجيل الدخول",
+  "email": "عنوان البريد الإلكتروني",
+  "password": "كلمة المرور",
+  "forgot_password": "نسيت كلمة المرور",
+  "required": "هذا الحقل مطلوب",
+  "welcome_back": "أهلاً، مرحباً بعودتك",
+  "happy_to_see_you": "يسعدنا رؤيتك مجدداً، لاستخدام حسابك يرجى تسجيل الدخول أولاً.",
+  "please_enter_valid_email": "الرجاء إدخال عنوان بريد صحيح",
+  "unsupported_email_domain": "نطاق البريد الإلكتروني هذا غير مدعوم.",
+  "session_creation_failed": "فشلت عملية إنشاء الجلسة. يرجى المحاولة مرة أخرى.",
+  "invaild_email_password": "بريد إلكتروني أو كلمة مرور غير صحيحة.",
+  "please_verify_email": "لم يتم تأكيد البريد الإلكتروني",
+  "invaild_email_format": "تنسيق البريد الإلكتروني غير صالح.",
+  "too_many_login_attempts": "عدد محاولات تسجيل الدخول كبير جدًا. يرجى المحاولة مرة أخرى لاحقًا.",
+  "no_internet_connection": "لا يوجد اتصال بالإنترنت. يرجى التحقق من شبكتك.",
+  "email_already_used": "يوجد حساب بالفعل بهذا البريد الإلكتروني.",
+  "password_too_weak": "كلمة المرور ضعيفة للغاية. يرجى استخدام كلمة مرور أقوى.",
+  "passwords_do_not_match": "كلمات المرور غير متطابقة",
+  "hello_get_started": "مرحباً، لنبدأ",
+  "create_and_join": "أنشئ حسابك وانضم إلينا اليوم.",
+  "already_have_account": "أمتلك حساب بالفعل",
+  "please_enter_valid_number": "الرجاء إدخال رقم صحيح",
+  "password_must_be_at_least_8_characters": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
+  "must_contain_uppercase": "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل",
+  "must_contain_lowercase": "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل",
+  "must_contain_number": "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل",
+  "phone_number": "رقم الهاتف",
+  "name": "الاسم كامل",
+  "governorate": "المحافظة",
+  "city": "المدينة",
+  "street": "الشارع",
+  "house_number": "رقم أو اسم المنزل",
+  "floor": "الطابق",
+  "apartment_number": "رقم الشقة",
+  "confirm_password": "تأكيد كلمة المرور"
+};
+static const Map<String,dynamic> _en = {
+  "welcome": "Welcome to",
+  "on_boarding_title_1": "Turn Trash Into Treasure",
+  "on_boarding_description_1": "Recycle your household waste easily and get valuable points you can use in our in-app market.",
+  "on_boarding_title_2": "Trade Waste for Food",
+  "on_boarding_description_2": "Collect your recyclable items, schedule a pickup, and earn Bekia Points to spend on food and other goods.",
+  "on_boarding_title_3": "Help Build a Greener World",
+  "on_boarding_description_3": "Every bag of recyclables you give helps protect the environment and supports sustainable living for everyone.",
+  "on_boarding_title_4": "Ready to Start?",
+  "on_boarding_description_4": "Join Bekia Pay and make your waste work for you!",
+  "get_started": "Get Started",
+  "skip": "Skip",
+  "do_not_have_an_account": "Don't have Account?",
+  "create_new_account": "Create Account",
+  "sign_up": "Sign Up",
+  "sign_in": "Sign In",
+  "email": "Email Address",
+  "password": "Password",
+  "forgot_password": "Forgot Password",
+  "required": "This field is required",
+  "welcome_back": "Hello, Welcome Back",
+  "happy_to_see_you": "Happy to see you again, to use your account please login first.",
+  "please_enter_valid_email": "Please enter a valid email",
+  "unsupported_email_domain": "This email domain is not supported.",
+  "session_creation_failed": "Session creation failed. Please try again.",
+  "invaild_email_password": "Invalid email or password.",
+  "please_verify_email": "Please verify your email address before signing in.",
+  "invaild_email_format": "Invalid email format.",
+  "too_many_login_attempts": "Too many login attempts. Please try again later.",
+  "no_internet_connection": "No internet connection. Please check your network.",
+  "email_already_used": "An account with this email already exists.",
+  "password_too_weak": "Password is too weak. Please use a stronger password.",
+  "passwords_do_not_match": "Passwords do not match",
+  "hello_get_started": "Hello, Let's Get Started",
+  "create_and_join": "Create your account and join us today.",
+  "already_have_account": "Already have an account",
+  "please_enter_valid_number": "Please enter valid number",
+  "password_must_be_at_least_8_characters": "Password must be at least 8 characters",
+  "must_contain_uppercase": "Password must contain at least one uppercase letter",
+  "must_contain_lowercase": "Password must contain at least one lowercase letter",
+  "must_contain_number": "Password must contain at least one number",
+  "phone_number": "Phone Number",
+  "name": "Full name",
+  "governorate": "Governorate",
+  "city": "City",
+  "street": "Street",
+  "house_number": "House Number or name",
+  "floor": "Floor",
+  "apartment_number": "Apartment number",
+  "confirm_password": "Confirm password"
+};
+static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
+}

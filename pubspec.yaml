@@ -1,0 +1,71 @@
+name: bekia_pay
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.13.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  intl: ^0.20.3
+  get_it: ^9.2.1
+  supabase_flutter: ^2.17.2
+  shared_preferences: ^2.5.5
+  flutter_bloc: ^9.1.1
+  dots_indicator: ^4.0.1
+  easy_localization: ^3.0.8
+  fluttertoast: ^10.0.0
+  freezed_annotation: ^3.1.0
+  email_validator: ^3.0.0
+  flutter_pw_validator: ^1.6.0
+  phone_text_field: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^6.0.0
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.8
+  freezed: ^4.0.1
+  build_runner: ^2.16.1
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/fonts/
+    - assets/translations/
+
+  fonts:
+    - family: Bricolage
+      fonts:
+        - asset: assets/fonts/Bricolage.ttf
+    - family: Noto
+      fonts:
+        - asset: assets/fonts/Noto.ttf
+    - family: USModern
+      fonts:
+        - asset: assets/fonts/USModern.ttf
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+
+flutter_native_splash:
+  color: "#ddf7e2"
+  image: "assets/images/icon.png"
+  android_12:
+    color: "#ddf7e2"
+    image: "assets/images/icon.png"
+
