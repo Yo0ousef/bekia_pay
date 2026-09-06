@@ -28,7 +28,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       TextEditingController();
   final TextEditingController apartmentNumberController =
       TextEditingController();
-  String phoneNumber = "";
+  String _phoneNumber = "";
 
   Future<void> signUp() async {
     emit(const SignUpState.initial());
@@ -44,7 +44,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     emit(const SignUpState.loading());
     final user = UserModel(
       fullName: nameController.text.trim(),
-      phone: phoneNumber,
+      phone: _phoneNumber,
       governorate: governorateController.text.trim(),
       email: emailController.text.trim(),
       pointsBalance: '0',
@@ -98,7 +98,7 @@ class SignUpCubit extends Cubit<SignUpState> {
 
   void onPhoneNumberChanged(value) {
     if (value != null) {
-      phoneNumber = value.completeNumber;
+      _phoneNumber = value.completeNumber;
     }
   }
 

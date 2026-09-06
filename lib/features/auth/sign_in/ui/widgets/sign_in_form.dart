@@ -25,7 +25,11 @@ class SignInForm extends StatelessWidget {
       listener: (context, state) {
         state.maybeWhen(
           success: () {
-            Navigator.pushReplacementNamed(context, AppRoutes.home.route);
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              AppRoutes.home.route,
+              (route) => false,
+            );
           },
           failure: (message) {
             Fluttertoast.showToast(
@@ -85,13 +89,7 @@ class SignInForm extends StatelessWidget {
               20.vGap,
               state.maybeWhen(
                 loading: () {
-                  return CustomButton(
-                    onPressed: cubit.signIn,
-                    widget: CircularProgressIndicator(
-                      color: theme.scaffoldBackgroundColor,
-                    ),
-                    width: double.infinity,
-                  );
+                  return CircularProgressIndicator(color: theme.primaryColor);
                 },
                 orElse: () {
                   return CustomButton(
@@ -106,10 +104,7 @@ class SignInForm extends StatelessWidget {
                 haveOrNot: LocaleKeys.do_not_have_an_account.tr(),
                 loginOrCreate: LocaleKeys.create_new_account.tr(),
                 onTap: () {
-                  Navigator.pushNamed(
-                    context,
-                    AppRoutes.signUp.route,
-                  );
+                  Navigator.pushNamed(context, AppRoutes.signUp.route);
                 },
               ),
             ],

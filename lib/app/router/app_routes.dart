@@ -2,7 +2,8 @@ enum AppRoutes {
   home("/home"),
   gate("/gate"),
   signIn("/signIn"),
-  signUp("/signUp");
+  signUp("/signUp"),
+  onBoarding("/onBoarding");
 
   final String route;
 

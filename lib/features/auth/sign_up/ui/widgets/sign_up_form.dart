@@ -30,6 +30,7 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emptyValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.name,
+            suffixIcon: Icon(Icons.person, color: AppColors.disableDarkColor),
           ),
           10.vGap,
           CustomTextFormField(
@@ -38,6 +39,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emailValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.emailAddress,
+            suffixIcon: Icon(
+              Icons.email_outlined,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           PhoneTextField(
@@ -55,6 +60,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emptyValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
+            suffixIcon: Icon(
+              Icons.location_on_outlined,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           CustomTextFormField(
@@ -63,6 +72,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emptyValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
+            suffixIcon: Icon(
+              Icons.location_city_outlined,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           CustomTextFormField(
@@ -71,6 +84,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emptyValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
+            suffixIcon: Icon(
+              Icons.streetview,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           CustomTextFormField(
@@ -79,6 +96,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.emptyValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
+            suffixIcon: Icon(
+              Icons.home_outlined,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           CustomTextFormField(
@@ -87,6 +108,7 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.numbersValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.number,
+            suffixIcon: Icon(Icons.stairs, color: AppColors.disableDarkColor),
           ),
           10.vGap,
           CustomTextFormField(
@@ -95,6 +117,10 @@ class SignUpForm extends StatelessWidget {
             validator: Validators.numbersValidate,
             onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.number,
+            suffixIcon: Icon(
+              Icons.apartment,
+              color: AppColors.disableDarkColor,
+            ),
           ),
           10.vGap,
           BlocProvider(
