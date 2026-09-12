@@ -25,6 +25,7 @@ dependencies:
   email_validator: ^3.0.0
   flutter_pw_validator: ^1.6.0
   phone_text_field: ^2.0.0
+  carousel_slider: ^5.1.2
 
 dev_dependencies:
   flutter_test:

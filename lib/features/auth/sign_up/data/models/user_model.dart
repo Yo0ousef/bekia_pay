@@ -8,8 +8,8 @@ class UserModel {
       street,
       governorate,
       houseNumber,
-      pointsBalance,
       apartmentNumber;
+  final int pointsBalance;
 
   UserModel({
     required this.fullName,

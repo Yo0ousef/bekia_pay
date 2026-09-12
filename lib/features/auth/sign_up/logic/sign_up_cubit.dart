@@ -47,7 +47,7 @@ class SignUpCubit extends Cubit<SignUpState> {
       phone: _phoneNumber,
       governorate: governorateController.text.trim(),
       email: emailController.text.trim(),
-      pointsBalance: '0',
+      pointsBalance: 0,
       role: 'user',
       city: cityController.text.trim(),
       street: streetController.text.trim(),
