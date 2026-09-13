@@ -1,10 +1,9 @@
+import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/app_name_widget.dart';
-import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
-import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
-import 'package:bekia_pay/features/auth/sign_up/data/models/user_model.dart';
-import 'package:bekia_pay/features/home/data/models/offer_model.dart';
-import 'package:bekia_pay/features/home/logic/home_cubit.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:bekia_pay/features/chat/ui/chat_view_body.dart';
+import 'package:bekia_pay/features/home/ui/widgets/custom_bottom_navigation_bar.dart';
+import 'package:bekia_pay/features/home/ui/widgets/home_view_body.dart';
+import 'package:bekia_pay/features/options/ui/options_view_body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,63 +12,39 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> _views = [
+      const HomeViewBody(),
+      const ChatViewBody(),
+      const OptionsViewBody(),
+    ];
+
     ThemeData theme = Theme.of(context);
-    return Scaffold(
-      backgroundColor: theme.scaffoldBackgroundColor,
-      appBar: AppBar(
-        backgroundColor: theme.scaffoldBackgroundColor,
-        title: AppNameWidget(),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.shopping_cart_outlined),
-          ),
-        ],
-      ),
-      body: BlocBuilder<HomeCubit, HomeState>(
-        builder: (context, state) => state.when(
-          loading: () => const Center(child: CircularProgressIndicator()),
-          failure: (message) {
-            return Column(
-              mainAxisAlignment: .center,
-              children: [Text(message).center],
-            );
-          },
-          success: (homeData) {
-            final UserModel user = homeData.user;
-            final List<OfferModel> offers = homeData.offers;
-            return Column(
-              mainAxisAlignment: .center,
-              children: [
-                CarouselSlider(
-                  items: [
-                    Image.network(offers[0].imageUrl),
-                    Image.asset("assets/images/new_offer.jpg"),
-                    Image.asset("assets/images/new_offer.jpg"),
-                  ],
-                  options: CarouselOptions(
-                    height: context.screenHeight * .2,
-                    enableInfiniteScroll: false,
-                    reverse: false,
-                    autoPlay: true,
-                    autoPlayInterval: const Duration(seconds: 3),
-                    autoPlayAnimationDuration: const Duration(
-                      milliseconds: 800,
+    return BlocBuilder<IndexChangerCubit, int>(
+      builder: (context, state) {
+        return Scaffold(
+          backgroundColor: theme.scaffoldBackgroundColor,
+          appBar: state != 2
+              ? AppBar(
+                  backgroundColor: theme.scaffoldBackgroundColor,
+                  title: AppNameWidget(),
+                  centerTitle: true,
+                  actions: [
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(Icons.shopping_cart_outlined),
                     ),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                    aspectRatio: 16 / 9,
-                    // onPageChanged: (index, reason) {},
-                    scrollDirection: Axis.horizontal,
-                  ),
-                ),
-                Text(user.fullName).center,
-              ],
-            );
-          },
-        ),
-      ),
+                  ],
+                )
+              : null,
+          body: _views[context.read<IndexChangerCubit>().state],
+          bottomNavigationBar: CustomBottomNavigationBar(
+            currentIndex: state,
+            onTap: (index) {
+              context.read<IndexChangerCubit>().changeIndex(index);
+            },
+          ),
+        );
+      },
     );
   }
 }

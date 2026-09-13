@@ -1,4 +1,5 @@
-import 'package:bekia_pay/core/shared/logic/theme_cubit.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_in/data/sign_in_repo.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
@@ -25,8 +26,11 @@ class DependencyInjection {
       () => SignInCubit(getIt<SignInRepo>()),
     );
     getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
-    getIt.registerFactory<SignUpCubit>(() => SignUpCubit(getIt<SignUpRepo>()));
-    getIt.registerFactory<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
+    getIt.registerLazySingleton<SignUpCubit>(
+      () => SignUpCubit(getIt<SignUpRepo>()),
+    );
+    getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
+    getIt.registerFactory<IndexChangerCubit>(() => IndexChangerCubit());
 
     // Repositories
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());

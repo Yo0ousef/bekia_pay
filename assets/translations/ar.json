@@ -47,5 +47,15 @@
   "house_number": "رقم أو اسم المنزل",
   "floor": "الطابق",
   "apartment_number": "رقم الشقة",
-  "confirm_password": "تأكيد كلمة المرور"
+  "confirm_password": "تأكيد كلمة المرور",
+  "subscription": "الاشتراك",
+  "my_points": "نقاطي",
+  "market": "المتجر",
+  "materials": "المواد الخام",
+  "renew": "التجديد",
+  "shop_now": "تسوق الان",
+  "explore": "استكشف",
+  "home": "الرئيسية",
+  "chat": "المحادثة",
+  "more": "المزيد"
 }

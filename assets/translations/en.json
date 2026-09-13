@@ -47,5 +47,15 @@
   "house_number": "House Number or name",
   "floor": "Floor",
   "apartment_number": "Apartment number",
-  "confirm_password": "Confirm password"
+  "confirm_password": "Confirm password",
+  "subscription": "Subscription",
+  "my_points": "My points",
+  "market": "Market",
+  "materials": "Materials",
+  "renew": "Renew",
+  "shop_now": "Shop now",
+  "explore": "Explore",
+  "home": "Home",
+  "chat": "Chat",
+  "more": "More"
 }

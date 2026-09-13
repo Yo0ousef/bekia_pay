@@ -3,7 +3,7 @@ import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/app/theming/dark_theme.dart';
 import 'package:bekia_pay/app/theming/light_theme.dart';
 import 'package:bekia_pay/core/services/shared_preferences/prefs.dart';
-import 'package:bekia_pay/core/shared/logic/theme_cubit.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:easy_localization/easy_localization.dart';

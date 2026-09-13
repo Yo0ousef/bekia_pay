@@ -26,6 +26,7 @@ dependencies:
   flutter_pw_validator: ^1.6.0
   phone_text_field: ^2.0.0
   carousel_slider: ^5.1.2
+  cached_network_image: ^4.0.0
 
 dev_dependencies:
   flutter_test:

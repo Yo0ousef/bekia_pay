@@ -52,5 +52,15 @@ abstract class  LocaleKeys {
   static const floor = 'floor';
   static const apartment_number = 'apartment_number';
   static const confirm_password = 'confirm_password';
+  static const subscription = 'subscription';
+  static const my_points = 'my_points';
+  static const market = 'market';
+  static const materials = 'materials';
+  static const renew = 'renew';
+  static const shop_now = 'shop_now';
+  static const explore = 'explore';
+  static const home = 'home';
+  static const chat = 'chat';
+  static const more = 'more';
 
 }

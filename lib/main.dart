@@ -1,6 +1,6 @@
 import 'package:bekia_pay/app/bekia_pay.dart';
 import 'package:bekia_pay/core/services/shared_preferences/prefs.dart';
-import 'package:bekia_pay/core/shared/logic/theme_cubit.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
 import 'package:bekia_pay/core/utils/translations/codegen_loader.g.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';

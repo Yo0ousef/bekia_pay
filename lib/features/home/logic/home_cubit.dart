@@ -18,23 +18,28 @@ class HomeCubit extends Cubit<HomeState> {
 
   void getAllData() async {
     final results = await Future.wait([_repo.getUser(), _repo.getOffers()]);
+    if (isClosed) return;
     final userResult = results[0] as ApiResult<UserModel>;
     final offersResult = results[1] as ApiResult<List<OfferModel>>;
     userResult.when(
       success: (user) {
         offersResult.when(
           success: (offers) {
-            emit(
-              HomeState<HomeData>.success(HomeData(user: user, offers: offers)),
-            );
+            if (!isClosed) {
+              emit(
+                HomeState<HomeData>.success(
+                  HomeData(user: user, offers: offers),
+                ),
+              );
+            }
           },
           failure: (message) {
-            emit(HomeState.failure(message));
+            if (!isClosed) emit(HomeState.failure(message));
           },
         );
       },
       failure: (message) {
-        emit(HomeState.failure(message));
+        if (!isClosed) emit(HomeState.failure(message));
       },
     );
   }

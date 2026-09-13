@@ -63,7 +63,17 @@ class CodegenLoader extends AssetLoader{
   "house_number": "رقم أو اسم المنزل",
   "floor": "الطابق",
   "apartment_number": "رقم الشقة",
-  "confirm_password": "تأكيد كلمة المرور"
+  "confirm_password": "تأكيد كلمة المرور",
+  "subscription": "الاشتراك",
+  "my_points": "نقاطي",
+  "market": "المتجر",
+  "materials": "المواد الخام",
+  "renew": "التجديد",
+  "shop_now": "تسوق الان",
+  "explore": "استكشف",
+  "home": "الرئيسية",
+  "chat": "المحادثة",
+  "more": "المزيد"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -114,7 +124,17 @@ static const Map<String,dynamic> _en = {
   "house_number": "House Number or name",
   "floor": "Floor",
   "apartment_number": "Apartment number",
-  "confirm_password": "Confirm password"
+  "confirm_password": "Confirm password",
+  "subscription": "Subscription",
+  "my_points": "My points",
+  "market": "Market",
+  "materials": "Materials",
+  "renew": "Renew",
+  "shop_now": "Shop now",
+  "explore": "Explore",
+  "home": "Home",
+  "chat": "Chat",
+  "more": "More"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }
