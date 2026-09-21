@@ -1,3 +1,4 @@
+import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
@@ -24,7 +25,9 @@ class HomeGrid extends StatelessWidget {
                 title: LocaleKeys.subscription.tr(),
                 trailing: Icon(Icons.verified, color: AppColors.redColor),
                 subtitle: LocaleKeys.renew.tr(),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.subscription.route);
+                },
               ),
               HomeCard(
                 title: LocaleKeys.my_points.tr(),
@@ -45,12 +48,16 @@ class HomeGrid extends StatelessWidget {
                   color: AppColors.redColor,
                 ),
                 subtitle: LocaleKeys.shop_now.tr(),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.shop.route);
+                },
               ),
               HomeCard(
                 title: LocaleKeys.materials.tr(),
                 subtitle: LocaleKeys.explore.tr(),
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, AppRoutes.materials.route);
+                },
               ),
             ],
           ),

@@ -16,7 +16,7 @@ void main() async {
   DependencyInjection.setUp();
   await Supabase.initialize(
     url: 'https://ezoowkhdpyletwszvefg.supabase.co',
-    anonKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6b293a2hkcHlsZXR3c3p2ZWZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTIwMjYsImV4cCI6MjA3NzkyODAyNn0.hsC5ItmL9t8n-JfNJDjxekD0uvu4Kzk82ZUU5FreOlw",
+    publishableKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6b293a2hkcHlsZXR3c3p2ZWZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTIwMjYsImV4cCI6MjA3NzkyODAyNn0.hsC5ItmL9t8n-JfNJDjxekD0uvu4Kzk82ZUU5FreOlw",
   );
   runApp(
     EasyLocalization(

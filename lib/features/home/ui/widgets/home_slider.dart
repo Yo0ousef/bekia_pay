@@ -1,8 +1,9 @@
 import 'package:bekia_pay/app/router/app_routes.dart';
+import 'package:bekia_pay/app/theming/app_colors.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/features/home/data/models/offer_model.dart';
-import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,8 @@ class HomeSlider extends StatelessWidget {
                       child: CachedNetworkImage(
                         imageUrl: offer.imageUrl,
                         placeholder: (context, url) =>
-                            CircularProgressIndicator().center,
+                            CircularProgressIndicator(color: theme.primaryColor)
+                                .center,
                         errorWidget: (context, url, error) =>
                             Icon(Icons.error).center,
                       ),
@@ -70,7 +72,7 @@ class HomeSlider extends StatelessWidget {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: state == index
-                        ? theme.primaryColor
+                        ? AppColors.secondaryLightColor
                         : theme.disabledColor,
                   ),
                 );

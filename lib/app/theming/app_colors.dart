@@ -6,13 +6,16 @@ class AppColors {
   static const redColor = Color(0xFFC72020);
   static const whiteColor = Color(0xFFFFFFFF);
   static const blackColor = Color(0xFF000000);
+  static const greenColor = Colors.green;
 
   /// Light Colors
   static const Color fillLightColor = Color(0xFF1E1E1E);
   static const Color textLightColor = Color(0xFF000000);
   static const Color disableLightColor = Color(0xFF9E9E9E);
-  static const Color primaryLightColor = Color(0xFF771F98);
-  static const Color secondaryLightColor = Color(0xff1C92B0);
+  static const Color primaryLightColor = Color(0xff1C92B0);
+  static const Color secondaryLightColor = Color(
+    0xff1C92B0,
+  ); // old purple 0xFF771F98
   static const Color backgroundLightColor = Color(0xFFFFFFFF);
 
   /// Dark Colors

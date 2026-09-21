@@ -17,7 +17,7 @@ class BekiaPay extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ThemeCubit, ThemeMode>(
       builder: (context, mode) {
-        bool? isDark = Prefs.getBool("isDark");
+        bool isDark = Prefs.getBool("isDark");
         return MaterialApp(
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
@@ -38,11 +38,7 @@ class BekiaPay extends StatelessWidget {
               child: child!,
             );
           },
-          themeMode: isDark == null
-              ? mode
-              : isDark
-              ? .dark
-              : .light,
+          themeMode: isDark ? .dark : .light,
           theme: AppLightTheme.theme,
           title: AppConstants.appName,
           darkTheme: AppDarkTheme.theme,

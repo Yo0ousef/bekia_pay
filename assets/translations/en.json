@@ -57,5 +57,14 @@
   "explore": "Explore",
   "home": "Home",
   "chat": "Chat",
-  "more": "More"
+  "more": "More",
+  "choose_plan": "Choose a plan",
+  "subscription_plans": "Subscription Plans",
+  "most_popular": "Most popular",
+  "month": "Month",
+  "current_plan": "Current plan",
+  "already_have_plan": "Already have a plan",
+  "active": "Active",
+  "subscribe": "Subscribe",
+  "shop": "Shop"
 }

@@ -9,7 +9,11 @@ import 'package:bekia_pay/features/gate/gate_view.dart';
 import 'package:bekia_pay/features/home/data/models/offer_model.dart';
 import 'package:bekia_pay/features/home/logic/home_cubit.dart';
 import 'package:bekia_pay/features/home/ui/home_view.dart';
+import 'package:bekia_pay/features/materials/ui/materials_view.dart';
 import 'package:bekia_pay/features/offer_details/ui/offer_details_view.dart';
+import 'package:bekia_pay/features/shop/ui/shop_view.dart';
+import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
+import 'package:bekia_pay/features/subscription/ui/subscription_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -67,6 +71,17 @@ class AppRouter {
             child: const SignUpView(),
           ),
         );
+      case AppRoutes.subscription:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => DependencyInjection.getIt<SubscriptionCubit>(),
+            child: const SubscriptionView(),
+          ),
+        );
+      case AppRoutes.shop:
+        return MaterialPageRoute(builder: (context) => const ShopView());
+      case AppRoutes.materials:
+        return MaterialPageRoute(builder: (context) => const MaterialsView());
       default:
         return MaterialPageRoute(builder: (context) => const ErrorView());
     }

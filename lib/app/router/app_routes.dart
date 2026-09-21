@@ -1,10 +1,13 @@
 enum AppRoutes {
   home("/home"),
   gate("/gate"),
-  signIn("/signIn"),
+  shop("/shop"),
   signUp("/signUp"),
+  signIn("/signIn"),
+  materials("/materials"),
+  onBoarding("/onBoarding"),
   offerDetails("/offerDetails"),
-  onBoarding("/onBoarding");
+  subscription("/subscription");
 
   final String route;
 

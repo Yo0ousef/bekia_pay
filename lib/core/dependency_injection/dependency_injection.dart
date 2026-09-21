@@ -8,6 +8,8 @@ import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:bekia_pay/features/home/data/home_repo.dart';
 import 'package:bekia_pay/features/home/logic/home_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
+import 'package:bekia_pay/features/subscription/data/subscription_repo.dart';
+import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 class DependencyInjection {
@@ -31,10 +33,14 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
     getIt.registerFactory<IndexChangerCubit>(() => IndexChangerCubit());
+    getIt.registerLazySingleton<SubscriptionCubit>(
+      () => SubscriptionCubit(getIt<SubscriptionRepo>()),
+    );
 
     // Repositories
+    getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
-    getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
+    getIt.registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo());
   }
 }

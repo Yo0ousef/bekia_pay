@@ -57,5 +57,14 @@
   "explore": "استكشف",
   "home": "الرئيسية",
   "chat": "المحادثة",
-  "more": "المزيد"
+  "more": "المزيد",
+  "choose_plan": "اختر خطتك",
+  "subscription_plans": "خطط الإشتراك",
+  "most_popular": "أشهر الخطط",
+  "month": "شهر",
+  "current_plan": "الخطة الحالية",
+  "already_have_plan": "لديك خطة بالفعل",
+  "active": "فعال",
+  "subscribe": "إشتراك",
+  "shop": "المتجر"
 }

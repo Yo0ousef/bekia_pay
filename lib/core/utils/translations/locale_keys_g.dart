@@ -62,5 +62,13 @@ abstract class  LocaleKeys {
   static const home = 'home';
   static const chat = 'chat';
   static const more = 'more';
+  static const choose_plan = 'choose_plan';
+  static const subscription_plans = 'subscription_plans';
+  static const most_popular = 'most_popular';
+  static const month = 'month';
+  static const current_plan = 'current_plan';
+  static const already_have_plan = 'already_have_plan';
+  static const active = 'active';
+  static const subscribe = 'subscribe';
 
 }

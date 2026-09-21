@@ -14,9 +14,11 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return BlocBuilder<HomeCubit, HomeState>(
       builder: (context, state) => state.when(
-        loading: () => const Center(child: CircularProgressIndicator()),
+        loading: () =>
+            CircularProgressIndicator(color: theme.primaryColor).center,
         failure: (message) {
           return SingleChildScrollView(
             child: Column(
