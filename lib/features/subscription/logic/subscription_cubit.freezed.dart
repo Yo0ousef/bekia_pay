@@ -56,13 +56,13 @@ extension SubscriptionStatePatterns on SubscriptionState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Loading value)?  Loading,TResult Function( _Success value)?  Success,TResult Function( _Failure value)?  Failure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Loading value)?  loading,TResult Function( _Success value)?  success,TResult Function( _Failure value)?  failure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
-case _Loading() when Loading != null:
-return Loading(_that);case _Success() when Success != null:
-return Success(_that);case _Failure() when Failure != null:
-return Failure(_that);case _:
+case _Loading() when loading != null:
+return loading(_that);case _Success() when success != null:
+return success(_that);case _Failure() when failure != null:
+return failure(_that);case _:
   return orElse();
 
 }
@@ -80,13 +80,13 @@ return Failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Loading value)  Loading,required TResult Function( _Success value)  Success,required TResult Function( _Failure value)  Failure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Loading value)  loading,required TResult Function( _Success value)  success,required TResult Function( _Failure value)  failure,}){
 final _that = this;
 switch (_that) {
 case _Loading():
-return Loading(_that);case _Success():
-return Success(_that);case _Failure():
-return Failure(_that);case _:
+return loading(_that);case _Success():
+return success(_that);case _Failure():
+return failure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -103,13 +103,13 @@ return Failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Loading value)?  Loading,TResult? Function( _Success value)?  Success,TResult? Function( _Failure value)?  Failure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Loading value)?  loading,TResult? Function( _Success value)?  success,TResult? Function( _Failure value)?  failure,}){
 final _that = this;
 switch (_that) {
-case _Loading() when Loading != null:
-return Loading(_that);case _Success() when Success != null:
-return Success(_that);case _Failure() when Failure != null:
-return Failure(_that);case _:
+case _Loading() when loading != null:
+return loading(_that);case _Success() when success != null:
+return success(_that);case _Failure() when failure != null:
+return failure(_that);case _:
   return null;
 
 }
@@ -126,12 +126,12 @@ return Failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  Loading,TResult Function( List<SubscriptionModel> plans,  String? activePlanId)?  Success,TResult Function( String message)?  Failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<SubscriptionModel> plans,  String? activePlanId)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
-case _Loading() when Loading != null:
-return Loading();case _Success() when Success != null:
-return Success(_that.plans,_that.activePlanId);case _Failure() when Failure != null:
-return Failure(_that.message);case _:
+case _Loading() when loading != null:
+return loading();case _Success() when success != null:
+return success(_that.plans,_that.activePlanId);case _Failure() when failure != null:
+return failure(_that.message);case _:
   return orElse();
 
 }
@@ -149,12 +149,12 @@ return Failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  Loading,required TResult Function( List<SubscriptionModel> plans,  String? activePlanId)  Success,required TResult Function( String message)  Failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<SubscriptionModel> plans,  String? activePlanId)  success,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Loading():
-return Loading();case _Success():
-return Success(_that.plans,_that.activePlanId);case _Failure():
-return Failure(_that.message);case _:
+return loading();case _Success():
+return success(_that.plans,_that.activePlanId);case _Failure():
+return failure(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -171,12 +171,12 @@ return Failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  Loading,TResult? Function( List<SubscriptionModel> plans,  String? activePlanId)?  Success,TResult? Function( String message)?  Failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<SubscriptionModel> plans,  String? activePlanId)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
-case _Loading() when Loading != null:
-return Loading();case _Success() when Success != null:
-return Success(_that.plans,_that.activePlanId);case _Failure() when Failure != null:
-return Failure(_that.message);case _:
+case _Loading() when loading != null:
+return loading();case _Success() when success != null:
+return success(_that.plans,_that.activePlanId);case _Failure() when failure != null:
+return failure(_that.message);case _:
   return null;
 
 }
@@ -207,7 +207,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-    return 'SubscriptionState.Loading()';
+    return 'SubscriptionState.loading()';
 }
 
 
@@ -253,7 +253,7 @@ int get hashCode {
 
 @override
 String toString() {
-    return 'SubscriptionState.Success(plans: $plans, activePlanId: $activePlanId)';
+    return 'SubscriptionState.success(plans: $plans, activePlanId: $activePlanId)';
 }
 
 
@@ -322,7 +322,7 @@ int get hashCode {
 
 @override
 String toString() {
-    return 'SubscriptionState.Failure(message: $message)';
+    return 'SubscriptionState.failure(message: $message)';
 }
 
 

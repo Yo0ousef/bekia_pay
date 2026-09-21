@@ -26,10 +26,10 @@ class SubscriptionView extends StatelessWidget {
       body: BlocBuilder<SubscriptionCubit, SubscriptionState>(
         builder: (context, state) {
           return state.when(
-            Loading: () =>
+            loading: () =>
                 CircularProgressIndicator(color: Theme.of(context).primaryColor)
                     .center,
-            Success: (plans, activePlanId) {
+            success: (plans, activePlanId) {
               return SingleChildScrollView(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +62,7 @@ class SubscriptionView extends StatelessWidget {
                 ),
               );
             },
-            Failure: (message) => Text(message),
+            failure: (message) => Text(message),
           );
         },
       ),

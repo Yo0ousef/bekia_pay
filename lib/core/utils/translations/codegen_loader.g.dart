@@ -81,7 +81,11 @@ class CodegenLoader extends AssetLoader{
   "current_plan": "الخطة الحالية",
   "already_have_plan": "لديك خطة بالفعل",
   "active": "فعال",
-  "subscribe": "إشتراك"
+  "subscribe": "إشتراك",
+  "shop": "المتجر",
+  "sold_out": "نفذت الكمية",
+  "buy": "شراء",
+  "add_to_cart": "أضف للعربة"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -150,7 +154,11 @@ static const Map<String,dynamic> _en = {
   "current_plan": "Current plan",
   "already_have_plan": "Already have a plan",
   "active": "Active",
-  "subscribe": "Subscribe"
+  "subscribe": "Subscribe",
+  "shop": "Shop",
+  "sold_out": "Sold out",
+  "buy": "Buy",
+  "add_to_cart": "Add to Cart"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

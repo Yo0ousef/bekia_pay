@@ -5,9 +5,15 @@ import 'package:bekia_pay/features/auth/sign_in/data/sign_in_repo.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_up/data/sign_up_repo.dart';
 import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
+import 'package:bekia_pay/features/cart/logic/cart_cubit.dart';
 import 'package:bekia_pay/features/home/data/home_repo.dart';
 import 'package:bekia_pay/features/home/logic/home_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
+import 'package:bekia_pay/features/shop/data/favourite_repo.dart';
+import 'package:bekia_pay/features/shop/data/products_repo.dart';
+import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
+import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
+import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/subscription/data/subscription_repo.dart';
 import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
 import 'package:get_it/get_it.dart';
@@ -36,11 +42,23 @@ class DependencyInjection {
     getIt.registerLazySingleton<SubscriptionCubit>(
       () => SubscriptionCubit(getIt<SubscriptionRepo>()),
     );
+    getIt.registerLazySingleton<ProductsCubit>(
+      () => ProductsCubit(getIt<ProductsRepo>()),
+    );
+    getIt.registerLazySingleton<CounterCubit>(() => CounterCubit());
+    getIt.registerLazySingleton<FavouriteCubit>(
+      () => FavouriteCubit(getIt<FavouriteRepo>()),
+    );
+    getIt.registerLazySingleton<CartCubit>(
+      () => CartCubit(getIt<ProductsRepo>()),
+    );
 
     // Repositories
     getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
+    getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo());
+    getIt.registerLazySingleton<FavouriteRepo>(() => FavouriteRepo());
     getIt.registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo());
   }
 }

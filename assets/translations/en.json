@@ -66,5 +66,8 @@
   "already_have_plan": "Already have a plan",
   "active": "Active",
   "subscribe": "Subscribe",
-  "shop": "Shop"
+  "shop": "Shop",
+  "sold_out": "Sold out",
+  "buy": "Buy",
+  "add_to_cart": "Add to Cart"
 }

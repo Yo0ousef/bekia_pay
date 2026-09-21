@@ -66,5 +66,8 @@
   "already_have_plan": "لديك خطة بالفعل",
   "active": "فعال",
   "subscribe": "إشتراك",
-  "shop": "المتجر"
+  "shop": "المتجر",
+  "sold_out": "نفذت الكمية",
+  "buy": "شراء",
+  "add_to_cart": "أضف للعربة"
 }

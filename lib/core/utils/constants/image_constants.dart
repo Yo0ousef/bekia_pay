@@ -8,4 +8,5 @@ class ImageConstants {
   static const String recycleOutcome = "$_baseUrl/recycle outcome.png";
   static const String readyToStart = "$_baseUrl/ready to start.png";
   static const String avatar = "$_baseUrl/avatar.png";
+  static const String no_image = "$_baseUrl/no_image.jpg";
 }

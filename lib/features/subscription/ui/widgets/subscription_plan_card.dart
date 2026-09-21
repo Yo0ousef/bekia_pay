@@ -34,12 +34,12 @@ class SubscriptionPlanCard extends StatelessWidget {
 
     final state = context.watch<SubscriptionCubit>().state;
     final bool doesUserHaveAPlan = state.maybeWhen(
-      Success: (subscriptions, activeSubscriptionId) =>
+      success: (subscriptions, activeSubscriptionId) =>
           activeSubscriptionId != null,
       orElse: () => false,
     );
     final bool isActive = state.maybeWhen(
-      Success: (subscriptions, activeSubscriptionId) =>
+      success: (subscriptions, activeSubscriptionId) =>
           activeSubscriptionId == plan.id,
       orElse: () => false,
     );

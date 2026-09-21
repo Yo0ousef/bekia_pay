@@ -70,5 +70,9 @@ abstract class  LocaleKeys {
   static const already_have_plan = 'already_have_plan';
   static const active = 'active';
   static const subscribe = 'subscribe';
+  static const shop = 'shop';
+  static const sold_out = 'sold_out';
+  static const buy = 'buy';
+  static const add_to_cart = 'add_to_cart';
 
 }
