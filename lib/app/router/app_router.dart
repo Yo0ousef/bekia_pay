@@ -1,18 +1,23 @@
 import 'package:bekia_pay/core/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
+import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_in/ui/sign_in_view.dart';
 import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_up/ui/sign_up_view.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
+import 'package:bekia_pay/features/cart/ui/cart_view.dart';
 import 'package:bekia_pay/features/error/error_view.dart';
 import 'package:bekia_pay/features/gate/gate_view.dart';
 import 'package:bekia_pay/features/home/data/models/offer_model.dart';
 import 'package:bekia_pay/features/home/logic/home_cubit.dart';
 import 'package:bekia_pay/features/home/ui/home_view.dart';
+import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/materials/ui/materials_view.dart';
 import 'package:bekia_pay/features/offer_details/ui/offer_details_view.dart';
-import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
+import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
+import 'package:bekia_pay/features/on_boarding/ui/on_boarding_view.dart';
 import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/shop_view.dart';
@@ -21,7 +26,6 @@ import 'package:bekia_pay/features/subscription/ui/subscription_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'app_routes.dart';
 
 class AppRouter {
@@ -101,7 +105,33 @@ class AppRouter {
           ),
         );
       case AppRoutes.materials:
-        return MaterialPageRoute(builder: (context) => const MaterialsView());
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => DependencyInjection.getIt<MaterialsCubit>(),
+            child: const MaterialsView(),
+          ),
+        );
+      case AppRoutes.onBoarding:
+        return MaterialPageRoute(
+          builder: (context) => BlocProvider(
+            create: (_) => DependencyInjection.getIt<BoardingCubit>(),
+            child: const OnBoardingView(),
+          ),
+        );
+      case AppRoutes.cart:
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<CheckOutCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<CartCubit>(),
+              ),
+            ],
+            child: const CartView(),
+          ),
+        );
       default:
         return MaterialPageRoute(builder: (context) => const ErrorView());
     }

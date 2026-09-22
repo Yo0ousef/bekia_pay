@@ -9,10 +9,11 @@ class GateView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     WidgetsBinding.instance.addPostFrameCallback((_) {
       final isOnBoardingViewSeen = Prefs.getBool(AppConstants.seenBoarding);
       final session = Supabase.instance.client.auth.currentSession;
-      final isLoggedIn = session != null;
+      final bool isLoggedIn = session != null;
       final AppRoutes targetRoute;
       if (!isOnBoardingViewSeen) {
         targetRoute = AppRoutes.onBoarding;
@@ -29,6 +30,8 @@ class GateView extends StatelessWidget {
       );
     });
 
-    return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator(color: theme.primaryColor)),
+    );
   }
 }

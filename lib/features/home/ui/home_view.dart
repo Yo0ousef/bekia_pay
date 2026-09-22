@@ -1,3 +1,4 @@
+import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/app_name_widget.dart';
 import 'package:bekia_pay/features/chat/ui/chat_view_body.dart';
@@ -12,7 +13,7 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<Widget> _views = [
+    final List<Widget> views = [
       const HomeViewBody(),
       const ChatViewBody(),
       const OptionsViewBody(),
@@ -30,13 +31,15 @@ class HomeView extends StatelessWidget {
                   centerTitle: true,
                   actions: [
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(context, AppRoutes.cart.route);
+                      },
                       icon: Icon(Icons.shopping_cart_outlined),
                     ),
                   ],
                 )
               : null,
-          body: _views[context.read<IndexChangerCubit>().state],
+          body: views[context.read<IndexChangerCubit>().state],
           bottomNavigationBar: CustomBottomNavigationBar(
             currentIndex: state,
             onTap: (index) {

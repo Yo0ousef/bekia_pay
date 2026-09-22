@@ -85,7 +85,11 @@ class CodegenLoader extends AssetLoader{
   "shop": "المتجر",
   "sold_out": "نفذت الكمية",
   "buy": "شراء",
-  "add_to_cart": "أضف للعربة"
+  "add_to_cart": "أضف للعربة",
+  "added_to_fav": "تمت الإضافة للمفضلة",
+  "removed_from_fav": "تم الحذف من المفضلة",
+  "added_to_cart": "تمت الإضافة للعربة",
+  "removed_from_cart": "تم الحذف من العربة"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -158,7 +162,11 @@ static const Map<String,dynamic> _en = {
   "shop": "Shop",
   "sold_out": "Sold out",
   "buy": "Buy",
-  "add_to_cart": "Add to Cart"
+  "add_to_cart": "Add to Cart",
+  "added_to_fav": "Added to favourite",
+  "removed_from_fav": "Removed from favourite",
+  "added_to_cart": "Added to Cart",
+  "removed_from_cart": "Removed from cart"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

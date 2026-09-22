@@ -69,5 +69,9 @@
   "shop": "المتجر",
   "sold_out": "نفذت الكمية",
   "buy": "شراء",
-  "add_to_cart": "أضف للعربة"
+  "add_to_cart": "أضف للعربة",
+  "added_to_fav": "تمت الإضافة للمفضلة",
+  "removed_from_fav": "تم الحذف من المفضلة",
+  "added_to_cart": "تمت الإضافة للعربة",
+  "removed_from_cart": "تم الحذف من العربة"
 }

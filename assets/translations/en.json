@@ -69,5 +69,9 @@
   "shop": "Shop",
   "sold_out": "Sold out",
   "buy": "Buy",
-  "add_to_cart": "Add to Cart"
+  "add_to_cart": "Add to Cart",
+  "added_to_fav": "Added to favourite",
+  "removed_from_fav": "Removed from favourite",
+  "added_to_cart": "Added to Cart",
+  "removed_from_cart": "Removed from cart"
 }

@@ -5,9 +5,13 @@ import 'package:bekia_pay/features/auth/sign_in/data/sign_in_repo.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_up/data/sign_up_repo.dart';
 import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/data/orders_repo.dart';
+import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
 import 'package:bekia_pay/features/home/data/home_repo.dart';
 import 'package:bekia_pay/features/home/logic/home_cubit.dart';
+import 'package:bekia_pay/features/materials/data/materials_repo.dart';
+import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
 import 'package:bekia_pay/features/shop/data/favourite_repo.dart';
 import 'package:bekia_pay/features/shop/data/products_repo.dart';
@@ -52,12 +56,20 @@ class DependencyInjection {
     getIt.registerLazySingleton<CartCubit>(
       () => CartCubit(getIt<ProductsRepo>()),
     );
+    getIt.registerLazySingleton<MaterialsCubit>(
+      () => MaterialsCubit(getIt<MaterialsRepo>()),
+    );
+    getIt.registerLazySingleton<CheckOutCubit>(
+      () => CheckOutCubit(getIt<OrdersRepo>()),
+    );
 
     // Repositories
     getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
+    getIt.registerLazySingleton<OrdersRepo>(() => OrdersRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
     getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo());
+    getIt.registerLazySingleton<MaterialsRepo>(() => MaterialsRepo());
     getIt.registerLazySingleton<FavouriteRepo>(() => FavouriteRepo());
     getIt.registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo());
   }

@@ -2,6 +2,7 @@ enum AppRoutes {
   home("/home"),
   gate("/gate"),
   shop("/shop"),
+  cart("/cart"),
   signUp("/signUp"),
   signIn("/signIn"),
   materials("/materials"),

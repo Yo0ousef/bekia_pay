@@ -74,5 +74,9 @@ abstract class  LocaleKeys {
   static const sold_out = 'sold_out';
   static const buy = 'buy';
   static const add_to_cart = 'add_to_cart';
+  static const added_to_fav = 'added_to_fav';
+  static const removed_from_fav = 'removed_from_fav';
+  static const added_to_cart = 'added_to_cart';
+  static const removed_from_cart = 'removed_from_cart';
 
 }

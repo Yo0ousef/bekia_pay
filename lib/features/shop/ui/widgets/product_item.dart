@@ -3,8 +3,9 @@ import 'package:bekia_pay/app/theming/theming_typography.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
+import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:bekia_pay/features/shop/data/models/product_model.dart';
 import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
@@ -53,7 +54,7 @@ class ProductItem extends StatelessWidget {
                 height: context.screenHeight * 0.15,
                 fit: BoxFit.cover,
                 placeholder: (context, url) =>
-                    CircularProgressIndicator(color: theme.primaryColor),
+                    CircularProgressIndicator(color: theme.primaryColor).center,
                 errorWidget: (_, _, _) =>
                     Image.asset(ImageConstants.no_image, fit: BoxFit.cover),
               ),
@@ -107,11 +108,19 @@ class ProductItem extends StatelessWidget {
                     return IconButton(
                       icon: Icon(
                         isFav ? Icons.favorite : Icons.favorite_border,
-                        color: isFav ? Colors.red : Colors.grey,
+                        color: isFav
+                            ? AppColors.redColor
+                            : AppColors.disableDarkColor,
                       ),
                       onPressed: () {
                         context.read<FavouriteCubit>().toggleFavorite(
                           product.id,
+                        );
+                        Fluttertoast.showToast(
+                          backgroundColor: theme.primaryColor,
+                          msg: isFav
+                              ? LocaleKeys.removed_from_fav.tr()
+                              : LocaleKeys.added_to_fav.tr(),
                         );
                       },
                     );
@@ -119,13 +128,15 @@ class ProductItem extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Text(
-                      product.pricePoints.toString(),
-                      style: ThemingTypography.styleBold20(context)
-                          .copyWith(color: AppColors.secondaryDarkColor),
+                    Padding(
+                      padding: .symmetric(horizontal: 4.0),
+                      child: Text(
+                        product.pricePoints.toString(),
+                        style: ThemingTypography.styleBold20(context)
+                            .copyWith(color: AppColors.secondaryDarkColor),
+                      ),
                     ),
-                    4.vGap,
-                    Icon(Icons.stars_outlined, color: AppColors.redColor),
+                    Icon(Icons.stars, color: AppColors.redColor),
                   ],
                 ),
                 20.vGap,
@@ -160,8 +171,8 @@ class ProductItem extends StatelessWidget {
                               );
                               context.read<CounterCubit>().reset();
                               Fluttertoast.showToast(
-                                msg: 'Success',
-                                toastLength: Toast.LENGTH_SHORT,
+                                backgroundColor: theme.primaryColor,
+                                msg: LocaleKeys.added_to_cart.tr(),
                               );
                             },
                       child: Text(
