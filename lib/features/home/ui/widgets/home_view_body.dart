@@ -1,9 +1,9 @@
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
+import 'package:bekia_pay/core/shared/widgets/reload_button.dart';
+import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
-import 'package:bekia_pay/features/auth/sign_up/data/models/user_model.dart';
-import 'package:bekia_pay/features/home/data/models/offer_model.dart';
-import 'package:bekia_pay/features/home/logic/home_cubit.dart';
+import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
 import 'package:bekia_pay/features/home/ui/widgets/home_grid.dart';
 import 'package:bekia_pay/features/home/ui/widgets/home_slider.dart';
 import 'package:flutter/material.dart';
@@ -15,34 +15,48 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return BlocBuilder<HomeCubit, HomeState>(
-      builder: (context, state) => state.when(
-        loading: () =>
-            CircularProgressIndicator(color: theme.primaryColor).center,
-        failure: (message) {
-          return SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: .start,
-              children: [Text(message).center],
-            ),
-          );
-        },
-        success: (homeData) {
-          final UserModel user = homeData.user;
-          final List<OfferModel> offers = homeData.offers;
-          return Column(
-            mainAxisAlignment: .start,
-            children: [
-              BlocProvider(
-                create: (context) => IndexChangerCubit(),
-                child: HomeSlider(offers: offers),
-              ),
-              10.vGap,
-              HomeGrid(user: user),
-            ],
-          );
-        },
-      ),
+    return Column(
+      mainAxisAlignment: .start,
+      children: [
+        BlocProvider(
+          create: (context) => IndexChangerCubit(),
+          child: BlocBuilder<OffersCubit, OffersState>(
+            builder: (context, state) {
+              return state.when(
+                loading: () {
+                  return SizedBox(
+                    height: context.screenHeight * .2,
+                    child: CircularProgressIndicator(color: theme.primaryColor)
+                        .center,
+                  );
+                },
+                success: (offers) {
+                  return HomeSlider(offers: offers);
+                },
+                failure: (message) {
+                  return SizedBox(
+                    height: context.screenHeight * .2,
+                    child: Column(
+                      mainAxisAlignment: .center,
+                      children: [
+                        Text("Something went wrong , try again later"),
+                        12.vGap,
+                        ReloadButton(
+                          onTap: () {
+                            context.read<OffersCubit>().getOffers();
+                          },
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+        ),
+        10.vGap,
+        HomeGrid(),
+      ],
     );
   }
 }

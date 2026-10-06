@@ -73,5 +73,8 @@
   "added_to_fav": "Added to favourite",
   "removed_from_fav": "Removed from favourite",
   "added_to_cart": "Added to Cart",
-  "removed_from_cart": "Removed from cart"
+  "removed_from_cart": "Removed from cart",
+  "cart": "Cart",
+  "cart_warning_message": "You won't be able to cancel your orders after the 25th of the month.",
+  "reload": "Reload"
 }

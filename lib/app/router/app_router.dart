@@ -1,4 +1,5 @@
 import 'package:bekia_pay/core/dependency_injection/dependency_injection.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
@@ -11,7 +12,7 @@ import 'package:bekia_pay/features/cart/ui/cart_view.dart';
 import 'package:bekia_pay/features/error/error_view.dart';
 import 'package:bekia_pay/features/gate/gate_view.dart';
 import 'package:bekia_pay/features/home/data/models/offer_model.dart';
-import 'package:bekia_pay/features/home/logic/home_cubit.dart';
+import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
 import 'package:bekia_pay/features/home/ui/home_view.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/materials/ui/materials_view.dart';
@@ -38,7 +39,10 @@ class AppRouter {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) => DependencyInjection.getIt<HomeCubit>(),
+                create: (_) => DependencyInjection.getIt<OffersCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<PointsCubit>(),
               ),
               BlocProvider(
                 create: (_) => DependencyInjection.getIt<IndexChangerCubit>(),

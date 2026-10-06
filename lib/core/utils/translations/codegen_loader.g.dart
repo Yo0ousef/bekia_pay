@@ -89,7 +89,10 @@ class CodegenLoader extends AssetLoader{
   "added_to_fav": "تمت الإضافة للمفضلة",
   "removed_from_fav": "تم الحذف من المفضلة",
   "added_to_cart": "تمت الإضافة للعربة",
-  "removed_from_cart": "تم الحذف من العربة"
+  "removed_from_cart": "تم الحذف من العربة",
+  "cart": "العربة",
+  "cart_warning_message": ".لن تتمكن من إلغاء طلباتك بعد 25 من الشهر",
+  "reload": "إعادة تحميل"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -166,7 +169,10 @@ static const Map<String,dynamic> _en = {
   "added_to_fav": "Added to favourite",
   "removed_from_fav": "Removed from favourite",
   "added_to_cart": "Added to Cart",
-  "removed_from_cart": "Removed from cart"
+  "removed_from_cart": "Removed from cart",
+  "cart": "Cart",
+  "cart_warning_message": "You won't be able to cancel your orders after the 25th of the month.",
+  "reload": "Reload"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

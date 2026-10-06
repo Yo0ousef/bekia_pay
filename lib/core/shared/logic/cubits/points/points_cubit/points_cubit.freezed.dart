@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint, type=warning, deprecated_member_use, deprecated_member_use_from_same_package
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'home_cubit.dart';
+part of 'points_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,7 +13,7 @@ part of 'home_cubit.dart';
 // dart format off
 T _$identity<T>(T value) => value;
 /// @nodoc
-mixin _$HomeState<T> {
+mixin _$PointsState<T> {
 
 
 
@@ -21,7 +21,7 @@ mixin _$HomeState<T> {
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is HomeState<T>);
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is PointsState<T>);
 }
 
 
@@ -30,20 +30,20 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-    return 'HomeState<$T>()';
+    return 'PointsState<$T>()';
 }
 
 
 }
 
 /// @nodoc
-class $HomeStateCopyWith<T,$Res>  {
-$HomeStateCopyWith(HomeState<T> _, $Res Function(HomeState<T>) __);
+class $PointsStateCopyWith<T,$Res>  {
+$PointsStateCopyWith(PointsState<T> _, $Res Function(PointsState<T>) __);
 }
 
 
-/// Adds pattern-matching-related methods to [HomeState].
-extension HomeStatePatterns<T> on HomeState<T> {
+/// Adds pattern-matching-related methods to [PointsState].
+extension PointsStatePatterns<T> on PointsState<T> {
 /// A variant of `map` that fallback to returning `orElse`.
 ///
 /// It is equivalent to doing:
@@ -126,11 +126,11 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( T data)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( T points)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
-return success(_that.data);case _Failure() when failure != null:
+return success(_that.points);case _Failure() when failure != null:
 return failure(_that.message);case _:
   return orElse();
 
@@ -149,11 +149,11 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( T data)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( T points)  success,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Success():
-return success(_that.data);case _Failure():
+return success(_that.points);case _Failure():
 return failure(_that.message);case _:
   throw StateError('Unexpected subclass');
 
@@ -171,11 +171,11 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( T data)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( T points)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
-return success(_that.data);case _Failure() when failure != null:
+return success(_that.points);case _Failure() when failure != null:
 return failure(_that.message);case _:
   return null;
 
@@ -187,7 +187,7 @@ return failure(_that.message);case _:
 /// @nodoc
 
 
-class _Loading<T> implements HomeState<T> {
+class _Loading<T> implements PointsState<T> {
   const _Loading();
   
 
@@ -207,7 +207,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-    return 'HomeState<$T>.loading()';
+    return 'PointsState<$T>.loading()';
 }
 
 
@@ -219,13 +219,13 @@ String toString() {
 /// @nodoc
 
 
-class _Success<T> implements HomeState<T> {
-  const _Success(this.data);
+class _Success<T> implements PointsState<T> {
+  const _Success(this.points);
   
 
- final  T data;
+ final  T points;
 
-/// Create a copy of HomeState
+/// Create a copy of PointsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -235,29 +235,29 @@ _$SuccessCopyWith<T, _Success<T>> get copyWith => __$SuccessCopyWithImpl<T, _Suc
 
 @override
 bool operator ==(Object other) {
-    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success<T>&&const DeepCollectionEquality().equals(other.data, data));
+    return identical(this, other) || (other.runtimeType == runtimeType&&other is _Success<T>&&const DeepCollectionEquality().equals(other.points, points));
 }
 
 
 @override
 int get hashCode {
-    return Object.hash(runtimeType,const DeepCollectionEquality().hash(data));
+    return Object.hash(runtimeType,const DeepCollectionEquality().hash(points));
 }
 
 @override
 String toString() {
-    return 'HomeState<$T>.success(data: $data)';
+    return 'PointsState<$T>.success(points: $points)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$SuccessCopyWith<T,$Res> implements $HomeStateCopyWith<T, $Res> {
+abstract mixin class _$SuccessCopyWith<T,$Res> implements $PointsStateCopyWith<T, $Res> {
   factory _$SuccessCopyWith(_Success<T> value, $Res Function(_Success<T>) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- T data
+ T points
 });
 
 
@@ -272,11 +272,11 @@ class __$SuccessCopyWithImpl<T,$Res>
   final _Success<T> _self;
   final $Res Function(_Success<T>) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of PointsState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? data = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? points = freezed,}) {
   return _then(_Success<T>(
-freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+freezed == points ? _self.points : points // ignore: cast_nullable_to_non_nullable
 as T,
   ));
 }
@@ -287,13 +287,13 @@ as T,
 /// @nodoc
 
 
-class _Failure<T> implements HomeState<T> {
+class _Failure<T> implements PointsState<T> {
   const _Failure(this.message);
   
 
  final  String message;
 
-/// Create a copy of HomeState
+/// Create a copy of PointsState
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
@@ -314,14 +314,14 @@ int get hashCode {
 
 @override
 String toString() {
-    return 'HomeState<$T>.failure(message: $message)';
+    return 'PointsState<$T>.failure(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class _$FailureCopyWith<T,$Res> implements $HomeStateCopyWith<T, $Res> {
+abstract mixin class _$FailureCopyWith<T,$Res> implements $PointsStateCopyWith<T, $Res> {
   factory _$FailureCopyWith(_Failure<T> value, $Res Function(_Failure<T>) _then) = __$FailureCopyWithImpl;
 @useResult
 $Res call({
@@ -340,7 +340,7 @@ class __$FailureCopyWithImpl<T,$Res>
   final _Failure<T> _self;
   final $Res Function(_Failure<T>) _then;
 
-/// Create a copy of HomeState
+/// Create a copy of PointsState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
   return _then(_Failure<T>(

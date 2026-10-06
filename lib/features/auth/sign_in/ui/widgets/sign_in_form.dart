@@ -45,6 +45,7 @@ class SignInForm extends StatelessWidget {
       builder: (context, state) {
         return Form(
           key: cubit.formKey,
+          autovalidateMode: .onUnfocus,
           child: Column(
             children: [
               CustomTextFormField(

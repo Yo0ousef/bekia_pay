@@ -78,5 +78,8 @@ abstract class  LocaleKeys {
   static const removed_from_fav = 'removed_from_fav';
   static const added_to_cart = 'added_to_cart';
   static const removed_from_cart = 'removed_from_cart';
+  static const cart = 'cart';
+  static const cart_warning_message = 'cart_warning_message';
+  static const reload = 'reload';
 
 }

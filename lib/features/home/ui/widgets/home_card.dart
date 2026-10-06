@@ -7,18 +7,14 @@ import 'package:flutter/material.dart';
 class HomeCard extends StatelessWidget {
   final String title, subtitle;
   final Widget? trailing;
-  final IconData? subtitleIcon;
   final VoidCallback? onTap;
-  final double? iconSize;
 
   const HomeCard({
     super.key,
     required this.title,
     this.trailing,
-    this.subtitleIcon,
     required this.subtitle,
     this.onTap,
-    this.iconSize,
   });
 
   @override
@@ -68,9 +64,9 @@ class HomeCard extends StatelessWidget {
                   Text(subtitle),
                   10.hGap,
                   Icon(
-                    subtitleIcon ?? Icons.arrow_forward_ios_outlined,
+                    Icons.arrow_forward_ios_outlined,
                     color: AppColors.redColor,
-                    size: iconSize ?? 15,
+                    size: 15,
                   ),
                 ],
               ),

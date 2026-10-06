@@ -1,3 +1,6 @@
+import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
+import 'package:bekia_pay/features/cart/ui/widgets/cart_view_body.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class CartView extends StatelessWidget {
@@ -9,10 +12,11 @@ class CartView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('Cart'),
+        title: Text(LocaleKeys.cart.tr()),
         automaticallyImplyLeading: false,
         backgroundColor: theme.scaffoldBackgroundColor,
       ),
+      body: CartViewBody(),
     );
   }
 }

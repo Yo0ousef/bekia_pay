@@ -1,3 +1,5 @@
+import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
+import 'package:bekia_pay/core/shared/logic/cubits/points/points_repo.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
@@ -8,8 +10,8 @@ import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:bekia_pay/features/cart/data/orders_repo.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
-import 'package:bekia_pay/features/home/data/home_repo.dart';
-import 'package:bekia_pay/features/home/logic/home_cubit.dart';
+import 'package:bekia_pay/features/home/data/offers_repo.dart';
+import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
 import 'package:bekia_pay/features/materials/data/materials_repo.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
@@ -41,7 +43,9 @@ class DependencyInjection {
     getIt.registerLazySingleton<SignUpCubit>(
       () => SignUpCubit(getIt<SignUpRepo>()),
     );
-    getIt.registerLazySingleton<HomeCubit>(() => HomeCubit(getIt<HomeRepo>()));
+    getIt.registerLazySingleton<OffersCubit>(
+      () => OffersCubit(getIt<OffersRepo>()),
+    );
     getIt.registerFactory<IndexChangerCubit>(() => IndexChangerCubit());
     getIt.registerLazySingleton<SubscriptionCubit>(
       () => SubscriptionCubit(getIt<SubscriptionRepo>()),
@@ -62,9 +66,13 @@ class DependencyInjection {
     getIt.registerLazySingleton<CheckOutCubit>(
       () => CheckOutCubit(getIt<OrdersRepo>()),
     );
+    getIt.registerLazySingleton<PointsCubit>(
+      () => PointsCubit(getIt<PointsRepo>()),
+    );
 
     // Repositories
-    getIt.registerLazySingleton<HomeRepo>(() => HomeRepo());
+    getIt.registerLazySingleton<PointsRepo>(() => PointsRepo());
+    getIt.registerLazySingleton<OffersRepo>(() => OffersRepo());
     getIt.registerLazySingleton<OrdersRepo>(() => OrdersRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());

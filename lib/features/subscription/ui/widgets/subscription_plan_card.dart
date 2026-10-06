@@ -32,15 +32,17 @@ class SubscriptionPlanCard extends StatelessWidget {
     final title = plan.title[isAr ? 'ar' : 'en']?.toString() ?? '';
     final description = plan.description[isAr ? 'ar' : 'en']?.toString() ?? '';
 
-    final state = context.watch<SubscriptionCubit>().state;
+    final state = context
+        .watch<SubscriptionCubit>()
+        .state;
     final bool doesUserHaveAPlan = state.maybeWhen(
       success: (subscriptions, activeSubscriptionId) =>
-          activeSubscriptionId != null,
+      activeSubscriptionId != null,
       orElse: () => false,
     );
     final bool isActive = state.maybeWhen(
       success: (subscriptions, activeSubscriptionId) =>
-          activeSubscriptionId == plan.id,
+      activeSubscriptionId == plan.id,
       orElse: () => false,
     );
 
@@ -111,13 +113,13 @@ class SubscriptionPlanCard extends StatelessWidget {
           Text(
             "${plan.price}\$ /${LocaleKeys.month.tr()}",
             style: ThemingTypography.styleBold24(context)
-                .copyWith(fontSize: 32, color: Colors.black87),
+                .copyWith(fontSize: 32, color: AppColors.blackColor),
           ),
           if (description.isNotEmpty)
             Text(
               description,
               style: ThemingTypography.styleRegular14(context)
-                  .copyWith(color: Colors.black54),
+                  .copyWith(color: AppColors.blackColor),
             ),
           8.vGap,
           const Divider(),
@@ -137,7 +139,8 @@ class SubscriptionPlanCard extends StatelessWidget {
                         features[index],
                         style: ThemingTypography.styleRegular14(
                           context,
-                        ).copyWith(color: Colors.black54, fontFamily: 'Noto'),
+                        ).copyWith(
+                            color: AppColors.blackColor, fontFamily: 'Noto'),
                       ),
                     ),
                   ],
@@ -151,30 +154,30 @@ class SubscriptionPlanCard extends StatelessWidget {
             height: 50,
             child: isActive
                 ? OutlinedButton(
-                    onPressed: null,
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: color),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: Text(
-                      LocaleKeys.current_plan.tr(),
-                      style: ThemingTypography.styleRegular14(context)
-                          .copyWith(color: color),
-                    ),
-                  )
+              onPressed: null,
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: color),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(
+                LocaleKeys.current_plan.tr(),
+                style: ThemingTypography.styleRegular14(context)
+                    .copyWith(color: color),
+              ),
+            )
                 : doesUserHaveAPlan
                 ? OutlinedButton(
-                    onPressed: null,
-                    style: OutlinedButton.styleFrom(
-                      side: BorderSide(color: color),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                    ),
-                    child: Text(LocaleKeys.already_have_plan.tr()),
-                  )
+              onPressed: null,
+              style: OutlinedButton.styleFrom(
+                side: BorderSide(color: color),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: Text(LocaleKeys.already_have_plan.tr()),
+            )
                 : SubscriptionButton(plan: plan, color: color),
           ),
         ],
