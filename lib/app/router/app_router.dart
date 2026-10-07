@@ -41,9 +41,7 @@ class AppRouter {
               BlocProvider.value(
                 value: DependencyInjection.getIt<OffersCubit>(),
               ),
-              BlocProvider.value(
-                value: DependencyInjection.getIt<CartCubit>(),
-              ),
+              BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
@@ -103,9 +101,7 @@ class AppRouter {
               BlocProvider.value(
                 value: DependencyInjection.getIt<FavouriteCubit>(),
               ),
-              BlocProvider.value(
-                value: DependencyInjection.getIt<CartCubit>(),
-              ),
+              BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
 
             child: const ShopView(),
@@ -135,9 +131,7 @@ class AppRouter {
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
-              BlocProvider.value(
-                value: DependencyInjection.getIt<CartCubit>(),
-              ),
+              BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
             child: const CartView(),
           ),

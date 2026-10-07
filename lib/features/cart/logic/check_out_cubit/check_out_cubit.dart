@@ -15,9 +15,16 @@ class CheckOutCubit extends Cubit<CheckOutState> {
   void checkOut({required List<CartItemModel> items}) async {
     emit(const CheckOutState.loading());
     final result = await _repo.placeOrder(items: items);
+    if (isClosed) return;
     result.when(
       success: (_) => emit(const CheckOutState.success()),
       failure: (message) => emit(CheckOutState.failure(message)),
     );
+  }
+
+  void reset() {
+    if (!isClosed) {
+      emit(const CheckOutState.initial());
+    }
   }
 }

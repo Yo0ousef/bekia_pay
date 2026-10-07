@@ -81,5 +81,17 @@ abstract class  LocaleKeys {
   static const cart = 'cart';
   static const cart_warning_message = 'cart_warning_message';
   static const reload = 'reload';
+  static const something_went_wrong = 'something_went_wrong';
+  static const cancel = 'cancel';
+  static const order_now = 'order_now';
+  static const insufficient_points = 'insufficient_points';
+  static const points = 'points';
+  static const you_have = 'you_have';
+  static const pay_total_of = 'pay_total_of';
+  static const no_items_in_cart = 'no_items_in_cart';
+  static const amount = 'amount';
+  static const price = 'price';
+  static const total = 'total';
+  static const order_placed = 'order_placed';
 
 }

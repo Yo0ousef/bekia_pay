@@ -1,7 +1,9 @@
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/ui/widgets/cart_view_item.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,7 +17,7 @@ class CartItemsList extends StatelessWidget {
         if (state.isEmpty) {
           return Center(
             child: Text(
-              "No Items In Cart Yet",
+              LocaleKeys.no_items_in_cart.tr(),
               style: ThemingTypography.styleBold24(context),
             ),
           );

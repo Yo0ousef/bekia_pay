@@ -92,7 +92,19 @@ class CodegenLoader extends AssetLoader{
   "removed_from_cart": "تم الحذف من العربة",
   "cart": "العربة",
   "cart_warning_message": ".لن تتمكن من إلغاء طلباتك بعد 25 من الشهر",
-  "reload": "إعادة تحميل"
+  "reload": "إعادة تحميل",
+  "something_went_wrong": "حدث خطأ , حاول مرة أخري",
+  "cancel": "إلغاء",
+  "order_now": "اطلب الان",
+  "insufficient_points": "النقاط غير كافية",
+  "points": " نقاط",
+  "you_have": " لديك",
+  "pay_total_of": "ادفع",
+  "no_items_in_cart": "لا توجد مشتريات في السلة ",
+  "amount": "الكمية",
+  "price": "السعر",
+  "total": "الإجمالي",
+  "order_placed": "تم إنشاء الطلب بنجاح"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -172,7 +184,19 @@ static const Map<String,dynamic> _en = {
   "removed_from_cart": "Removed from cart",
   "cart": "Cart",
   "cart_warning_message": "You won't be able to cancel your orders after the 25th of the month.",
-  "reload": "Reload"
+  "reload": "Reload",
+  "something_went_wrong": "Something went wrong , try again later",
+  "cancel": "Cancel",
+  "order_now": "Order now",
+  "insufficient_points": "Insufficient points",
+  "points": " points",
+  "you_have": "You have ",
+  "pay_total_of": "Pay total of ",
+  "no_items_in_cart": "No items in cart yet",
+  "amount": "Amount",
+  "price": "Price",
+  "total": "Total",
+  "order_placed": "Order placed successfully!"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

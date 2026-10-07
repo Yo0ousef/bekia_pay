@@ -76,5 +76,17 @@
   "removed_from_cart": "Removed from cart",
   "cart": "Cart",
   "cart_warning_message": "You won't be able to cancel your orders after the 25th of the month.",
-  "reload": "Reload"
+  "reload": "Reload",
+  "something_went_wrong": "Something went wrong , try again later",
+  "cancel": "Cancel",
+  "order_now": "Order now",
+  "insufficient_points": "Insufficient points",
+  "points": " points",
+  "you_have": "You have ",
+  "pay_total_of": "Pay total of ",
+  "no_items_in_cart": "No items in cart yet",
+  "amount": "Amount",
+  "price": "Price",
+  "total": "Total",
+  "order_placed": "Order placed successfully!"
 }
