@@ -38,11 +38,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<OffersCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<OffersCubit>(),
               ),
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<PointsCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<CartCubit>(),
+              ),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<PointsCubit>(),
               ),
               BlocProvider(
                 create: (_) => DependencyInjection.getIt<IndexChangerCubit>(),
@@ -62,8 +65,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<SignInCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<SignInCubit>(),
               ),
               BlocProvider(
                 create: (_) => DependencyInjection.getIt<VisibilityCubit>(),
@@ -76,8 +79,8 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<SignUpCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<SignUpCubit>(),
               ),
             ],
             child: const SignUpView(),
@@ -85,8 +88,8 @@ class AppRouter {
         );
       case AppRoutes.subscription:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) => DependencyInjection.getIt<SubscriptionCubit>(),
+          builder: (context) => BlocProvider.value(
+            value: DependencyInjection.getIt<SubscriptionCubit>(),
             child: const SubscriptionView(),
           ),
         );
@@ -94,14 +97,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<ProductsCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<ProductsCubit>(),
               ),
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<FavouriteCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<FavouriteCubit>(),
               ),
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<CartCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<CartCubit>(),
               ),
             ],
 
@@ -110,15 +113,15 @@ class AppRouter {
         );
       case AppRoutes.materials:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) => DependencyInjection.getIt<MaterialsCubit>(),
+          builder: (context) => BlocProvider.value(
+            value: DependencyInjection.getIt<MaterialsCubit>(),
             child: const MaterialsView(),
           ),
         );
       case AppRoutes.onBoarding:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider(
-            create: (_) => DependencyInjection.getIt<BoardingCubit>(),
+          builder: (context) => BlocProvider.value(
+            value: DependencyInjection.getIt<BoardingCubit>(),
             child: const OnBoardingView(),
           ),
         );
@@ -126,11 +129,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<CheckOutCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<CheckOutCubit>(),
               ),
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<CartCubit>(),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<PointsCubit>(),
+              ),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<CartCubit>(),
               ),
             ],
             child: const CartView(),

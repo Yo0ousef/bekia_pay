@@ -1,10 +1,12 @@
-import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/app_name_widget.dart';
+import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/chat/ui/chat_view_body.dart';
+import 'package:bekia_pay/features/home/ui/widgets/cart_badge.dart';
 import 'package:bekia_pay/features/home/ui/widgets/custom_bottom_navigation_bar.dart';
 import 'package:bekia_pay/features/home/ui/widgets/home_view_body.dart';
 import 'package:bekia_pay/features/options/ui/options_view_body.dart';
+import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -30,11 +32,10 @@ class HomeView extends StatelessWidget {
                   title: AppNameWidget(),
                   centerTitle: true,
                   actions: [
-                    IconButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, AppRoutes.cart.route);
+                    BlocBuilder<CartCubit, List<CartItemModel>>(
+                      builder: (context, state) {
+                        return CartBadge(count: state.length);
                       },
-                      icon: Icon(Icons.shopping_cart_outlined),
                     ),
                   ],
                 )

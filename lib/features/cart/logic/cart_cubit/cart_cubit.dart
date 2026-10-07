@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bekia_pay/core/services/shared_preferences/prefs.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:bekia_pay/features/shop/data/products_repo.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<List<CartItemModel>> {
@@ -13,18 +14,14 @@ class CartCubit extends Cubit<List<CartItemModel>> {
     _loadCartFromCache();
   }
 
-  void addItem(CartItemModel item) async {
+  void addItem(CartItemModel item) {
     if (isClosed) return;
-
     final existingIndex = state.indexWhere(
-      (element) => element.name == item.name,
+      (element) => element.productId == item.productId,
     );
-
-    List<CartItemModel> updatedList;
-    if (existingIndex != -1) {
-      updatedList = List<CartItemModel>.from(state);
+    final updatedList = List<CartItemModel>.from(state);
+    if (existingIndex >= 0) {
       final existingItem = updatedList[existingIndex];
-
       updatedList[existingIndex] = CartItemModel(
         productId: existingItem.productId,
         name: existingItem.name,
@@ -33,16 +30,14 @@ class CartCubit extends Cubit<List<CartItemModel>> {
         pricePoints: existingItem.pricePoints,
       );
     } else {
-      updatedList = [...state, item];
+      updatedList.add(item);
     }
     emit(updatedList);
-
     _saveCartToCache(updatedList);
-
-    if (isClosed) return;
   }
 
   void removeItem(CartItemModel item) {
+    if (isClosed) return;
     final updatedList = state
         .where((element) => element.productId != item.productId)
         .toList();
@@ -51,6 +46,7 @@ class CartCubit extends Cubit<List<CartItemModel>> {
   }
 
   void clearCart() {
+    if (isClosed) return;
     emit([]);
     _saveCartToCache([]);
   }
@@ -63,7 +59,9 @@ class CartCubit extends Cubit<List<CartItemModel>> {
         final List<CartItemModel> cachedItems = decodedList
             .map((item) => CartItemModel.fromJson(item as Map<String, dynamic>))
             .toList();
-        emit(cachedItems);
+        if (!isClosed) {
+          emit(cachedItems);
+        }
       } catch (e) {
         _saveCartToCache([]);
       }
@@ -89,9 +87,5 @@ class CartCubit extends Cubit<List<CartItemModel>> {
       total += item.pricePoints * item.count;
     }
     return total;
-  }
-
-  int get totalItemsCount {
-    return state.length;
   }
 }
