@@ -93,5 +93,13 @@ abstract class  LocaleKeys {
   static const price = 'price';
   static const total = 'total';
   static const order_placed = 'order_placed';
+  static const my_orders = 'my_orders';
+  static const favourites = 'favourites';
+  static const profile = 'profile';
+  static const change_password = 'change_password';
+  static const help_center = 'help_center';
+  static const sign_out = 'sign_out';
+  static const language = 'language';
+  static const contact_us = 'contact_us';
 
 }

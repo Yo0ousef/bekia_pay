@@ -1,6 +1,7 @@
 import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/shared/widgets/custom_button.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
@@ -59,7 +60,7 @@ class SignUpView extends StatelessWidget {
                       },
                       builder: (context, state) {
                         return state.maybeWhen(
-                          loading: () => CircularProgressIndicator(),
+                          loading: () => AppConstants.loading,
                           orElse: () {
                             return CustomButton(
                               onPressed: signUpCubit.signUp,

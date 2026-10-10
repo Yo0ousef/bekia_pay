@@ -1,5 +1,6 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
@@ -14,7 +15,6 @@ class MaterialItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return Container(
       padding: .all(8),
       decoration: BoxDecoration(
@@ -43,8 +43,7 @@ class MaterialItem extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: material.materialImage,
               fit: BoxFit.cover,
-              placeholder: (_, _) =>
-                  CircularProgressIndicator(color: theme.primaryColor).center,
+              placeholder: (_, _) => AppConstants.loading.center,
               errorWidget: (_, _, _) =>
                   Image.asset(ImageConstants.no_image, fit: .cover),
             ),

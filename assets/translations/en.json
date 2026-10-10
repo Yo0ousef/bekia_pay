@@ -88,5 +88,13 @@
   "amount": "Amount",
   "price": "Price",
   "total": "Total",
-  "order_placed": "Order placed successfully!"
+  "order_placed": "Order placed successfully!",
+  "my_orders": "My orders",
+  "favourites": "Favourites",
+  "profile": "My Profile",
+  "change_password": "Change password",
+  "help_center": "Help center",
+  "sign_out": "Sign out",
+  "language": "Language",
+  "contact_us": "Contact us"
 }

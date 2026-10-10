@@ -27,6 +27,7 @@ dependencies:
   phone_text_field: ^2.0.0
   carousel_slider: ^5.1.2
   cached_network_image: ^4.0.0
+  flutter_spinkit: ^5.2.2
 
 dev_dependencies:
   flutter_test:

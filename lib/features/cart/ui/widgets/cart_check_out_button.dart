@@ -1,6 +1,8 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
+import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
@@ -56,9 +58,7 @@ class CartCheckOutButton extends StatelessWidget {
                 builder: (context, state) {
                   return state.maybeWhen(
                     loading: () {
-                      return CircularProgressIndicator(
-                        color: theme.primaryColor,
-                      );
+                      return AppConstants.loading;
                     },
                     success: (points) {
                       final num userPoints = points;
@@ -131,14 +131,7 @@ class CartCheckOutButton extends StatelessWidget {
                                       }
                                     },
                               child: isLoading
-                                  ? const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        color: AppColors.whiteColor,
-                                        strokeWidth: 2,
-                                      ),
-                                    )
+                                  ? AppConstants.loading.center
                                   : Text(LocaleKeys.order_now.tr()),
                             ),
                           ),

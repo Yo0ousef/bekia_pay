@@ -1,6 +1,7 @@
 import 'package:bekia_pay/app/router/app_routes.dart';
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
@@ -37,9 +38,7 @@ class HomeSlider extends StatelessWidget {
                         borderRadius: .circular(12),
                         child: CachedNetworkImage(
                           imageUrl: offer.imageUrl,
-                          placeholder: (_, _) => CircularProgressIndicator(
-                            color: theme.primaryColor,
-                          ).center,
+                          placeholder: (_, _) => AppConstants.loading.center,
                           errorWidget: (_, _, _) =>
                               Image.asset(ImageConstants.no_image, fit: .cover),
                         ),

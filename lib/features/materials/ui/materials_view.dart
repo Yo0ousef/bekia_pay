@@ -1,3 +1,4 @@
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/materials/ui/widgets/materials_grid.dart';
@@ -20,8 +21,7 @@ class MaterialsView extends StatelessWidget {
       body: BlocBuilder<MaterialsCubit, MaterialsState>(
         builder: (context, state) {
           return state.when(
-            loading: () =>
-                CircularProgressIndicator(color: theme.primaryColor).center,
+            loading: () => AppConstants.loading.center,
             success: (materials) => MaterialsGrid(materials: materials),
             failure: (message) => Text(message),
           );

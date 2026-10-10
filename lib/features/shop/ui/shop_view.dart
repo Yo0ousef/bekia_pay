@@ -1,4 +1,4 @@
-import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/widgets/products_list.dart';
@@ -24,8 +24,7 @@ class ShopView extends StatelessWidget {
         builder: (context, state) {
           return state.when(
             loading: () {
-              return CircularProgressIndicator(color: theme.primaryColor)
-                  .center;
+              return AppConstants.loading;
             },
             failure: (message) {
               Fluttertoast.showToast(msg: message);

@@ -15,6 +15,9 @@ import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
 import 'package:bekia_pay/features/materials/data/materials_repo.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
+import 'package:bekia_pay/features/options/data/options_repo.dart';
+import 'package:bekia_pay/features/options/logic/sign_out_cubit/sign_out_cubit.dart';
+import 'package:bekia_pay/features/options/logic/user_profile_cubit/user_profile_cubit.dart';
 import 'package:bekia_pay/features/shop/data/favourite_repo.dart';
 import 'package:bekia_pay/features/shop/data/products_repo.dart';
 import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
@@ -69,6 +72,12 @@ class DependencyInjection {
     getIt.registerLazySingleton<PointsCubit>(
       () => PointsCubit(getIt<PointsRepo>()),
     );
+    getIt.registerLazySingleton<SignOutCubit>(
+      () => SignOutCubit(getIt<OptionsRepo>()),
+    );
+    getIt.registerLazySingleton<UserProfileCubit>(
+      () => UserProfileCubit(getIt<OptionsRepo>()),
+    );
 
     // Repositories
     getIt.registerLazySingleton<PointsRepo>(() => PointsRepo());
@@ -76,6 +85,7 @@ class DependencyInjection {
     getIt.registerLazySingleton<OrdersRepo>(() => OrdersRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
+    getIt.registerLazySingleton<OptionsRepo>(() => OptionsRepo());
     getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo());
     getIt.registerLazySingleton<MaterialsRepo>(() => MaterialsRepo());
     getIt.registerLazySingleton<FavouriteRepo>(() => FavouriteRepo());

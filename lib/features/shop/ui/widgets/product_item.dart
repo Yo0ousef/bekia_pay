@@ -1,5 +1,6 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
@@ -53,8 +54,7 @@ class ProductItem extends StatelessWidget {
                 width: context.screenWidth * 0.2,
                 height: context.screenHeight * 0.15,
                 fit: BoxFit.cover,
-                placeholder: (context, url) =>
-                    CircularProgressIndicator(color: theme.primaryColor).center,
+                placeholder: (context, url) => AppConstants.loading.center,
                 errorWidget: (_, _, _) =>
                     Image.asset(ImageConstants.no_image, fit: BoxFit.cover),
               ),

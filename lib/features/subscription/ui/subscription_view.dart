@@ -1,5 +1,6 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
@@ -26,9 +27,7 @@ class SubscriptionView extends StatelessWidget {
       body: BlocBuilder<SubscriptionCubit, SubscriptionState>(
         builder: (context, state) {
           return state.when(
-            loading: () =>
-                CircularProgressIndicator(color: Theme.of(context).primaryColor)
-                    .center,
+            loading: () => AppConstants.loading.center,
             success: (plans, activePlanId) {
               return SingleChildScrollView(
                 child: Column(

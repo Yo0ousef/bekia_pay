@@ -1,5 +1,6 @@
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/reload_button.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
@@ -16,7 +17,6 @@ class HomeViewBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return Column(
       mainAxisAlignment: .start,
       children: [
@@ -28,8 +28,7 @@ class HomeViewBody extends StatelessWidget {
                 loading: () {
                   return SizedBox(
                     height: context.screenHeight * .2,
-                    child: CircularProgressIndicator(color: theme.primaryColor)
-                        .center,
+                    child: AppConstants.loading.center,
                   );
                 },
                 success: (offers) {

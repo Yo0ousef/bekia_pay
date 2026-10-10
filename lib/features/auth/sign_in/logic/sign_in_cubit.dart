@@ -5,7 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'sign_in_cubit.freezed.dart';
-
 part 'sign_in_state.dart';
 
 class SignInCubit extends Cubit<SignInState> {
@@ -25,14 +24,18 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   void signIn() async {
-    emit(SignInState.loading());
     if (formKey.currentState!.validate()) {
+      emit(SignInState.loading());
       ApiResult<bool> result = await _repo.sinInWithEmailAndPassword(
         email: emailController.text,
         password: passwordController.text,
       );
       result.when(
-        success: (_) => emit(SignInState.success()),
+        success: (_) {
+          emit(SignInState.success());
+          emailController.clear();
+          passwordController.clear();
+        },
         failure: (message) => emit(SignInState.failure(message: message)),
       );
     }

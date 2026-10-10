@@ -88,5 +88,13 @@
   "amount": "الكمية",
   "price": "السعر",
   "total": "الإجمالي",
-  "order_placed": "تم إنشاء الطلب بنجاح"
+  "order_placed": "تم إنشاء الطلب بنجاح",
+  "my_orders": "طلباتي",
+  "favourites": "المفضلات",
+  "profile": "ملفي الشخصي",
+  "change_password": "تغيير كلمة المرور",
+  "help_center": "سنتر المساعده",
+  "sign_out": "تسجيل الخروج",
+  "language": "اللغة",
+  "contact_us": "تواصل معنا"
 }

@@ -5,6 +5,7 @@ import 'package:bekia_pay/core/shared/logic/validators.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/custom_button.dart';
 import 'package:bekia_pay/core/shared/widgets/custom_text_form_field.dart';
+import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
@@ -28,7 +29,7 @@ class SignInForm extends StatelessWidget {
             Navigator.pushNamedAndRemoveUntil(
               context,
               AppRoutes.home.route,
-              (route) => false,
+                  (route) => false,
             );
           },
           failure: (message) {
@@ -61,6 +62,7 @@ class SignInForm extends StatelessWidget {
                   return CustomTextFormField(
                     controller: cubit.passwordController,
                     onSaved: cubit.onPasswordSaved,
+                    validator: Validators.passwordValidate,
                     labelText: LocaleKeys.password.tr(),
                     keyboardType: TextInputType.visiblePassword,
                     suffixIcon: IconButton(
@@ -90,7 +92,7 @@ class SignInForm extends StatelessWidget {
               20.vGap,
               state.maybeWhen(
                 loading: () {
-                  return CircularProgressIndicator(color: theme.primaryColor);
+                  return AppConstants.loading;
                 },
                 orElse: () {
                   return CustomButton(

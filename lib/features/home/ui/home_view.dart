@@ -5,7 +5,7 @@ import 'package:bekia_pay/features/chat/ui/chat_view_body.dart';
 import 'package:bekia_pay/features/home/ui/widgets/cart_badge.dart';
 import 'package:bekia_pay/features/home/ui/widgets/custom_bottom_navigation_bar.dart';
 import 'package:bekia_pay/features/home/ui/widgets/home_view_body.dart';
-import 'package:bekia_pay/features/options/ui/options_view_body.dart';
+import 'package:bekia_pay/features/options/ui/options_view.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +18,7 @@ class HomeView extends StatelessWidget {
     final List<Widget> views = [
       const HomeViewBody(),
       const ChatViewBody(),
-      const OptionsViewBody(),
+      const OptionsView(),
     ];
 
     ThemeData theme = Theme.of(context);
