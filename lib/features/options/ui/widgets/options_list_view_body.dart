@@ -4,6 +4,7 @@ import 'package:bekia_pay/app/theming/theming_typography.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/options/logic/sign_out_cubit/sign_out_cubit.dart';
 import 'package:bekia_pay/features/options/ui/widgets/option_tile.dart';
+import 'package:bekia_pay/features/options/ui/widgets/show_language_dialoge.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,7 +30,7 @@ class OptionsListViewBody extends StatelessWidget {
           icon: Icons.favorite_border,
           title: LocaleKeys.favourites.tr(),
           onTap: () {
-            // Navigator.pushNamed(context, FavoriteProductsView.routeName);
+            Navigator.pushNamed(context, AppRoutes.favourites.route);
           },
         ),
         optionTile(
@@ -59,7 +60,7 @@ class OptionsListViewBody extends StatelessWidget {
           icon: Icons.language,
           title: LocaleKeys.language.tr(),
           onTap: () {
-            // showLanguageDialog(context);
+            showLanguageDialog(context);
           },
         ),
         optionTile(

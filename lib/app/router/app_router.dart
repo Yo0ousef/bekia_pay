@@ -10,6 +10,7 @@ import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
 import 'package:bekia_pay/features/cart/ui/cart_view.dart';
 import 'package:bekia_pay/features/error/error_view.dart';
+import 'package:bekia_pay/features/favourites/ui/favourites_view.dart';
 import 'package:bekia_pay/features/gate/gate_view.dart';
 import 'package:bekia_pay/features/home/data/models/offer_model.dart';
 import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
@@ -134,6 +135,21 @@ class AppRouter {
               BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
             child: const CartView(),
+          ),
+        );
+      case AppRoutes.favourites:
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: DependencyInjection.getIt<ProductsCubit>(),
+              ),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<FavouriteCubit>(),
+              ),
+              BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
+            ],
+            child: const FavouritesView(),
           ),
         );
       default:

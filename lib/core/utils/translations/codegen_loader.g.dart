@@ -112,7 +112,9 @@ class CodegenLoader extends AssetLoader{
   "help_center": "سنتر المساعده",
   "sign_out": "تسجيل الخروج",
   "language": "اللغة",
-  "contact_us": "تواصل معنا"
+  "contact_us": "تواصل معنا",
+  "ok": "تأكيد",
+  "no_favourites": "لا توجد مفضلات بعد"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -212,7 +214,9 @@ static const Map<String,dynamic> _en = {
   "help_center": "Help center",
   "sign_out": "Sign out",
   "language": "Language",
-  "contact_us": "Contact us"
+  "contact_us": "Contact us",
+  "ok": "Ok",
+  "no_favourites": "No favourites yet"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

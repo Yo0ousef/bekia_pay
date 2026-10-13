@@ -7,6 +7,7 @@ enum AppRoutes {
   signIn("/signIn"),
   materials("/materials"),
   onBoarding("/onBoarding"),
+  favourites("/favourites"),
   offerDetails("/offerDetails"),
   subscription("/subscription");
 

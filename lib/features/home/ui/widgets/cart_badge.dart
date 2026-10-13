@@ -10,7 +10,7 @@ class CartBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(right: 16.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
       child: Badge(
         backgroundColor: AppColors.redColor,
         label: Text(count.toString()),

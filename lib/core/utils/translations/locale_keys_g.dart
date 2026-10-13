@@ -101,5 +101,7 @@ abstract class  LocaleKeys {
   static const sign_out = 'sign_out';
   static const language = 'language';
   static const contact_us = 'contact_us';
+  static const ok = 'ok';
+  static const no_favourites = 'no_favourites';
 
 }
