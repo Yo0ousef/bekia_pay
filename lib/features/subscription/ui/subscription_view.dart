@@ -1,5 +1,6 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
@@ -61,7 +62,13 @@ class SubscriptionView extends StatelessWidget {
                 ),
               );
             },
-            failure: (message) => Text(message),
+            failure: (_) {
+              return Reload(
+                onTap: () {
+                  context.read<SubscriptionCubit>().getPlans();
+                },
+              );
+            },
           );
         },
       ),

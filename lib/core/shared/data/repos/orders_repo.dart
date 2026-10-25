@@ -1,6 +1,8 @@
+import 'package:bekia_pay/core/shared/data/models/order_model.dart';
 import 'package:bekia_pay/core/shared/logic/api_result.dart';
-import 'package:bekia_pay/features/cart/data/models/order_model.dart';
+import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class OrdersRepo {
@@ -34,12 +36,12 @@ class OrdersRepo {
     try {
       final userId = _supabase.auth.currentUser?.id;
       if (userId == null) throw Exception('Not logged in');
-
       final response = await _supabase
           .from('orders')
           .select('*, order_items(*, products(*))')
           .eq('user_id', userId)
-          .order('created_at', ascending: false);
+          .order('created_at', ascending: false)
+          .timeout(5.sec);
       final List<OrderModel> orders = (response as List)
           .map((e) => OrderModel.fromJson(e))
           .toList();
@@ -51,6 +53,7 @@ class OrdersRepo {
 
   Future<ApiResult<void>> cancelOrder(String orderId) async {
     try {
+      debugPrint('cancelOrder: $orderId');
       await _supabase.rpc(
         'cancel_order_and_delete',
         params: {'p_order_id': orderId},

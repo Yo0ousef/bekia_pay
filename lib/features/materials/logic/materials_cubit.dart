@@ -5,16 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'materials_cubit.freezed.dart';
+
 part 'materials_state.dart';
 
 class MaterialsCubit extends Cubit<MaterialsState> {
   final MaterialsRepo _materialsRepo;
 
   MaterialsCubit(this._materialsRepo) : super(const MaterialsState.loading()) {
-    fetchMaterials();
+    getMaterials();
   }
 
-  void fetchMaterials() async {
+  void getMaterials() async {
     final ApiResult<List<MaterialModel>> materials = await _materialsRepo
         .fetchMaterials();
     materials.when(

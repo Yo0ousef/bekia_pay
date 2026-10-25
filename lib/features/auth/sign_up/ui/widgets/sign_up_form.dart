@@ -1,6 +1,6 @@
+import 'package:bekia_pay/app/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
-import 'package:bekia_pay/core/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/core/shared/logic/validators.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/custom_text_form_field.dart';

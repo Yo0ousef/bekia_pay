@@ -1,5 +1,7 @@
+import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
+import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/widgets/products_list.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -28,7 +30,12 @@ class ShopView extends StatelessWidget {
             },
             failure: (message) {
               Fluttertoast.showToast(msg: message);
-              return Text("something went wrong , try again later");
+              return Reload(
+                onTap: () {
+                  context.read<FavouriteCubit>().getFavourites();
+                  context.read<ProductsCubit>().getProducts();
+                },
+              );
             },
             success: (products) {
               return ProductsList(products: products);

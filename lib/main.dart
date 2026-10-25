@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'core/dependency_injection/dependency_injection.dart';
+import 'app/dependency_injection/dependency_injection.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

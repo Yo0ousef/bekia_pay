@@ -22,7 +22,7 @@ class OptionsListViewBody extends StatelessWidget {
           icon: Icons.history,
           title: LocaleKeys.my_orders.tr(),
           onTap: () {
-            // Navigator.pushNamed(context, ActivityHistoryView.routeName);
+            Navigator.pushNamed(context, AppRoutes.orders.route);
           },
         ),
         optionTile(

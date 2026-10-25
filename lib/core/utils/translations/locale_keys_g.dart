@@ -103,5 +103,6 @@ abstract class  LocaleKeys {
   static const contact_us = 'contact_us';
   static const ok = 'ok';
   static const no_favourites = 'no_favourites';
+  static const no_orders = 'no_orders';
 
 }

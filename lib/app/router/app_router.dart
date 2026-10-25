@@ -1,4 +1,4 @@
-import 'package:bekia_pay/core/dependency_injection/dependency_injection.dart';
+import 'package:bekia_pay/app/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
@@ -20,6 +20,10 @@ import 'package:bekia_pay/features/materials/ui/materials_view.dart';
 import 'package:bekia_pay/features/offer_details/ui/offer_details_view.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/ui/on_boarding_view.dart';
+import 'package:bekia_pay/features/ordersN/domain/entities/order_entity.dart';
+import 'package:bekia_pay/features/ordersN/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/ordersN/presentation/views/order_details_view_n.dart';
+import 'package:bekia_pay/features/ordersN/presentation/views/orders_view.dart';
 import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/shop_view.dart';
@@ -150,6 +154,35 @@ class AppRouter {
               BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
             child: const FavouritesView(),
+          ),
+        );
+      case AppRoutes.orders:
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: DependencyInjection.getIt<OrderCubit>(),
+              ),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<PointsCubit>(),
+              ),
+            ],
+            child: const OrderView(),
+          ),
+        );
+      case AppRoutes.orderDetails:
+        final order = settings.arguments as OrderEntity;
+        return MaterialPageRoute(
+          builder: (context) => MultiBlocProvider(
+            providers: [
+              BlocProvider.value(
+                value: DependencyInjection.getIt<OrderCubit>(),
+              ),
+              BlocProvider.value(
+                value: DependencyInjection.getIt<PointsCubit>(),
+              ),
+            ],
+            child: OrderDetailsViewN(order: order),
           ),
         );
       default:

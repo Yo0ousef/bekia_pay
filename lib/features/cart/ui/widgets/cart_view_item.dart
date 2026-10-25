@@ -1,11 +1,10 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
-import 'package:bekia_pay/core/utils/constants/image_constants.dart';
+import 'package:bekia_pay/core/shared/widgets/product_image.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +16,6 @@ class CartViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return Container(
       width: double.infinity,
       height: context.screenHeight * 0.20,
@@ -37,20 +35,7 @@ class CartViewItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(12),
-            child: CachedNetworkImage(
-              imageUrl: item.imageUrl,
-              width: context.screenWidth * 0.2,
-              height: context.screenHeight * 0.15,
-              fit: BoxFit.cover,
-              placeholder: (_, _) => Center(
-                child: CircularProgressIndicator(color: theme.primaryColor),
-              ),
-              errorWidget: (_, _, _) =>
-                  Image.asset(ImageConstants.no_image, fit: .cover),
-            ),
-          ),
+          ProductImage(imageUrl: item.imageUrl),
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

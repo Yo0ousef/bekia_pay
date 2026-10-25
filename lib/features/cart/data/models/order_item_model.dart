@@ -18,7 +18,7 @@ class OrderItemModel {
     return OrderItemModel(
       id: json['id'].toString(),
       quantity: json['quantity'] ?? 0,
-      points: json['points'] ?? 0,
+      points: json['line_total_points'] ?? 0,
       productName: product['product_name'] ?? 'Unknown Product',
       productImage: product['image_url'] ?? '',
     );

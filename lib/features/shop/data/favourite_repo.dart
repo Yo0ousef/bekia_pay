@@ -1,4 +1,5 @@
 import 'package:bekia_pay/core/shared/logic/api_result.dart';
+import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class FavouriteRepo {
@@ -13,7 +14,8 @@ class FavouriteRepo {
       final List<dynamic> response = await _supabase
           .from('favorites')
           .select('product_id')
-          .eq('user_id', user.id);
+          .eq('user_id', user.id)
+          .timeout(10.sec);
 
       final List<String> favoriteIds = response
           .map((item) => item['product_id'].toString())
@@ -30,10 +32,10 @@ class FavouriteRepo {
       if (user == null) {
         return false;
       }
-      await _supabase.from('favorites').insert({
-        'user_id': user.id,
-        'product_id': productId,
-      });
+      await _supabase
+          .from('favorites')
+          .insert({'user_id': user.id, 'product_id': productId})
+          .timeout(10.sec);
       return true;
     } catch (exception) {
       return false;
@@ -50,7 +52,8 @@ class FavouriteRepo {
           .from('favorites')
           .delete()
           .eq('user_id', user.id)
-          .eq('product_id', productId);
+          .eq('product_id', productId)
+          .timeout(10.sec);
       return ApiResult.success(null);
     } catch (exception) {
       return ApiResult.failure(exception.toString());

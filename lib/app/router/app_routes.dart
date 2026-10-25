@@ -6,9 +6,11 @@ enum AppRoutes {
   signUp("/signUp"),
   signIn("/signIn"),
   materials("/materials"),
+  orders("/orders"),
   onBoarding("/onBoarding"),
   favourites("/favourites"),
   offerDetails("/offerDetails"),
+  orderDetails("/orderDetails"),
   subscription("/subscription");
 
   final String route;

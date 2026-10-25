@@ -1,4 +1,4 @@
-import 'package:bekia_pay/core/dependency_injection/dependency_injection.dart';
+import 'package:bekia_pay/app/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/features/options/data/options_repo.dart';
 import 'package:bekia_pay/features/options/logic/sign_out_cubit/sign_out_cubit.dart';
 import 'package:bekia_pay/features/options/logic/user_profile_cubit/user_profile_cubit.dart';

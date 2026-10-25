@@ -34,7 +34,7 @@ class SignInForm extends StatelessWidget {
           },
           failure: (message) {
             Fluttertoast.showToast(
-              msg: message,
+              msg: LocaleKeys.something_went_wrong.tr(),
               backgroundColor: AppColors.redColor,
               textColor: AppColors.whiteColor,
               fontSize: 16,

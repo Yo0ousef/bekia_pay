@@ -1,4 +1,5 @@
 import 'package:bekia_pay/app/theming/theming_typography.dart';
+import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
@@ -30,18 +31,25 @@ class FavouritesView extends StatelessWidget {
             listener: (context, state) {
               state.maybeWhen(
                 failure: (errMessage) {
-                  return Text(errMessage);
+                  return Reload(
+                    onTap: () {
+                      context.read<ProductsCubit>().getProducts();
+                    },
+                  );
                 },
                 orElse: () {},
               );
             },
           ),
-          // Handle Favorites Failure via Freezed pattern matching
           BlocListener<FavouriteCubit, FavouriteState>(
             listener: (context, state) {
               state.maybeWhen(
                 failure: (errMessage) {
-                  return Text(errMessage);
+                  return Reload(
+                    onTap: () {
+                      context.read<ProductsCubit>().getProducts();
+                    },
+                  );
                 },
                 orElse: () {},
               );
@@ -52,7 +60,13 @@ class FavouritesView extends StatelessWidget {
           builder: (context, productState) {
             return productState.when(
               loading: () => AppConstants.loading,
-              failure: (message) => Center(child: Text(message)),
+              failure: (message) {
+                return Reload(
+                  onTap: () {
+                    context.read<ProductsCubit>().getProducts();
+                  },
+                );
+              },
               success: (products) {
                 return BlocBuilder<FavouriteCubit, FavouriteState>(
                   builder: (context, favoriteState) {

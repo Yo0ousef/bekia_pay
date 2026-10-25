@@ -1,10 +1,8 @@
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
-import 'package:bekia_pay/core/utils/constants/app_constants.dart';
-import 'package:bekia_pay/core/utils/constants/image_constants.dart';
+import 'package:bekia_pay/core/shared/widgets/product_image.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
-import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
@@ -12,7 +10,6 @@ import 'package:bekia_pay/features/shop/data/models/product_model.dart';
 import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -47,18 +44,7 @@ class ProductItem extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ClipRRect(
-              borderRadius: .circular(12),
-              child: CachedNetworkImage(
-                imageUrl: product.imageUrl,
-                width: context.screenWidth * 0.2,
-                height: context.screenHeight * 0.15,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => AppConstants.loading.center,
-                errorWidget: (_, _, _) =>
-                    Image.asset(ImageConstants.no_image, fit: BoxFit.cover),
-              ),
-            ),
+            ProductImage(imageUrl: product.imageUrl),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,

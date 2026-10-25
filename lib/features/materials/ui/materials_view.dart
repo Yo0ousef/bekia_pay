@@ -1,3 +1,4 @@
+import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
@@ -23,7 +24,13 @@ class MaterialsView extends StatelessWidget {
           return state.when(
             loading: () => AppConstants.loading.center,
             success: (materials) => MaterialsGrid(materials: materials),
-            failure: (message) => Text(message),
+            failure: (message) {
+              return Reload(
+                onTap: () {
+                  context.read<MaterialsCubit>().getMaterials();
+                },
+              );
+            },
           );
         },
       ),
