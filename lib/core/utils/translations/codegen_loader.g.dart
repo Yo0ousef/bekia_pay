@@ -115,7 +115,19 @@ class CodegenLoader extends AssetLoader{
   "contact_us": "تواصل معنا",
   "ok": "تأكيد",
   "no_favourites": "لا توجد مفضلات بعد",
-  "no_orders": "لا توجد طلبات "
+  "no_orders": "لا توجد طلبات ",
+  "order_number": "الطلب رقم {id}",
+  "order_items_count": "عناصر الطلب ({count})",
+  "quantity_label": "الكمية: {quantity}",
+  "empty_order_items": "لا توجد عناصر في هذا الطلب",
+  "order_status_pending": "قيد الانتظار",
+  "order_status_confirmed": "مؤكد",
+  "order_status_cancelled": "ملغي",
+  "order_status_completed": "مكتمل",
+  "cancel_order_confirmation_title": "إلغاء الطلب؟",
+  "cancel_order_confirmation_message": "هل أنت متأكد من إلغاء هذا الطلب؟",
+  "order_cancel_failed": "تعذر إلغاء الطلب. حاول مرة أخرى.",
+  "orders_load_failed": "تعذر تحميل الطلبات. تحقق من اتصالك وحاول مرة أخرى."
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -218,7 +230,19 @@ static const Map<String,dynamic> _en = {
   "contact_us": "Contact us",
   "ok": "Ok",
   "no_favourites": "No favourites yet",
-  "no_orders": "No orders yet"
+  "no_orders": "No orders yet",
+  "order_number": "Order #{id}",
+  "order_items_count": "Order items ({count})",
+  "quantity_label": "Qty: {quantity}",
+  "empty_order_items": "No items in this order",
+  "order_status_pending": "Pending",
+  "order_status_confirmed": "Confirmed",
+  "order_status_cancelled": "Cancelled",
+  "order_status_completed": "Completed",
+  "cancel_order_confirmation_title": "Cancel order?",
+  "cancel_order_confirmation_message": "Are you sure you want to cancel this order?",
+  "order_cancel_failed": "The order could not be cancelled. Please try again.",
+  "orders_load_failed": "Couldn't load orders. Check your connection and try again."
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

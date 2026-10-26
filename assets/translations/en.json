@@ -99,5 +99,17 @@
   "contact_us": "Contact us",
   "ok": "Ok",
   "no_favourites": "No favourites yet",
-  "no_orders": "No orders yet"
+  "no_orders": "No orders yet",
+  "order_number": "Order #{id}",
+  "order_items_count": "Order items ({count})",
+  "quantity_label": "Qty: {quantity}",
+  "empty_order_items": "No items in this order",
+  "order_status_pending": "Pending",
+  "order_status_confirmed": "Confirmed",
+  "order_status_cancelled": "Cancelled",
+  "order_status_completed": "Completed",
+  "cancel_order_confirmation_title": "Cancel order?",
+  "cancel_order_confirmation_message": "Are you sure you want to cancel this order?",
+  "order_cancel_failed": "The order could not be cancelled. Please try again.",
+  "orders_load_failed": "Couldn't load orders. Check your connection and try again."
 }

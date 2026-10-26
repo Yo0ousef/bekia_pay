@@ -1,6 +1,5 @@
-import 'package:bekia_pay/core/shared/data/repos/orders_repo.dart';
-import 'package:bekia_pay/core/shared/logic/api_result.dart';
-import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
+import 'package:bekia_pay/features/orders/domain/entities/order_item_request.dart';
+import 'package:bekia_pay/features/orders/domain/use_cases/place_order_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -8,18 +7,18 @@ part 'check_out_cubit.freezed.dart';
 part 'check_out_state.dart';
 
 class CheckOutCubit extends Cubit<CheckOutState> {
-  final OrdersRepo _repo;
+  final PlaceOrderUseCase _placeOrder;
 
-  CheckOutCubit(this._repo) : super(const CheckOutState.initial());
+  CheckOutCubit(this._placeOrder) : super(const CheckOutState.initial());
 
-  void checkOut({required List<CartItemModel> items}) async {
+  Future<void> checkOut({required List<OrderItemRequest> items}) async {
     emit(const CheckOutState.loading());
-    final result = await _repo.placeOrder(items: items);
-    if (isClosed) return;
-    result.when(
-      success: (_) => emit(const CheckOutState.success()),
-      failure: (message) => emit(CheckOutState.failure(message)),
-    );
+    try {
+      await _placeOrder(items: items);
+      if (!isClosed) emit(const CheckOutState.success());
+    } catch (error) {
+      if (!isClosed) emit(CheckOutState.failure(error.toString()));
+    }
   }
 
   void reset() {

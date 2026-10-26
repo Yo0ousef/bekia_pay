@@ -6,6 +6,7 @@ import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
+import 'package:bekia_pay/features/orders/domain/entities/order_item_request.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -126,7 +127,14 @@ class CartCheckOutButton extends StatelessWidget {
                                         );
                                       } else {
                                         context.read<CheckOutCubit>().checkOut(
-                                          items: cartItems,
+                                          items: cartItems
+                                              .map(
+                                                (item) => OrderItemRequest(
+                                                  productId: item.productId,
+                                                  quantity: item.count,
+                                                ),
+                                              )
+                                              .toList(),
                                         );
                                       }
                                     },

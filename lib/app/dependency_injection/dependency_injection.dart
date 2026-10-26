@@ -1,6 +1,5 @@
 import 'package:bekia_pay/core/services/database_service/database_client.dart';
 import 'package:bekia_pay/core/services/database_service/supabase_client_impl.dart';
-import 'package:bekia_pay/core/shared/data/repos/orders_repo.dart';
 import 'package:bekia_pay/core/shared/data/repos/points_repo.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
@@ -20,13 +19,13 @@ import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
 import 'package:bekia_pay/features/options/data/options_repo.dart';
 import 'package:bekia_pay/features/options/logic/sign_out_cubit/sign_out_cubit.dart';
 import 'package:bekia_pay/features/options/logic/user_profile_cubit/user_profile_cubit.dart';
-import 'package:bekia_pay/features/orders/logic/orders_cubit.dart';
-import 'package:bekia_pay/features/ordersN/data/data_sources/order_remote_data_source.dart';
-import 'package:bekia_pay/features/ordersN/data/repos_impl/order_repo_impl.dart';
-import 'package:bekia_pay/features/ordersN/domain/repos/order_repo.dart';
-import 'package:bekia_pay/features/ordersN/domain/use_cases/cancel_order_use_case.dart';
-import 'package:bekia_pay/features/ordersN/domain/use_cases/get_orders_use_case.dart';
-import 'package:bekia_pay/features/ordersN/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/data/data_sources/order_remote_data_source.dart';
+import 'package:bekia_pay/features/orders/data/repos_impl/order_repo_impl.dart';
+import 'package:bekia_pay/features/orders/domain/repos/order_repo.dart';
+import 'package:bekia_pay/features/orders/domain/use_cases/cancel_order_use_case.dart';
+import 'package:bekia_pay/features/orders/domain/use_cases/get_orders_use_case.dart';
+import 'package:bekia_pay/features/orders/domain/use_cases/place_order_use_case.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
 import 'package:bekia_pay/features/shop/data/favourite_repo.dart';
 import 'package:bekia_pay/features/shop/data/products_repo.dart';
 import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
@@ -56,13 +55,16 @@ class DependencyInjection {
     // 2. DATA SOURCES (Milestone 3)
     // ==========================================
     getIt.registerLazySingleton<OrderRemoteDataSource>(
-      () => OrderRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
+      () => OrderRemoteDataSourceImpl(
+        databaseClient: getIt<DatabaseClient>(),
+        supabaseClient: Supabase.instance.client,
+      ),
     );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
     // ==========================================
-    // Notice how OrdersRepo (the abstract contract) now points to OrderRepoImpl!
+    // Orders domain contract and implementation.
     getIt.registerLazySingleton<OrderRepo>(
       () => OrderRepoImpl(remoteDataSource: getIt<OrderRemoteDataSource>()),
     );
@@ -73,12 +75,15 @@ class DependencyInjection {
       () => GetOrdersUseCase(repository: getIt<OrderRepo>()),
     );
     getIt.registerLazySingleton(() => CancelOrderUseCase(getIt<OrderRepo>()));
+    getIt.registerLazySingleton(
+      () => PlaceOrderUseCase(repository: getIt<OrderRepo>()),
+    );
 
     // ==========================================
     // 5. CUBITS (Milestone 4)
     // ==========================================
-    // Update OrdersCubit to take the GetOrdersUseCase instead of OrdersRepo directly
-    getIt.registerLazySingleton<OrderCubit>(
+    // OrdersCubit uses domain use cases instead of a data repository.
+    getIt.registerFactory<OrderCubit>(
       () => OrderCubit(
         getOrdersUseCase: getIt<GetOrdersUseCase>(),
         cancelOrderUseCase: getIt<CancelOrderUseCase>(),
@@ -116,7 +121,7 @@ class DependencyInjection {
       () => MaterialsCubit(getIt<MaterialsRepo>()),
     );
     getIt.registerLazySingleton<CheckOutCubit>(
-      () => CheckOutCubit(getIt<OrdersRepo>()),
+      () => CheckOutCubit(getIt<PlaceOrderUseCase>()),
     );
     getIt.registerLazySingleton<PointsCubit>(
       () => PointsCubit(getIt<PointsRepo>()),
@@ -127,13 +132,9 @@ class DependencyInjection {
     getIt.registerLazySingleton<UserProfileCubit>(
       () => UserProfileCubit(getIt<OptionsRepo>()),
     );
-    getIt.registerLazySingleton<OrdersCubit>(
-      () => OrdersCubit(getIt<OrdersRepo>()),
-    );
 
     // Repositories
     getIt.registerLazySingleton<PointsRepo>(() => PointsRepo());
-    getIt.registerLazySingleton<OrdersRepo>(() => OrdersRepo());
     getIt.registerLazySingleton<OffersRepo>(() => OffersRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());

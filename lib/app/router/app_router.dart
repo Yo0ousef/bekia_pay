@@ -20,10 +20,10 @@ import 'package:bekia_pay/features/materials/ui/materials_view.dart';
 import 'package:bekia_pay/features/offer_details/ui/offer_details_view.dart';
 import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/ui/on_boarding_view.dart';
-import 'package:bekia_pay/features/ordersN/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/ordersN/presentation/cubit/order_cubit.dart';
-import 'package:bekia_pay/features/ordersN/presentation/views/order_details_view_n.dart';
-import 'package:bekia_pay/features/ordersN/presentation/views/orders_view.dart';
+import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/views/order_details_view.dart';
+import 'package:bekia_pay/features/orders/presentation/views/orders_view.dart';
 import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/shop_view.dart';
@@ -160,14 +160,15 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: DependencyInjection.getIt<OrderCubit>(),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<OrderCubit>()
+                  ..fetchOrders(),
               ),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
             ],
-            child: const OrderView(),
+            child: const OrdersView(),
           ),
         );
       case AppRoutes.orderDetails:
@@ -175,14 +176,14 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: DependencyInjection.getIt<OrderCubit>(),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<OrderCubit>(),
               ),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
             ],
-            child: OrderDetailsViewN(order: order),
+            child: OrderDetailsView(order: order),
           ),
         );
       default:

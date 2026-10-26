@@ -7,12 +7,14 @@ class SupabaseClientImpl implements DatabaseClient {
   SupabaseClientImpl(this._supabaseClient);
 
   @override
-  Future<bool> deleteData({required String table, required String id}) async {
-    try {
-      await _supabaseClient.from(table).delete().eq('id', id);
-      return true;
-    } catch (e) {
-      return false;
+  Future<void> deleteData({required String table, required String id}) async {
+    final deletedRows = await _supabaseClient
+        .from(table)
+        .delete()
+        .eq('id', id)
+        .select('id');
+    if (deletedRows.isEmpty) {
+      throw StateError('No $table row with id $id was deleted');
     }
   }
 
@@ -21,8 +23,17 @@ class SupabaseClientImpl implements DatabaseClient {
     required String table,
     String selectQuery = "*",
     Map<String, dynamic>? queryParams,
+    String? orderBy,
+    bool ascending = true,
   }) async {
-    final response = await _supabaseClient.from(table).select(selectQuery);
+    dynamic query = _supabaseClient.from(table).select(selectQuery);
+    queryParams?.forEach((column, value) {
+      query = query.eq(column, value);
+    });
+    if (orderBy != null) {
+      query = query.order(orderBy, ascending: ascending);
+    }
+    final response = await query;
     return List<Map<String, dynamic>>.from(response);
   }
 
@@ -40,16 +51,18 @@ class SupabaseClientImpl implements DatabaseClient {
   }
 
   @override
-  Future<bool> updateData({
+  Future<void> updateData({
     required String table,
     required String id,
     required Map<String, dynamic> data,
   }) async {
-    try {
-      await _supabaseClient.from(table).update(data).eq('id', id);
-      return true;
-    } catch (e) {
-      return false;
+    final updatedRows = await _supabaseClient
+        .from(table)
+        .update(data)
+        .eq('id', id)
+        .select('id');
+    if (updatedRows.isEmpty) {
+      throw StateError('No $table row with id $id was updated');
     }
   }
 }

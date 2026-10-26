@@ -99,5 +99,17 @@
   "contact_us": "تواصل معنا",
   "ok": "تأكيد",
   "no_favourites": "لا توجد مفضلات بعد",
-  "no_orders": "لا توجد طلبات "
+  "no_orders": "لا توجد طلبات ",
+  "order_number": "الطلب رقم {id}",
+  "order_items_count": "عناصر الطلب ({count})",
+  "quantity_label": "الكمية: {quantity}",
+  "empty_order_items": "لا توجد عناصر في هذا الطلب",
+  "order_status_pending": "قيد الانتظار",
+  "order_status_confirmed": "مؤكد",
+  "order_status_cancelled": "ملغي",
+  "order_status_completed": "مكتمل",
+  "cancel_order_confirmation_title": "إلغاء الطلب؟",
+  "cancel_order_confirmation_message": "هل أنت متأكد من إلغاء هذا الطلب؟",
+  "order_cancel_failed": "تعذر إلغاء الطلب. حاول مرة أخرى.",
+  "orders_load_failed": "تعذر تحميل الطلبات. تحقق من اتصالك وحاول مرة أخرى."
 }
