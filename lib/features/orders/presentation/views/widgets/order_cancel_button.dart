@@ -1,6 +1,6 @@
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/utils/order_ui_rules.dart';
 import 'package:bekia_pay/features/orders/presentation/views/widgets/confirm_cancellation_dialog.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -25,7 +25,7 @@ class OrderCancelButton extends StatelessWidget {
       return const SizedBox.shrink();
     }
 
-    final cubit = context.read<OrderCubit>();
+    final cubit = context.read<OrdersCubit>();
     return ValueListenableBuilder<String?>(
       valueListenable: cubit.cancellingOrderId,
       builder: (context, cancellingId, _) {

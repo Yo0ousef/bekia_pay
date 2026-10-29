@@ -1,30 +1,31 @@
 import 'package:bekia_pay/app/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
-import 'package:bekia_pay/core/shared/logic/cubits/slider_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_in/ui/sign_in_view.dart';
 import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_up/ui/sign_up_view.dart';
+import 'package:bekia_pay/features/cart/logic/cart_count_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
 import 'package:bekia_pay/features/cart/ui/cart_view.dart';
 import 'package:bekia_pay/features/error/error_view.dart';
-import 'package:bekia_pay/features/favourites/ui/favourites_view.dart';
+import 'package:bekia_pay/features/favourites/presentation/cubit/favourite_cubit.dart';
+import 'package:bekia_pay/features/favourites/presentation/views/favourites_view.dart';
 import 'package:bekia_pay/features/gate/gate_view.dart';
-import 'package:bekia_pay/features/home/data/models/offer_model.dart';
-import 'package:bekia_pay/features/home/logic/offers_cubit.dart';
-import 'package:bekia_pay/features/home/ui/home_view.dart';
+import 'package:bekia_pay/features/home/domain/entities/offer_entity.dart';
+import 'package:bekia_pay/features/home/presentation/cubits/home_navigation_cubit.dart';
+import 'package:bekia_pay/features/home/presentation/cubits/offers_cubit.dart';
+import 'package:bekia_pay/features/home/presentation/views/home_view.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/materials/ui/materials_view.dart';
-import 'package:bekia_pay/features/offer_details/ui/offer_details_view.dart';
-import 'package:bekia_pay/features/on_boarding/logic/boarding_cubit.dart';
-import 'package:bekia_pay/features/on_boarding/ui/on_boarding_view.dart';
+import 'package:bekia_pay/features/offer_details/offer_details_view.dart';
+import 'package:bekia_pay/features/on_boarding/presentation/cubits/boarding_cubit.dart';
+import 'package:bekia_pay/features/on_boarding/presentation/views/on_boarding_view.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/views/order_details_view.dart';
 import 'package:bekia_pay/features/orders/presentation/views/orders_view.dart';
-import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/shop_view.dart';
 import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
@@ -43,16 +44,18 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: DependencyInjection.getIt<OffersCubit>(),
+              BlocProvider(
+                create: (_) =>
+                    DependencyInjection.getIt<OffersCubit>()..fetchOffers(),
               ),
               BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<CartCountCubit>(),
+              ),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
-              BlocProvider(
-                create: (_) => DependencyInjection.getIt<IndexChangerCubit>(),
-              ),
+              BlocProvider(create: (_) => HomeNavigationCubit()),
             ],
             child: const HomeView(),
           ),
@@ -60,7 +63,7 @@ class AppRouter {
       case AppRoutes.gate:
         return MaterialPageRoute(builder: (context) => const GateView());
       case AppRoutes.offerDetails:
-        OfferModel offer = settings.arguments as OfferModel;
+        final offer = settings.arguments as OfferEntity;
         return MaterialPageRoute(
           builder: (context) => OfferDetailsView(offer: offer),
         );
@@ -104,7 +107,8 @@ class AppRouter {
                 value: DependencyInjection.getIt<ProductsCubit>(),
               ),
               BlocProvider.value(
-                value: DependencyInjection.getIt<FavouriteCubit>(),
+                value: DependencyInjection.getIt<FavouriteCubit>()
+                  ..getFavourites(),
               ),
               BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
@@ -149,7 +153,8 @@ class AppRouter {
                 value: DependencyInjection.getIt<ProductsCubit>(),
               ),
               BlocProvider.value(
-                value: DependencyInjection.getIt<FavouriteCubit>(),
+                value: DependencyInjection.getIt<FavouriteCubit>()
+                  ..getFavourites(),
               ),
               BlocProvider.value(value: DependencyInjection.getIt<CartCubit>()),
             ],
@@ -161,8 +166,8 @@ class AppRouter {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) => DependencyInjection.getIt<OrderCubit>()
-                  ..fetchOrders(),
+                create: (_) =>
+                    DependencyInjection.getIt<OrdersCubit>()..fetchOrders(),
               ),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),
@@ -177,7 +182,7 @@ class AppRouter {
           builder: (context) => MultiBlocProvider(
             providers: [
               BlocProvider(
-                create: (_) => DependencyInjection.getIt<OrderCubit>(),
+                create: (_) => DependencyInjection.getIt<OrdersCubit>(),
               ),
               BlocProvider.value(
                 value: DependencyInjection.getIt<PointsCubit>(),

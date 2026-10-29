@@ -127,7 +127,8 @@ class CodegenLoader extends AssetLoader{
   "cancel_order_confirmation_title": "إلغاء الطلب؟",
   "cancel_order_confirmation_message": "هل أنت متأكد من إلغاء هذا الطلب؟",
   "order_cancel_failed": "تعذر إلغاء الطلب. حاول مرة أخرى.",
-  "orders_load_failed": "تعذر تحميل الطلبات. تحقق من اتصالك وحاول مرة أخرى."
+  "orders_load_failed": "تعذر تحميل الطلبات. تحقق من اتصالك وحاول مرة أخرى.",
+  "error": "خطأ"
 };
 static const Map<String,dynamic> _en = {
   "welcome": "Welcome to",
@@ -242,7 +243,8 @@ static const Map<String,dynamic> _en = {
   "cancel_order_confirmation_title": "Cancel order?",
   "cancel_order_confirmation_message": "Are you sure you want to cancel this order?",
   "order_cancel_failed": "The order could not be cancelled. Please try again.",
-  "orders_load_failed": "Couldn't load orders. Check your connection and try again."
+  "orders_load_failed": "Couldn't load orders. Check your connection and try again.",
+  "error": "Error"
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en};
 }

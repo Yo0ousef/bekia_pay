@@ -29,6 +29,7 @@ dependencies:
   cached_network_image: ^4.0.0
   flutter_spinkit: ^5.2.2
   restart_app: ^1.10.1
+  dartz: ^0.10.1
 
 dev_dependencies:
   flutter_test:

@@ -19,6 +19,25 @@ class SupabaseClientImpl implements DatabaseClient {
   }
 
   @override
+  Future<void> deleteDataWhere({
+    required String table,
+    required Map<String, dynamic> queryParams,
+  }) async {
+    if (queryParams.isEmpty) {
+      throw ArgumentError('deleteDataWhere requires at least one filter');
+    }
+
+    dynamic query = _supabaseClient.from(table).delete();
+    queryParams.forEach((column, value) {
+      query = query.eq(column, value);
+    });
+    final deletedRows = await query.select();
+    if (deletedRows.isEmpty) {
+      throw StateError('No matching row in $table was deleted');
+    }
+  }
+
+  @override
   Future<List<Map<String, dynamic>>> getData({
     required String table,
     String selectQuery = "*",

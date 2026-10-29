@@ -3,7 +3,7 @@ import 'package:bekia_pay/core/shared/widgets/product_image.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/views/widgets/order_cancel_button.dart';
 import 'package:bekia_pay/features/orders/presentation/views/widgets/order_item_details.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +79,7 @@ class OrderItem extends StatelessWidget {
       arguments: order,
     );
     if (result == true && context.mounted) {
-      await context.read<OrderCubit>().fetchOrders(showLoading: false);
+      await context.read<OrdersCubit>().fetchOrders(showLoading: false);
     }
   }
 }

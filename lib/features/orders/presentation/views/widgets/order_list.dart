@@ -1,6 +1,6 @@
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/views/widgets/order_item.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +13,7 @@ Widget ordersList(
 }) {
   return RefreshIndicator(
     onRefresh: () async {
-      await context.read<OrderCubit>().fetchOrders(showLoading: false);
+      await context.read<OrdersCubit>().fetchOrders(showLoading: false);
     },
     child: ListView.builder(
       physics: const AlwaysScrollableScrollPhysics(),

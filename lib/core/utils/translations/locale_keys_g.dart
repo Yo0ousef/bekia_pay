@@ -116,5 +116,6 @@ abstract class  LocaleKeys {
   static const cancel_order_confirmation_message = 'cancel_order_confirmation_message';
   static const order_cancel_failed = 'order_cancel_failed';
   static const orders_load_failed = 'orders_load_failed';
+  static const error = 'error';
 
 }

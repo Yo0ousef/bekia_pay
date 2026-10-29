@@ -1,7 +1,7 @@
 import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
+import 'package:bekia_pay/features/favourites/presentation/cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:bekia_pay/features/shop/ui/widgets/products_list.dart';
 import 'package:easy_localization/easy_localization.dart';

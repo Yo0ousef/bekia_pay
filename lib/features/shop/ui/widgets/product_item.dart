@@ -8,7 +8,7 @@ import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
 import 'package:bekia_pay/features/shop/data/models/product_model.dart';
 import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
-import 'package:bekia_pay/features/shop/logic/favourite_cubit/favourite_cubit.dart';
+import 'package:bekia_pay/features/favourites/presentation/cubit/favourite_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -86,6 +86,10 @@ class ProductItem extends StatelessWidget {
               children: [
                 BlocBuilder<FavouriteCubit, FavouriteState>(
                   builder: (context, state) {
+                    final isReady = state.maybeWhen(
+                      success: (_) => true,
+                      orElse: () => false,
+                    );
                     final isFav = state.maybeWhen(
                       success: (favoriteIds) =>
                           favoriteIds.contains(product.id),
@@ -98,17 +102,24 @@ class ProductItem extends StatelessWidget {
                             ? AppColors.redColor
                             : AppColors.disableDarkColor,
                       ),
-                      onPressed: () {
-                        context.read<FavouriteCubit>().toggleFavorite(
-                          product.id,
-                        );
-                        Fluttertoast.showToast(
-                          backgroundColor: theme.primaryColor,
-                          msg: isFav
-                              ? LocaleKeys.removed_from_fav.tr()
-                              : LocaleKeys.added_to_fav.tr(),
-                        );
-                      },
+                      onPressed: isReady
+                          ? () async {
+                              final succeeded = await context
+                                  .read<FavouriteCubit>()
+                                  .toggleFavorite(product.id);
+                              if (!context.mounted) return;
+                              Fluttertoast.showToast(
+                                backgroundColor: succeeded
+                                    ? theme.primaryColor
+                                    : AppColors.redColor,
+                                msg: succeeded
+                                    ? isFav
+                                          ? LocaleKeys.removed_from_fav.tr()
+                                          : LocaleKeys.added_to_fav.tr()
+                                    : LocaleKeys.something_went_wrong.tr(),
+                              );
+                            }
+                          : null,
                     );
                   },
                 ),

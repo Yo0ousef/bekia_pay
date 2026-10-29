@@ -2,7 +2,7 @@ import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/views/widgets/order_list.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +22,7 @@ class OrdersView extends StatelessWidget {
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
-      body: BlocBuilder<OrderCubit, OrderState>(
+      body: BlocBuilder<OrdersCubit, OrdersState>(
         builder: (context, state) {
           return state.when(
             loading: () => AppConstants.loading.center,
@@ -34,7 +34,7 @@ class OrdersView extends StatelessWidget {
             },
             failure: (message) {
               return Reload(
-                onTap: () => context.read<OrderCubit>().fetchOrders(),
+                onTap: () => context.read<OrdersCubit>().fetchOrders(),
               );
             },
           );

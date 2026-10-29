@@ -2,7 +2,7 @@ import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
-import 'package:bekia_pay/features/orders/presentation/cubit/order_cubit.dart';
+import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,7 +10,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 Future<void> confirmCancellationDialog({
   required BuildContext context,
-  required OrderCubit cubit,
+  required OrdersCubit cubit,
   required OrderEntity order,
   VoidCallback? onCancelled,
 }) async {

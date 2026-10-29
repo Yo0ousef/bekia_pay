@@ -1,4 +1,5 @@
 import 'package:bekia_pay/core/services/database_service/database_client.dart';
+import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/features/orders/data/models/order_model.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_item_request.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -60,7 +61,7 @@ class OrderRemoteDataSourceImpl implements OrderRemoteDataSource {
           orderBy: 'created_at',
           ascending: false,
         )
-        .timeout(const Duration(seconds: 5));
+        .timeout(5.sec);
     return response.map((json) => OrderModel.fromJson(json)).toList();
   }
 }

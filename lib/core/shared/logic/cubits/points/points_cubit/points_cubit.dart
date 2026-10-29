@@ -25,7 +25,4 @@ class PointsCubit extends Cubit<PointsState> {
       },
     );
   }
-  // num returnPoints()async{
-  //   return await _repo.getPoints();
-  // }
 }

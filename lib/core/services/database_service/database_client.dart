@@ -20,4 +20,9 @@ abstract class DatabaseClient {
   });
 
   Future<void> deleteData({required String table, required String id});
+
+  Future<void> deleteDataWhere({
+    required String table,
+    required Map<String, dynamic> queryParams,
+  });
 }
