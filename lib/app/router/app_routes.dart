@@ -11,6 +11,8 @@ enum AppRoutes {
   favourites("/favourites"),
   offerDetails("/offerDetails"),
   orderDetails("/orderDetails"),
+  profileSettings("/profileSettings"),
+  changePassword("/changePassword"),
   subscription("/subscription");
 
   final String route;

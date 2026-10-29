@@ -22,6 +22,14 @@ import 'package:bekia_pay/features/materials/ui/materials_view.dart';
 import 'package:bekia_pay/features/offer_details/offer_details_view.dart';
 import 'package:bekia_pay/features/on_boarding/presentation/cubits/boarding_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/presentation/views/on_boarding_view.dart';
+import 'package:bekia_pay/features/options/domain/entities/user_entity.dart';
+import 'package:bekia_pay/features/options/presentation/controllers/change_password_form_controller.dart';
+import 'package:bekia_pay/features/options/presentation/controllers/edit_profile_form_controller.dart';
+import 'package:bekia_pay/features/options/presentation/logic/sign_out_cubit/sign_out_cubit.dart';
+import 'package:bekia_pay/features/options/presentation/logic/update_password_cubit/update_password_cubit.dart';
+import 'package:bekia_pay/features/options/presentation/logic/user_profile_cubit/user_profile_cubit.dart';
+import 'package:bekia_pay/features/options/presentation/ui/change_password_view.dart';
+import 'package:bekia_pay/features/options/presentation/ui/edit_profile_view.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_entity.dart';
 import 'package:bekia_pay/features/orders/presentation/cubit/orders_cubit.dart';
 import 'package:bekia_pay/features/orders/presentation/views/order_details_view.dart';
@@ -56,6 +64,12 @@ class AppRouter {
                 value: DependencyInjection.getIt<PointsCubit>(),
               ),
               BlocProvider(create: (_) => HomeNavigationCubit()),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<UserProfileCubit>(),
+              ),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<SignOutCubit>(),
+              ),
             ],
             child: const HomeView(),
           ),
@@ -97,6 +111,29 @@ class AppRouter {
           builder: (context) => BlocProvider.value(
             value: DependencyInjection.getIt<SubscriptionCubit>(),
             child: const SubscriptionView(),
+          ),
+        );
+      case AppRoutes.profileSettings:
+        final user = settings.arguments as UserEntity;
+        return MaterialPageRoute(
+          builder: (_) => RepositoryProvider(
+            create: (_) => EditProfileFormController(user),
+            dispose: (controller) => controller.dispose(),
+            child: BlocProvider(
+              create: (_) => DependencyInjection.getIt<UserProfileCubit>(),
+              child: const EditProfileView(),
+            ),
+          ),
+        );
+      case AppRoutes.changePassword:
+        return MaterialPageRoute(
+          builder: (_) => RepositoryProvider(
+            create: (_) => ChangePasswordFormController(),
+            dispose: (controller) => controller.dispose(),
+            child: BlocProvider(
+              create: (_) => DependencyInjection.getIt<UpdatePasswordCubit>(),
+              child: const ChangePasswordView(),
+            ),
           ),
         );
       case AppRoutes.shop:

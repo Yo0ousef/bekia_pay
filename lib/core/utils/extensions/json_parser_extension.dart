@@ -1,4 +1,12 @@
 extension JsonParserExtensions on Map<String, dynamic> {
+  String? parseOptionalString(String field, {String? contextName}) {
+    final value = this[field];
+    final prefix = contextName != null ? '$contextName.' : '';
+    if (value == null) return null;
+    if (value is String) return value.trim();
+    throw FormatException('$prefix$field must be a string or null');
+  }
+
   String parseRequiredString(String field, {String? contextName}) {
     final value = this[field];
     final prefix = contextName != null ? '$contextName.' : '';

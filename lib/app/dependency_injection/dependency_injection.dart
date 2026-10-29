@@ -26,9 +26,16 @@ import 'package:bekia_pay/features/home/presentation/cubits/offers_cubit.dart';
 import 'package:bekia_pay/features/materials/data/materials_repo.dart';
 import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/presentation/cubits/boarding_cubit.dart';
-import 'package:bekia_pay/features/options/data/options_repo.dart';
-import 'package:bekia_pay/features/options/logic/sign_out_cubit/sign_out_cubit.dart';
-import 'package:bekia_pay/features/options/logic/user_profile_cubit/user_profile_cubit.dart';
+import 'package:bekia_pay/features/options/data/data_sources/options_remote_data_source.dart';
+import 'package:bekia_pay/features/options/data/repos_impl/options_repo_impl.dart';
+import 'package:bekia_pay/features/options/domain/repos/options_repo.dart';
+import 'package:bekia_pay/features/options/domain/use_cases/get_user_profile_use_case.dart';
+import 'package:bekia_pay/features/options/domain/use_cases/sign_out_use_case.dart';
+import 'package:bekia_pay/features/options/domain/use_cases/update_password_use_case.dart';
+import 'package:bekia_pay/features/options/domain/use_cases/update_user_profile_use_case.dart';
+import 'package:bekia_pay/features/options/presentation/logic/sign_out_cubit/sign_out_cubit.dart';
+import 'package:bekia_pay/features/options/presentation/logic/update_password_cubit/update_password_cubit.dart';
+import 'package:bekia_pay/features/options/presentation/logic/user_profile_cubit/user_profile_cubit.dart';
 import 'package:bekia_pay/features/orders/data/data_sources/order_remote_data_source.dart';
 import 'package:bekia_pay/features/orders/data/repos_impl/order_repo_impl.dart';
 import 'package:bekia_pay/features/orders/domain/repos/order_repo.dart';
@@ -77,6 +84,12 @@ class DependencyInjection {
         supabaseClient: Supabase.instance.client,
       ),
     );
+    getIt.registerLazySingleton<OptionsRemoteDataSource>(
+      () => OptionsRemoteDataSourceImpl(
+        databaseClient: getIt<DatabaseClient>(),
+        supabaseClient: Supabase.instance.client,
+      ),
+    );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
@@ -90,6 +103,9 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<FavouriteRepo>(
       () => FavouriteRepoImpl(getIt<FavouritesRemoteDataSource>()),
+    );
+    getIt.registerLazySingleton<OptionsRepo>(
+      () => OptionsRepoImpl(getIt<OptionsRemoteDataSource>()),
     );
 
     // ==========================================
@@ -113,6 +129,18 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<RemoveFavouriteUseCase>(
       () => RemoveFavouriteUseCase(getIt<FavouriteRepo>()),
+    );
+    getIt.registerLazySingleton<GetUserProfileUseCase>(
+      () => GetUserProfileUseCase(getIt<OptionsRepo>()),
+    );
+    getIt.registerLazySingleton<UpdateUserProfileUseCase>(
+      () => UpdateUserProfileUseCase(getIt<OptionsRepo>()),
+    );
+    getIt.registerLazySingleton<UpdatePasswordUseCase>(
+      () => UpdatePasswordUseCase(getIt<OptionsRepo>()),
+    );
+    getIt.registerLazySingleton<SignOutUseCase>(
+      () => SignOutUseCase(getIt<OptionsRepo>()),
     );
 
     // ==========================================
@@ -168,18 +196,23 @@ class DependencyInjection {
     getIt.registerLazySingleton<PointsCubit>(
       () => PointsCubit(getIt<PointsRepo>()),
     );
-    getIt.registerLazySingleton<SignOutCubit>(
-      () => SignOutCubit(getIt<OptionsRepo>()),
+    getIt.registerFactory<SignOutCubit>(
+      () => SignOutCubit(getIt<SignOutUseCase>()),
     );
-    getIt.registerLazySingleton<UserProfileCubit>(
-      () => UserProfileCubit(getIt<OptionsRepo>()),
+    getIt.registerFactory<UserProfileCubit>(
+      () => UserProfileCubit(
+        getUserProfile: getIt<GetUserProfileUseCase>(),
+        updateUserProfile: getIt<UpdateUserProfileUseCase>(),
+      ),
+    );
+    getIt.registerFactory<UpdatePasswordCubit>(
+      () => UpdatePasswordCubit(getIt<UpdatePasswordUseCase>()),
     );
 
     // Repositories
     getIt.registerLazySingleton<PointsRepo>(() => PointsRepo());
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
-    getIt.registerLazySingleton<OptionsRepo>(() => OptionsRepo());
     getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo());
     getIt.registerLazySingleton<MaterialsRepo>(() => MaterialsRepo());
     // getIt.registerLazySingleton<FavouriteRepoImpl>(() => FavouriteRepoImpl());

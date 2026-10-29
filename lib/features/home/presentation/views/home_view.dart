@@ -1,11 +1,12 @@
-import 'package:bekia_pay/features/home/presentation/cubits/home_navigation_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/app_name_widget.dart';
 import 'package:bekia_pay/features/cart/logic/cart_count_cubit.dart';
 import 'package:bekia_pay/features/chat/ui/chat_view_body.dart';
+import 'package:bekia_pay/features/home/presentation/cubits/home_navigation_cubit.dart';
 import 'package:bekia_pay/features/home/presentation/views/widgets/cart_badge.dart';
 import 'package:bekia_pay/features/home/presentation/views/widgets/custom_bottom_navigation_bar.dart';
 import 'package:bekia_pay/features/home/presentation/views/widgets/home_view_body.dart';
-import 'package:bekia_pay/features/options/ui/options_view.dart';
+import 'package:bekia_pay/features/options/presentation/ui/options_view.dart';
+import 'package:bekia_pay/features/options/presentation/logic/user_profile_cubit/user_profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -41,6 +42,9 @@ class HomeView extends StatelessWidget {
           bottomNavigationBar: CustomBottomNavigationBar(
             currentIndex: state,
             onTap: (index) {
+              if (index == 2) {
+                context.read<UserProfileCubit>().fetchUserProfile();
+              }
               context.read<HomeNavigationCubit>().changeTab(index);
             },
           ),
