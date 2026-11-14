@@ -1,10 +1,12 @@
+import 'package:bekia_pay/features/materials/domain/entities/material_entity.dart';
+
 class MaterialModel {
   final String id;
   final String materialName;
   final String materialImage;
   final String materialPoints;
 
-  MaterialModel({
+  const MaterialModel({
     required this.id,
     required this.materialName,
     required this.materialImage,
@@ -19,4 +21,11 @@ class MaterialModel {
       materialPoints: json['material_points']?.toString() ?? '',
     );
   }
+
+  MaterialEntity toEntity() => MaterialEntity(
+    id: id,
+    materialName: materialName,
+    materialImage: materialImage,
+    materialPoints: materialPoints,
+  );
 }

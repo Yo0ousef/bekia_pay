@@ -1,9 +1,9 @@
-import 'package:bekia_pay/features/materials/data/models/material_model.dart';
-import 'package:bekia_pay/features/materials/ui/widgets/material_item.dart';
+import 'package:bekia_pay/features/materials/domain/entities/material_entity.dart';
+import 'package:bekia_pay/features/materials/presentation/views/widgets/material_item.dart';
 import 'package:flutter/material.dart';
 
 class MaterialsGrid extends StatelessWidget {
-  final List<MaterialModel> materials;
+  final List<MaterialEntity> materials;
 
   const MaterialsGrid({super.key, required this.materials});
 

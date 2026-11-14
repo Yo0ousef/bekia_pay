@@ -30,8 +30,11 @@ import 'package:bekia_pay/features/home/data/repos_impl/offers_repo_impl.dart';
 import 'package:bekia_pay/features/home/domain/repos/offers_repo.dart';
 import 'package:bekia_pay/features/home/domain/use_cases/get_offers_use_case.dart';
 import 'package:bekia_pay/features/home/presentation/cubits/offers_cubit.dart';
-import 'package:bekia_pay/features/materials/data/materials_repo.dart';
-import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
+import 'package:bekia_pay/features/materials/data/data_sources/materials_remote_data_source.dart';
+import 'package:bekia_pay/features/materials/data/repos_impl/materials_repo_impl.dart';
+import 'package:bekia_pay/features/materials/domain/repos/materials_repo.dart';
+import 'package:bekia_pay/features/materials/domain/use_cases/get_materials_use_case.dart';
+import 'package:bekia_pay/features/materials/presentation/cubits/materials_cubit.dart';
 import 'package:bekia_pay/features/on_boarding/presentation/cubits/boarding_cubit.dart';
 import 'package:bekia_pay/features/options/data/data_sources/options_remote_data_source.dart';
 import 'package:bekia_pay/features/options/data/repos_impl/options_repo_impl.dart';
@@ -100,6 +103,9 @@ class DependencyInjection {
     getIt.registerLazySingleton<CartLocalDataSource>(
       CartLocalDataSourceImpl.new,
     );
+    getIt.registerLazySingleton<MaterialsRemoteDataSource>(
+      () => MaterialsRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
+    );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
@@ -120,6 +126,9 @@ class DependencyInjection {
     getIt.registerLazySingleton<CartRepo>(
       () => CartRepoImpl(getIt<CartLocalDataSource>()),
     );
+    getIt.registerLazySingleton<MaterialsRepo>(
+      () => MaterialsRepoImpl(getIt<MaterialsRemoteDataSource>()),
+    );
 
     // ==========================================
     // 4. USE CASES (Milestone 2)
@@ -133,6 +142,9 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton(
       () => GetOffersUseCase(repository: getIt<OffersRepo>()),
+    );
+    getIt.registerLazySingleton(
+      () => GetMaterialsUseCase(repository: getIt<MaterialsRepo>()),
     );
     getIt.registerLazySingleton<GetFavouriteIdsUseCase>(
       () => GetFavouriteIdsUseCase(getIt<FavouriteRepo>()),
@@ -217,8 +229,8 @@ class DependencyInjection {
     getIt.registerFactory<CartCountCubit>(
       () => CartCountCubit(getIt<CartCubit>()),
     );
-    getIt.registerLazySingleton<MaterialsCubit>(
-      () => MaterialsCubit(getIt<MaterialsRepo>()),
+    getIt.registerFactory<MaterialsCubit>(
+      () => MaterialsCubit(getIt<GetMaterialsUseCase>()),
     );
     getIt.registerLazySingleton<CheckOutCubit>(
       () => CheckOutCubit(getIt<PlaceOrderUseCase>()),
@@ -244,7 +256,6 @@ class DependencyInjection {
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
     getIt.registerLazySingleton<ProductsRepo>(() => ProductsRepo());
-    getIt.registerLazySingleton<MaterialsRepo>(() => MaterialsRepo());
     // getIt.registerLazySingleton<FavouriteRepoImpl>(() => FavouriteRepoImpl());
     getIt.registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo());
   }

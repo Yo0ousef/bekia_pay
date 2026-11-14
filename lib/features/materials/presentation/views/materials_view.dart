@@ -1,8 +1,8 @@
 import 'package:bekia_pay/core/shared/widgets/reload.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
-import 'package:bekia_pay/features/materials/logic/materials_cubit.dart';
-import 'package:bekia_pay/features/materials/ui/widgets/materials_grid.dart';
+import 'package:bekia_pay/features/materials/presentation/cubits/materials_cubit.dart';
+import 'package:bekia_pay/features/materials/presentation/views/widgets/materials_grid.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

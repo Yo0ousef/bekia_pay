@@ -4,12 +4,12 @@ import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
-import 'package:bekia_pay/features/materials/data/models/material_model.dart';
+import 'package:bekia_pay/features/materials/domain/entities/material_entity.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class MaterialItem extends StatelessWidget {
-  final MaterialModel material;
+  final MaterialEntity material;
 
   const MaterialItem({super.key, required this.material});
 

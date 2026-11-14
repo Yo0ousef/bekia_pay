@@ -126,7 +126,7 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<MaterialModel> materials)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<MaterialEntity> materials)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
@@ -149,7 +149,7 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<MaterialModel> materials)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<MaterialEntity> materials)  success,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Success():
@@ -171,7 +171,7 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<MaterialModel> materials)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<MaterialEntity> materials)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
@@ -220,11 +220,11 @@ String toString() {
 
 
 class _Success implements MaterialsState {
-  const _Success( List<MaterialModel> materials): _materials = materials;
+  const _Success( List<MaterialEntity> materials): _materials = materials;
   
 
- final  List<MaterialModel> _materials;
- List<MaterialModel> get materials {
+ final  List<MaterialEntity> _materials;
+ List<MaterialEntity> get materials {
   if (_materials is EqualUnmodifiableListView) return _materials;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_materials);
@@ -263,7 +263,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $MaterialsStateCopyWith<
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- List<MaterialModel> materials
+ List<MaterialEntity> materials
 });
 
 
@@ -283,7 +283,7 @@ class __$SuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? materials = null,}) {
   return _then(_Success(
 null == materials ? _self._materials : materials // ignore: cast_nullable_to_non_nullable
-as List<MaterialModel>,
+as List<MaterialEntity>,
   ));
 }
 
@@ -359,3 +359,4 @@ as String,
 }
 
 // dart format on
+
