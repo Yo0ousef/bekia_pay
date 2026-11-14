@@ -5,7 +5,7 @@ class SubscriptionState with _$SubscriptionState {
   const factory SubscriptionState.loading() = _Loading;
 
   const factory SubscriptionState.success(
-    List<SubscriptionModel> plans,
+    List<SubscriptionPlanEntity> plans,
     String? activePlanId,
   ) = _Success;
 

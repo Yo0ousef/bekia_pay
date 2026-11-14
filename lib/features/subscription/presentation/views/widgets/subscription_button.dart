@@ -1,6 +1,6 @@
 import 'package:bekia_pay/app/theming/theming_typography.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/subscription/data/models/subscription_model.dart';
+import 'package:bekia_pay/features/subscription/domain/entities/subscription_plan_entity.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +11,7 @@ class SubscriptionButton extends StatelessWidget {
     required this.color,
   });
 
-  final SubscriptionModel plan;
+  final SubscriptionPlanEntity plan;
   final Color color;
 
   @override

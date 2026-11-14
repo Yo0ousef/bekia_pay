@@ -126,7 +126,7 @@ return failure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<SubscriptionModel> plans,  String? activePlanId)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( List<SubscriptionPlanEntity> plans,  String? activePlanId)?  success,TResult Function( String message)?  failure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
@@ -149,7 +149,7 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<SubscriptionModel> plans,  String? activePlanId)  success,required TResult Function( String message)  failure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( List<SubscriptionPlanEntity> plans,  String? activePlanId)  success,required TResult Function( String message)  failure,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Success():
@@ -171,7 +171,7 @@ return failure(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<SubscriptionModel> plans,  String? activePlanId)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( List<SubscriptionPlanEntity> plans,  String? activePlanId)?  success,TResult? Function( String message)?  failure,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Success() when success != null:
@@ -220,11 +220,11 @@ String toString() {
 
 
 class _Success implements SubscriptionState {
-  const _Success( List<SubscriptionModel> plans, this.activePlanId): _plans = plans;
+  const _Success( List<SubscriptionPlanEntity> plans, this.activePlanId): _plans = plans;
   
 
- final  List<SubscriptionModel> _plans;
- List<SubscriptionModel> get plans {
+ final  List<SubscriptionPlanEntity> _plans;
+ List<SubscriptionPlanEntity> get plans {
   if (_plans is EqualUnmodifiableListView) return _plans;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_plans);
@@ -264,7 +264,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $SubscriptionStateCopyWi
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- List<SubscriptionModel> plans, String? activePlanId
+ List<SubscriptionPlanEntity> plans, String? activePlanId
 });
 
 
@@ -284,7 +284,7 @@ class __$SuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? plans = null,Object? activePlanId = freezed,}) {
   return _then(_Success(
 null == plans ? _self._plans : plans // ignore: cast_nullable_to_non_nullable
-as List<SubscriptionModel>,freezed == activePlanId ? _self.activePlanId : activePlanId // ignore: cast_nullable_to_non_nullable
+as List<SubscriptionPlanEntity>,freezed == activePlanId ? _self.activePlanId : activePlanId // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -361,3 +361,4 @@ as String,
 }
 
 // dart format on
+

@@ -59,8 +59,12 @@ import 'package:bekia_pay/features/shop/domain/repos/products_repo.dart';
 import 'package:bekia_pay/features/shop/domain/use_cases/get_products_use_case.dart';
 import 'package:bekia_pay/features/shop/presentation/cubits/counter_cubit/counter_cubit.dart';
 import 'package:bekia_pay/features/shop/presentation/cubits/products_cubit.dart';
-import 'package:bekia_pay/features/subscription/data/subscription_repo.dart';
-import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
+import 'package:bekia_pay/features/subscription/data/data_sources/subscription_remote_data_source.dart';
+import 'package:bekia_pay/features/subscription/data/repos_impl/subscription_repo_impl.dart';
+import 'package:bekia_pay/features/subscription/domain/repos/subscription_repo.dart';
+import 'package:bekia_pay/features/subscription/domain/use_cases/get_active_subscription_plan_id_use_case.dart';
+import 'package:bekia_pay/features/subscription/domain/use_cases/get_subscription_plans_use_case.dart';
+import 'package:bekia_pay/features/subscription/presentation/cubits/subscription_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -112,6 +116,12 @@ class DependencyInjection {
     getIt.registerLazySingleton<ProductsRemoteDataSource>(
       () => ProductsRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
     );
+    getIt.registerLazySingleton<SubscriptionRemoteDataSource>(
+      () => SubscriptionRemoteDataSourceImpl(
+        databaseClient: getIt<DatabaseClient>(),
+        supabaseClient: Supabase.instance.client,
+      ),
+    );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
@@ -138,6 +148,9 @@ class DependencyInjection {
     getIt.registerLazySingleton<ProductsRepo>(
       () => ProductsRepoImpl(getIt<ProductsRemoteDataSource>()),
     );
+    getIt.registerLazySingleton<SubscriptionRepo>(
+      () => SubscriptionRepoImpl(getIt<SubscriptionRemoteDataSource>()),
+    );
 
     // ==========================================
     // 4. USE CASES (Milestone 2)
@@ -157,6 +170,16 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton(
       () => GetProductsUseCase(repository: getIt<ProductsRepo>()),
+    );
+    getIt.registerLazySingleton(
+      () => GetSubscriptionPlansUseCase(
+        repository: getIt<SubscriptionRepo>(),
+      ),
+    );
+    getIt.registerLazySingleton(
+      () => GetActiveSubscriptionPlanIdUseCase(
+        repository: getIt<SubscriptionRepo>(),
+      ),
     );
     getIt.registerLazySingleton<GetFavouriteIdsUseCase>(
       () => GetFavouriteIdsUseCase(getIt<FavouriteRepo>()),
@@ -216,8 +239,11 @@ class DependencyInjection {
     getIt.registerFactory<OffersCubit>(
       () => OffersCubit(getOffers: getIt<GetOffersUseCase>()),
     );
-    getIt.registerLazySingleton<SubscriptionCubit>(
-      () => SubscriptionCubit(getIt<SubscriptionRepo>()),
+    getIt.registerFactory<SubscriptionCubit>(
+      () => SubscriptionCubit(
+        getPlans: getIt<GetSubscriptionPlansUseCase>(),
+        getActivePlanId: getIt<GetActiveSubscriptionPlanIdUseCase>(),
+      ),
     );
     getIt.registerFactory<ProductsCubit>(
       () => ProductsCubit(getIt<GetProductsUseCase>()),
@@ -268,6 +294,5 @@ class DependencyInjection {
     getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
     getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
     // getIt.registerLazySingleton<FavouriteRepoImpl>(() => FavouriteRepoImpl());
-    getIt.registerLazySingleton<SubscriptionRepo>(() => SubscriptionRepo());
   }
 }

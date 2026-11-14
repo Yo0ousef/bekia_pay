@@ -36,8 +36,8 @@ import 'package:bekia_pay/features/orders/presentation/views/order_details_view.
 import 'package:bekia_pay/features/orders/presentation/views/orders_view.dart';
 import 'package:bekia_pay/features/shop/presentation/cubits/products_cubit.dart';
 import 'package:bekia_pay/features/shop/presentation/views/shop_view.dart';
-import 'package:bekia_pay/features/subscription/logic/subscription_cubit.dart';
-import 'package:bekia_pay/features/subscription/ui/subscription_view.dart';
+import 'package:bekia_pay/features/subscription/presentation/cubits/subscription_cubit.dart';
+import 'package:bekia_pay/features/subscription/presentation/views/subscription_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -108,8 +108,8 @@ class AppRouter {
         );
       case AppRoutes.subscription:
         return MaterialPageRoute(
-          builder: (context) => BlocProvider.value(
-            value: DependencyInjection.getIt<SubscriptionCubit>(),
+          builder: (context) => BlocProvider(
+            create: (_) => DependencyInjection.getIt<SubscriptionCubit>(),
             child: const SubscriptionView(),
           ),
         );

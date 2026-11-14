@@ -1,3 +1,5 @@
+import 'package:bekia_pay/features/subscription/domain/entities/subscription_plan_entity.dart';
+
 class SubscriptionModel {
   final String id;
   final Map<String, dynamic> title;
@@ -6,7 +8,7 @@ class SubscriptionModel {
   final Map<String, dynamic> features;
   final bool isPopular;
 
-  SubscriptionModel({
+  const SubscriptionModel({
     required this.id,
     required this.title,
     required this.price,
@@ -25,4 +27,13 @@ class SubscriptionModel {
       isPopular: json['is_popular'] ?? false,
     );
   }
+
+  SubscriptionPlanEntity toEntity() => SubscriptionPlanEntity(
+    id: id,
+    title: title,
+    price: price,
+    description: description,
+    features: features,
+    isPopular: isPopular,
+  );
 }
