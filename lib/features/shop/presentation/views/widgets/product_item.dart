@@ -8,17 +8,17 @@ import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/favourites/presentation/cubit/favourite_cubit.dart';
-import 'package:bekia_pay/features/shop/data/models/product_model.dart';
+import 'package:bekia_pay/features/shop/domain/entities/product_entity.dart';
 import 'package:bekia_pay/features/cart/domain/entities/cart_item_entity.dart';
-import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
-import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
+import 'package:bekia_pay/features/shop/presentation/cubits/counter_cubit/counter_cubit.dart';
+import 'package:bekia_pay/features/shop/presentation/cubits/products_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class ProductItem extends StatelessWidget {
-  final ProductModel product;
+  final ProductEntity product;
 
   const ProductItem({super.key, required this.product});
 

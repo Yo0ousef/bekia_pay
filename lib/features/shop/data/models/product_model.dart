@@ -1,3 +1,5 @@
+import 'package:bekia_pay/features/shop/domain/entities/product_entity.dart';
+
 class ProductModel {
   final String id;
   final String productName;
@@ -11,7 +13,7 @@ class ProductModel {
   final num quantityAvailable;
   final num orderPriority;
 
-  ProductModel({
+  const ProductModel({
     required this.id,
     required this.productName,
     required this.description,
@@ -40,4 +42,18 @@ class ProductModel {
       orderPriority: json['order_priority'] ?? 0,
     );
   }
+
+  ProductEntity toEntity() => ProductEntity(
+    id: id,
+    productName: productName,
+    description: description,
+    pricePoints: pricePoints,
+    discountPercentage: discountPercentage,
+    finalPricePoints: finalPricePoints,
+    imageUrl: imageUrl,
+    categoryId: categoryId,
+    inStock: inStock,
+    quantityAvailable: quantityAvailable,
+    orderPriority: orderPriority,
+  );
 }

@@ -126,7 +126,7 @@ return success(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( String message)?  failure,TResult Function( List<ProductModel> products)?  success,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loading,TResult Function( String message)?  failure,TResult Function( List<ProductEntity> products)?  success,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Failure() when failure != null:
@@ -149,7 +149,7 @@ return success(_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( String message)  failure,required TResult Function( List<ProductModel> products)  success,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loading,required TResult Function( String message)  failure,required TResult Function( List<ProductEntity> products)  success,}) {final _that = this;
 switch (_that) {
 case _Loading():
 return loading();case _Failure():
@@ -171,7 +171,7 @@ return success(_that.products);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( String message)?  failure,TResult? Function( List<ProductModel> products)?  success,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loading,TResult? Function( String message)?  failure,TResult? Function( List<ProductEntity> products)?  success,}) {final _that = this;
 switch (_that) {
 case _Loading() when loading != null:
 return loading();case _Failure() when failure != null:
@@ -288,11 +288,11 @@ as String,
 
 
 class _Success implements ProductsState {
-  const _Success( List<ProductModel> products): _products = products;
+  const _Success( List<ProductEntity> products): _products = products;
   
 
- final  List<ProductModel> _products;
- List<ProductModel> get products {
+ final  List<ProductEntity> _products;
+ List<ProductEntity> get products {
   if (_products is EqualUnmodifiableListView) return _products;
   // ignore: implicit_dynamic_type
   return EqualUnmodifiableListView(_products);
@@ -331,7 +331,7 @@ abstract mixin class _$SuccessCopyWith<$Res> implements $ProductsStateCopyWith<$
   factory _$SuccessCopyWith(_Success value, $Res Function(_Success) _then) = __$SuccessCopyWithImpl;
 @useResult
 $Res call({
- List<ProductModel> products
+ List<ProductEntity> products
 });
 
 
@@ -351,7 +351,7 @@ class __$SuccessCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? products = null,}) {
   return _then(_Success(
 null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
-as List<ProductModel>,
+as List<ProductEntity>,
   ));
 }
 
@@ -359,3 +359,4 @@ as List<ProductModel>,
 }
 
 // dart format on
+

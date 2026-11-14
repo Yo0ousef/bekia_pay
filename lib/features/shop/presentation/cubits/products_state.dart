@@ -6,5 +6,5 @@ class ProductsState with _$ProductsState {
 
   const factory ProductsState.failure(String message) = _Failure;
 
-  const factory ProductsState.success(List<ProductModel> products) = _Success;
+  const factory ProductsState.success(List<ProductEntity> products) = _Success;
 }

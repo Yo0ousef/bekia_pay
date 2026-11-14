@@ -1,9 +1,9 @@
-import 'package:bekia_pay/features/shop/data/models/product_model.dart';
-import 'package:bekia_pay/features/shop/ui/widgets/product_item.dart';
+import 'package:bekia_pay/features/shop/domain/entities/product_entity.dart';
+import 'package:bekia_pay/features/shop/presentation/views/widgets/product_item.dart';
 import 'package:flutter/material.dart';
 
 class ProductsList extends StatelessWidget {
-  final List<ProductModel> products;
+  final List<ProductEntity> products;
 
   const ProductsList({super.key, required this.products});
 
