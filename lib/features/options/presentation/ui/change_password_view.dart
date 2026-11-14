@@ -17,6 +17,7 @@ class ChangePasswordView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     final form = context.read<ChangePasswordFormController>();
     return BlocListener<UpdatePasswordCubit, UpdatePasswordState>(
       listenWhen: (previous, current) =>
@@ -39,7 +40,12 @@ class ChangePasswordView extends StatelessWidget {
         );
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(LocaleKeys.change_password.tr())),
+        appBar: AppBar(
+          title: Text(LocaleKeys.change_password.tr()),
+          centerTitle: true,
+          backgroundColor: theme.scaffoldBackgroundColor,
+          automaticallyImplyLeading: false,
+        ),
         body: SafeArea(
           child: Form(
             key: form.formKey,

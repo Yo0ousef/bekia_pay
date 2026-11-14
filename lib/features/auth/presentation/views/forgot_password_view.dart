@@ -24,6 +24,8 @@ class ForgotPasswordView extends StatelessWidget {
       appBar: AppBar(
         title: Text(LocaleKeys.forgot_password.tr()),
         backgroundColor: theme.scaffoldBackgroundColor,
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SafeArea(
         child: Padding(
@@ -42,8 +44,11 @@ class ForgotPasswordView extends StatelessWidget {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.mark_email_read_outlined,
-                        size: 64, color: theme.primaryColor),
+                    Icon(
+                      Icons.mark_email_read_outlined,
+                      size: 64,
+                      color: theme.primaryColor,
+                    ),
                     24.vGap,
                     Text(
                       LocaleKeys.password_reset_email_sent.tr(),
