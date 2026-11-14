@@ -8,9 +8,16 @@ import 'package:bekia_pay/features/auth/sign_in/data/sign_in_repo.dart';
 import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/sign_up/data/sign_up_repo.dart';
 import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
-import 'package:bekia_pay/features/cart/logic/cart_count_cubit.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
-import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
+import 'package:bekia_pay/features/cart/data/data_sources/cart_local_data_source.dart';
+import 'package:bekia_pay/features/cart/data/repos_impl/cart_repo_impl.dart';
+import 'package:bekia_pay/features/cart/domain/repos/cart_repo.dart';
+import 'package:bekia_pay/features/cart/domain/use_cases/add_item_use_case.dart';
+import 'package:bekia_pay/features/cart/domain/use_cases/clear_cart_use_case.dart';
+import 'package:bekia_pay/features/cart/domain/use_cases/get_cart_items_use_case.dart';
+import 'package:bekia_pay/features/cart/domain/use_cases/remove_item_use_case.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/cart_count_cubit.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/check_out_cubit/check_out_cubit.dart';
 import 'package:bekia_pay/features/favourites/data/data_sources/favourites_remote_data_source.dart';
 import 'package:bekia_pay/features/favourites/data/repos_impl/favourite_repo_impl.dart';
 import 'package:bekia_pay/features/favourites/domain/repos/favourite_repo.dart';
@@ -90,6 +97,9 @@ class DependencyInjection {
         supabaseClient: Supabase.instance.client,
       ),
     );
+    getIt.registerLazySingleton<CartLocalDataSource>(
+      CartLocalDataSourceImpl.new,
+    );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
@@ -106,6 +116,9 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<OptionsRepo>(
       () => OptionsRepoImpl(getIt<OptionsRemoteDataSource>()),
+    );
+    getIt.registerLazySingleton<CartRepo>(
+      () => CartRepoImpl(getIt<CartLocalDataSource>()),
     );
 
     // ==========================================
@@ -141,6 +154,18 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<SignOutUseCase>(
       () => SignOutUseCase(getIt<OptionsRepo>()),
+    );
+    getIt.registerLazySingleton<GetCartItemsUseCase>(
+      () => GetCartItemsUseCase(getIt<CartRepo>()),
+    );
+    getIt.registerLazySingleton<AddItemUseCase>(
+      () => AddItemUseCase(getIt<CartRepo>()),
+    );
+    getIt.registerLazySingleton<RemoveItemUseCase>(
+      () => RemoveItemUseCase(getIt<CartRepo>()),
+    );
+    getIt.registerLazySingleton<ClearCartUseCase>(
+      () => ClearCartUseCase(getIt<CartRepo>()),
     );
 
     // ==========================================
@@ -182,7 +207,12 @@ class DependencyInjection {
       ),
     );
     getIt.registerLazySingleton<CartCubit>(
-      () => CartCubit(getIt<ProductsRepo>()),
+      () => CartCubit(
+        getCartItems: getIt<GetCartItemsUseCase>(),
+        addItem: getIt<AddItemUseCase>(),
+        removeItem: getIt<RemoveItemUseCase>(),
+        clearCart: getIt<ClearCartUseCase>(),
+      ),
     );
     getIt.registerFactory<CartCountCubit>(
       () => CartCountCubit(getIt<CartCubit>()),

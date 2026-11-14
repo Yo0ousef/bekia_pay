@@ -1,5 +1,5 @@
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/cart/ui/widgets/cart_view_body.dart';
+import 'package:bekia_pay/features/cart/presentation/ui/widgets/cart_view_body.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

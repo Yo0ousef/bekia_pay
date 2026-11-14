@@ -1,3 +1,4 @@
+import 'package:bekia_pay/features/cart/domain/entities/cart_item_entity.dart';
 import 'package:bekia_pay/features/orders/domain/entities/order_item_request.dart';
 import 'package:bekia_pay/features/orders/domain/use_cases/place_order_use_case.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,10 +12,19 @@ class CheckOutCubit extends Cubit<CheckOutState> {
 
   CheckOutCubit(this._placeOrder) : super(const CheckOutState.initial());
 
-  Future<void> checkOut({required List<OrderItemRequest> items}) async {
+  Future<void> checkOut({required List<CartItemEntity> items}) async {
     emit(const CheckOutState.loading());
     try {
-      await _placeOrder(items: items);
+      await _placeOrder(
+        items: items
+            .map(
+              (item) => OrderItemRequest(
+                productId: item.productId,
+                quantity: item.quantity,
+              ),
+            )
+            .toList(growable: false),
+      );
       if (!isClosed) emit(const CheckOutState.success());
     } catch (error) {
       if (!isClosed) emit(CheckOutState.failure(error.toString()));

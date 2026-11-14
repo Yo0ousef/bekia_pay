@@ -15,9 +15,8 @@ class Prefs {
     return _instance.getBool(key) ?? false;
   }
 
-  static void setString(String key, String value) {
-    _instance.setString(key, value);
-  }
+  static Future<bool> setString(String key, String value) =>
+      _instance.setString(key, value);
 
   static String getString(String key) {
     return _instance.getString(key) ?? '';

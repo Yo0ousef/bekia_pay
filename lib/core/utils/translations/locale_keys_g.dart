@@ -98,6 +98,7 @@ abstract class  LocaleKeys {
   static const favourites = 'favourites';
   static const profile = 'profile';
   static const change_password = 'change_password';
+  static const retry = 'retry';
   static const help_center = 'help_center';
   static const sign_out = 'sign_out';
   static const language = 'language';

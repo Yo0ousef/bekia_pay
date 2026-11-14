@@ -1,13 +1,14 @@
+import 'dart:async';
+
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
-import 'package:bekia_pay/features/cart/logic/check_out_cubit/check_out_cubit.dart';
-import 'package:bekia_pay/features/orders/domain/entities/order_item_request.dart';
-import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_cubit.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/check_out_cubit/check_out_cubit.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_state.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,14 +22,15 @@ class CartCheckOutButton extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8),
-      child: BlocBuilder<CartCubit, List<CartItemModel>>(
-        builder: (context, cartItems) {
+      child: BlocBuilder<CartCubit, CartState>(
+        builder: (context, cartState) {
+          final cartItems = cartState.items;
           if (cartItems.isEmpty) return const SizedBox.shrink();
           return BlocConsumer<CheckOutCubit, CheckOutState>(
             listener: (context, checkoutState) {
               checkoutState.whenOrNull(
                 success: () {
-                  context.read<CartCubit>().clearCart();
+                  unawaited(context.read<CartCubit>().clearCart());
                   context.read<PointsCubit>().getPoints();
                   context.read<CheckOutCubit>().reset();
                   Fluttertoast.showToast(
@@ -49,7 +51,7 @@ class CartCheckOutButton extends StatelessWidget {
               );
             },
             builder: (context, checkoutState) {
-              final totalPoints = context.read<CartCubit>().totalPoints;
+              final totalPoints = cartState.totalPoints;
               final isAfterLimit = DateTime.now().day >= 25;
               final bool isLoading = checkoutState.maybeWhen(
                 loading: () => true,
@@ -64,7 +66,8 @@ class CartCheckOutButton extends StatelessWidget {
                     success: (points) {
                       final num userPoints = points;
                       final isInsufficient = (userPoints < totalPoints);
-                      final bool isDisabled = isAfterLimit || isLoading;
+                      final bool isDisabled =
+                          isAfterLimit || isLoading || cartState.isSaving;
                       return Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -127,14 +130,7 @@ class CartCheckOutButton extends StatelessWidget {
                                         );
                                       } else {
                                         context.read<CheckOutCubit>().checkOut(
-                                          items: cartItems
-                                              .map(
-                                                (item) => OrderItemRequest(
-                                                  productId: item.productId,
-                                                  quantity: item.count,
-                                                ),
-                                              )
-                                              .toList(),
+                                          items: cartItems,
                                         );
                                       }
                                     },

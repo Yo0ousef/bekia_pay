@@ -1,14 +1,16 @@
+import 'dart:async';
+
 import 'package:bekia_pay/app/theming/app_colors.dart';
 import 'package:bekia_pay/app/theming/theming_typography.dart';
 import 'package:bekia_pay/core/shared/widgets/product_image.dart';
 import 'package:bekia_pay/core/utils/extensions/context_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/cart/logic/cart_cubit/cart_cubit.dart';
-import 'package:bekia_pay/features/shop/data/models/cart_item_model.dart';
-import 'package:bekia_pay/features/shop/data/models/product_model.dart';
-import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
+import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/favourites/presentation/cubit/favourite_cubit.dart';
+import 'package:bekia_pay/features/shop/data/models/product_model.dart';
+import 'package:bekia_pay/features/cart/domain/entities/cart_item_entity.dart';
+import 'package:bekia_pay/features/shop/logic/counter_cubit/counter_cubit.dart';
 import 'package:bekia_pay/features/shop/logic/products_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -153,14 +155,14 @@ class ProductItem extends StatelessWidget {
                       onPressed: isButtonDisabled
                           ? null
                           : () {
-                              final cartItem = CartItemModel(
+                              final cartItem = CartItemEntity(
                                 productId: product.id,
                                 name: product.productName,
-                                count: counterState,
+                                quantity: counterState,
                                 imageUrl: product.imageUrl,
                                 pricePoints: product.finalPricePoints,
                               );
-                              context.read<CartCubit>().addItem(cartItem);
+                              unawaited(context.read<CartCubit>().addItem(cartItem));
                               // ✅ Update local UI immediately
                               context.read<ProductsCubit>().updateLocalQuantity(
                                 product.id,
