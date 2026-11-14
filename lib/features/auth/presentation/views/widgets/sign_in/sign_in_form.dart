@@ -8,8 +8,8 @@ import 'package:bekia_pay/core/shared/widgets/custom_text_form_field.dart';
 import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/widgets/new_acc_or_login.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_in_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/common/new_acc_or_login.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -34,7 +34,7 @@ class SignInForm extends StatelessWidget {
           },
           failure: (message) {
             Fluttertoast.showToast(
-              msg: LocaleKeys.something_went_wrong.tr(),
+              msg: message,
               backgroundColor: AppColors.redColor,
               textColor: AppColors.whiteColor,
               fontSize: 16,
@@ -50,7 +50,6 @@ class SignInForm extends StatelessWidget {
           child: Column(
             children: [
               CustomTextFormField(
-                onSaved: cubit.onEmailSaved,
                 labelText: LocaleKeys.email.tr(),
                 controller: cubit.emailController,
                 validator: Validators.emailValidate,
@@ -61,7 +60,6 @@ class SignInForm extends StatelessWidget {
                 builder: (context, state) {
                   return CustomTextFormField(
                     controller: cubit.passwordController,
-                    onSaved: cubit.onPasswordSaved,
                     validator: Validators.passwordValidate,
                     labelText: LocaleKeys.password.tr(),
                     keyboardType: TextInputType.visiblePassword,
@@ -82,10 +80,17 @@ class SignInForm extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    LocaleKeys.forgot_password.tr(),
-                    style: ThemingTypography.styleRegular14(context)
-                        .copyWith(color: theme.primaryColor),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(
+                      context,
+                      AppRoutes.forgotPassword.route,
+                      arguments: cubit.emailController.text,
+                    ),
+                    child: Text(
+                      LocaleKeys.forgot_password.tr(),
+                      style: ThemingTypography.styleRegular14(context)
+                          .copyWith(color: theme.primaryColor),
+                    ),
                   ),
                 ],
               ),

@@ -4,10 +4,15 @@ import 'package:bekia_pay/core/shared/data/repos/points_repo.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_in/data/sign_in_repo.dart';
-import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_up/data/sign_up_repo.dart';
-import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
+import 'package:bekia_pay/features/auth/data/data_sources/auth_remote_data_source.dart';
+import 'package:bekia_pay/features/auth/data/repos_impl/auth_repo_impl.dart';
+import 'package:bekia_pay/features/auth/domain/repos/auth_repo.dart';
+import 'package:bekia_pay/features/auth/domain/use_cases/send_password_reset_email_use_case.dart';
+import 'package:bekia_pay/features/auth/domain/use_cases/sign_in_use_case.dart';
+import 'package:bekia_pay/features/auth/domain/use_cases/sign_up_use_case.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/forgot_password_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_in_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_up_cubit.dart';
 import 'package:bekia_pay/features/cart/data/data_sources/cart_local_data_source.dart';
 import 'package:bekia_pay/features/cart/data/repos_impl/cart_repo_impl.dart';
 import 'package:bekia_pay/features/cart/domain/repos/cart_repo.dart';
@@ -122,6 +127,9 @@ class DependencyInjection {
         supabaseClient: Supabase.instance.client,
       ),
     );
+    getIt.registerLazySingleton<AuthRemoteDataSource>(
+      () => AuthRemoteDataSourceImpl(supabaseClient: Supabase.instance.client),
+    );
 
     // ==========================================
     // 3. REPOSITORIES (Milestone 3)
@@ -150,6 +158,9 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<SubscriptionRepo>(
       () => SubscriptionRepoImpl(getIt<SubscriptionRemoteDataSource>()),
+    );
+    getIt.registerLazySingleton<AuthRepo>(
+      () => AuthRepoImpl(getIt<AuthRemoteDataSource>()),
     );
 
     // ==========================================
@@ -180,6 +191,15 @@ class DependencyInjection {
       () => GetActiveSubscriptionPlanIdUseCase(
         repository: getIt<SubscriptionRepo>(),
       ),
+    );
+    getIt.registerLazySingleton(
+      () => SignInUseCase(repository: getIt<AuthRepo>()),
+    );
+    getIt.registerLazySingleton(
+      () => SignUpUseCase(repository: getIt<AuthRepo>()),
+    );
+    getIt.registerLazySingleton(
+      () => SendPasswordResetEmailUseCase(repository: getIt<AuthRepo>()),
     );
     getIt.registerLazySingleton<GetFavouriteIdsUseCase>(
       () => GetFavouriteIdsUseCase(getIt<FavouriteRepo>()),
@@ -229,12 +249,12 @@ class DependencyInjection {
     // Cubits
     getIt.registerLazySingleton<BoardingCubit>(() => BoardingCubit());
     getIt.registerFactory<VisibilityCubit>(() => VisibilityCubit());
-    getIt.registerLazySingleton<SignInCubit>(
-      () => SignInCubit(getIt<SignInRepo>()),
+    getIt.registerFactory<SignInCubit>(
+      () => SignInCubit(getIt<SignInUseCase>()),
     );
     getIt.registerLazySingleton<ThemeCubit>(() => ThemeCubit());
-    getIt.registerLazySingleton<SignUpCubit>(
-      () => SignUpCubit(getIt<SignUpRepo>()),
+    getIt.registerFactory<SignUpCubit>(
+      () => SignUpCubit(getIt<SignUpUseCase>()),
     );
     getIt.registerFactory<OffersCubit>(
       () => OffersCubit(getOffers: getIt<GetOffersUseCase>()),
@@ -291,8 +311,6 @@ class DependencyInjection {
 
     // Repositories
     getIt.registerLazySingleton<PointsRepo>(() => PointsRepo());
-    getIt.registerLazySingleton<SignInRepo>(() => SignInRepo());
-    getIt.registerLazySingleton<SignUpRepo>(() => SignUpRepo());
     // getIt.registerLazySingleton<FavouriteRepoImpl>(() => FavouriteRepoImpl());
   }
 }

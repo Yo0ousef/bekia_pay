@@ -6,7 +6,7 @@ import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
 import 'package:bekia_pay/core/shared/widgets/custom_text_form_field.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_up_cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -28,7 +28,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.name.tr(),
             controller: signUpCubit.nameController,
             validator: Validators.emptyValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.name,
             suffixIcon: Icon(Icons.person, color: AppColors.disableDarkColor),
           ),
@@ -37,7 +36,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.email.tr(),
             controller: signUpCubit.emailController,
             validator: Validators.emailValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.emailAddress,
             suffixIcon: Icon(
               Icons.email_outlined,
@@ -58,7 +56,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.governorate.tr(),
             controller: signUpCubit.governorateController,
             validator: Validators.emptyValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
             suffixIcon: Icon(
               Icons.location_on_outlined,
@@ -70,7 +67,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.city.tr(),
             controller: signUpCubit.cityController,
             validator: Validators.emptyValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
             suffixIcon: Icon(
               Icons.location_city_outlined,
@@ -82,7 +78,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.street.tr(),
             controller: signUpCubit.streetController,
             validator: Validators.emptyValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
             suffixIcon: Icon(
               Icons.streetview,
@@ -94,7 +89,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.house_number.tr(),
             controller: signUpCubit.houseNumberController,
             validator: Validators.emptyValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.text,
             suffixIcon: Icon(
               Icons.home_outlined,
@@ -106,7 +100,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.floor.tr(),
             controller: signUpCubit.floorController,
             validator: Validators.numbersValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.number,
             suffixIcon: Icon(Icons.stairs, color: AppColors.disableDarkColor),
           ),
@@ -115,7 +108,6 @@ class SignUpForm extends StatelessWidget {
             labelText: LocaleKeys.apartment_number.tr(),
             controller: signUpCubit.apartmentNumberController,
             validator: Validators.numbersValidate,
-            onSaved: signUpCubit.onNameSaved,
             keyboardType: TextInputType.number,
             suffixIcon: Icon(
               Icons.apartment,
@@ -131,7 +123,6 @@ class SignUpForm extends StatelessWidget {
                   labelText: LocaleKeys.password.tr(),
                   controller: signUpCubit.passwordController,
                   validator: Validators.passwordValidate,
-                  onSaved: signUpCubit.onNameSaved,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: state,
                   suffixIcon: IconButton(
@@ -154,7 +145,6 @@ class SignUpForm extends StatelessWidget {
                   labelText: LocaleKeys.confirm_password.tr(),
                   controller: signUpCubit.confirmPasswordController,
                   validator: Validators.passwordValidate,
-                  onSaved: signUpCubit.onNameSaved,
                   keyboardType: TextInputType.visiblePassword,
                   obscureText: state,
                   suffixIcon: IconButton(
@@ -173,3 +163,4 @@ class SignUpForm extends StatelessWidget {
     );
   }
 }
+

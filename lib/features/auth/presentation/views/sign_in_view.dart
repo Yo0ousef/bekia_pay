@@ -3,8 +3,8 @@ import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/extensions/widget_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/widgets/auth_header.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/widgets/sign_in_form.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/common/auth_header.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/sign_in/sign_in_form.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 

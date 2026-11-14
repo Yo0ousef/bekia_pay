@@ -5,10 +5,10 @@ import 'package:bekia_pay/core/utils/constants/app_constants.dart';
 import 'package:bekia_pay/core/utils/constants/image_constants.dart';
 import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/widgets/auth_header.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/widgets/new_acc_or_login.dart';
-import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_up/ui/widgets/sign_up_form.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/common/auth_header.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/common/new_acc_or_login.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_up_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/views/widgets/sign_up/sign_up_form.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -50,7 +50,7 @@ class SignUpView extends StatelessWidget {
                           ),
                           failure: (message) {
                             Fluttertoast.showToast(
-                              msg: LocaleKeys.something_went_wrong.tr(),
+                              msg: message,
                               backgroundColor: AppColors.redColor,
                               textColor: AppColors.whiteColor,
                               fontSize: 16,

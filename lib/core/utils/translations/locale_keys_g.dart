@@ -22,6 +22,10 @@ abstract class  LocaleKeys {
   static const password = 'password';
   static const current_password = 'current_password';
   static const forgot_password = 'forgot_password';
+  static const forgot_password_description = 'forgot_password_description';
+  static const password_reset_email_sent = 'password_reset_email_sent';
+  static const send_reset_email = 'send_reset_email';
+  static const back_to_sign_in = 'back_to_sign_in';
   static const required = 'required';
   static const welcome_back = 'welcome_back';
   static const happy_to_see_you = 'happy_to_see_you';

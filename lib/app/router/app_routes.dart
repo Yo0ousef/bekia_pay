@@ -5,6 +5,7 @@ enum AppRoutes {
   cart("/cart"),
   signUp("/signUp"),
   signIn("/signIn"),
+  forgotPassword("/forgotPassword"),
   materials("/materials"),
   orders("/orders"),
   onBoarding("/onBoarding"),

@@ -1,10 +1,13 @@
 import 'package:bekia_pay/app/dependency_injection/dependency_injection.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/visibility_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_in/logic/sign_in_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_in/ui/sign_in_view.dart';
-import 'package:bekia_pay/features/auth/sign_up/logic/sign_up_cubit.dart';
-import 'package:bekia_pay/features/auth/sign_up/ui/sign_up_view.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/forgot_password_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_in_cubit.dart';
+import 'package:bekia_pay/features/auth/presentation/cubits/sign_up_cubit.dart';
+import 'package:bekia_pay/features/auth/domain/use_cases/send_password_reset_email_use_case.dart';
+import 'package:bekia_pay/features/auth/presentation/views/forgot_password_view.dart';
+import 'package:bekia_pay/features/auth/presentation/views/sign_in_view.dart';
+import 'package:bekia_pay/features/auth/presentation/views/sign_up_view.dart';
 import 'package:bekia_pay/features/cart/presentation/logic/cart_count_cubit.dart';
 import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_cubit.dart';
 import 'package:bekia_pay/features/cart/presentation/logic/check_out_cubit/check_out_cubit.dart';
@@ -85,9 +88,7 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: DependencyInjection.getIt<SignInCubit>(),
-              ),
+              BlocProvider(create: (_) => DependencyInjection.getIt<SignInCubit>()),
               BlocProvider(
                 create: (_) => DependencyInjection.getIt<VisibilityCubit>(),
               ),
@@ -99,11 +100,20 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider.value(
-                value: DependencyInjection.getIt<SignUpCubit>(),
-              ),
+              BlocProvider(create: (_) => DependencyInjection.getIt<SignUpCubit>()),
             ],
             child: const SignUpView(),
+          ),
+        );
+      case AppRoutes.forgotPassword:
+        final initialEmail = settings.arguments as String?;
+        return MaterialPageRoute(
+          builder: (_) => BlocProvider(
+            create: (_) => ForgotPasswordCubit(
+              DependencyInjection.getIt<SendPasswordResetEmailUseCase>(),
+              initialEmail: initialEmail,
+            ),
+            child: const ForgotPasswordView(),
           ),
         );
       case AppRoutes.subscription:
