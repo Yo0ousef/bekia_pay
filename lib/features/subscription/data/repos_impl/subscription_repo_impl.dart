@@ -1,5 +1,6 @@
 import 'package:bekia_pay/features/subscription/data/data_sources/subscription_remote_data_source.dart';
 import 'package:bekia_pay/features/subscription/domain/entities/subscription_plan_entity.dart';
+import 'package:bekia_pay/features/subscription/domain/entities/user_subscription_entity.dart';
 import 'package:bekia_pay/features/subscription/domain/repos/subscription_repo.dart';
 
 class SubscriptionRepoImpl implements SubscriptionRepo {
@@ -14,6 +15,10 @@ class SubscriptionRepoImpl implements SubscriptionRepo {
   }
 
   @override
-  Future<String?> getActiveSubscriptionPlanId() =>
-      remoteDataSource.getActiveSubscriptionPlanId();
+  Future<UserSubscriptionEntity?> getCurrentSubscription() =>
+      remoteDataSource.getCurrentSubscription();
+
+  @override
+  Future<void> cancelPendingSubscription() =>
+      remoteDataSource.cancelPendingSubscription();
 }

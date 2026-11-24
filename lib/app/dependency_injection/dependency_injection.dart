@@ -1,5 +1,6 @@
 import 'package:bekia_pay/core/services/database_service/database_client.dart';
 import 'package:bekia_pay/core/services/database_service/supabase_client_impl.dart';
+import 'package:bekia_pay/core/services/payment_service/payment_service.dart';
 import 'package:bekia_pay/core/shared/data/repos/points_repo.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/points/points_cubit/points_cubit.dart';
 import 'package:bekia_pay/core/shared/logic/cubits/theme_cubit.dart';
@@ -66,9 +67,11 @@ import 'package:bekia_pay/features/shop/presentation/cubits/counter_cubit/counte
 import 'package:bekia_pay/features/shop/presentation/cubits/products_cubit.dart';
 import 'package:bekia_pay/features/subscription/data/data_sources/subscription_remote_data_source.dart';
 import 'package:bekia_pay/features/subscription/data/repos_impl/subscription_repo_impl.dart';
+import 'package:bekia_pay/features/subscription/data/services/payment_service.dart';
 import 'package:bekia_pay/features/subscription/domain/repos/subscription_repo.dart';
-import 'package:bekia_pay/features/subscription/domain/use_cases/get_active_subscription_plan_id_use_case.dart';
+import 'package:bekia_pay/features/subscription/domain/use_cases/cancel_subscription_request_use_case.dart';
 import 'package:bekia_pay/features/subscription/domain/use_cases/get_subscription_plans_use_case.dart';
+import 'package:bekia_pay/features/subscription/domain/use_cases/subscribe_to_plan_use_case.dart';
 import 'package:bekia_pay/features/subscription/presentation/cubits/subscription_cubit.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -123,6 +126,12 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<SubscriptionRemoteDataSource>(
       () => SubscriptionRemoteDataSourceImpl(
+        databaseClient: getIt<DatabaseClient>(),
+        supabaseClient: Supabase.instance.client,
+      ),
+    );
+    getIt.registerLazySingleton<PaymentService>(
+      () => CashOnDeliveryPaymentService(
         databaseClient: getIt<DatabaseClient>(),
         supabaseClient: Supabase.instance.client,
       ),
@@ -188,9 +197,10 @@ class DependencyInjection {
       ),
     );
     getIt.registerLazySingleton(
-      () => GetActiveSubscriptionPlanIdUseCase(
-        repository: getIt<SubscriptionRepo>(),
-      ),
+      () => SubscribeToPlanUseCase(getIt<PaymentService>()),
+    );
+    getIt.registerLazySingleton(
+      () => CancelSubscriptionRequestUseCase(getIt<SubscriptionRepo>()),
     );
     getIt.registerLazySingleton(
       () => SignInUseCase(repository: getIt<AuthRepo>()),
@@ -262,7 +272,9 @@ class DependencyInjection {
     getIt.registerFactory<SubscriptionCubit>(
       () => SubscriptionCubit(
         getPlans: getIt<GetSubscriptionPlansUseCase>(),
-        getActivePlanId: getIt<GetActiveSubscriptionPlanIdUseCase>(),
+        subscribeToPlan: getIt<SubscribeToPlanUseCase>(),
+        subscriptionRepo: getIt<SubscriptionRepo>(),
+        cancelSubscriptionRequest: getIt<CancelSubscriptionRequestUseCase>(),
       ),
     );
     getIt.registerFactory<ProductsCubit>(

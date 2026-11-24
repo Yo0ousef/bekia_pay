@@ -71,6 +71,9 @@ class AppRouter {
                 create: (_) => DependencyInjection.getIt<UserProfileCubit>(),
               ),
               BlocProvider(
+                create: (_) => DependencyInjection.getIt<SubscriptionCubit>(),
+              ),
+              BlocProvider(
                 create: (_) => DependencyInjection.getIt<SignOutCubit>(),
               ),
             ],

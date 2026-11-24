@@ -16,6 +16,7 @@ class EditProfileView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final form = context.read<EditProfileFormController>();
+    ThemeData theme = Theme.of(context);
     return BlocListener<UserProfileCubit, UserProfileState>(
       listenWhen: (previous, current) =>
           previous.maybeWhen(updating: () => true, orElse: () => false) &&
@@ -37,7 +38,12 @@ class EditProfileView extends StatelessWidget {
         );
       },
       child: Scaffold(
-        appBar: AppBar(title: Text(LocaleKeys.profile.tr())),
+        appBar: AppBar(
+          title: Text(LocaleKeys.profile.tr()),
+          centerTitle: true,
+          backgroundColor: theme.scaffoldBackgroundColor,
+          automaticallyImplyLeading: false,
+        ),
         body: SafeArea(
           child: Form(
             key: form.formKey,

@@ -12,6 +12,7 @@ class OfferDetailsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(offer.title),
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: theme.scaffoldBackgroundColor,
       ),

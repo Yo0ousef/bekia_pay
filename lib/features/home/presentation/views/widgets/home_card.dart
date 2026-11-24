@@ -8,6 +8,7 @@ class HomeCard extends StatelessWidget {
   final String title, subtitle;
   final Widget? trailing;
   final VoidCallback? onTap;
+  final bool showArrow;
 
   const HomeCard({
     super.key,
@@ -15,6 +16,7 @@ class HomeCard extends StatelessWidget {
     this.trailing,
     required this.subtitle,
     this.onTap,
+    this.showArrow = true,
   });
 
   @override
@@ -62,12 +64,14 @@ class HomeCard extends StatelessWidget {
                 mainAxisAlignment: .center,
                 children: [
                   Text(subtitle),
-                  10.hGap,
-                  Icon(
-                    Icons.arrow_forward_ios_outlined,
-                    color: AppColors.redColor,
-                    size: 15,
-                  ),
+                  if (showArrow) ...[
+                    10.hGap,
+                    Icon(
+                      Icons.arrow_forward_ios_outlined,
+                      color: AppColors.redColor,
+                      size: 15,
+                    ),
+                  ],
                 ],
               ),
             ),

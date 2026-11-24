@@ -32,19 +32,24 @@ class SubscriptionPlanCard extends StatelessWidget {
     final title = plan.title[isAr ? 'ar' : 'en']?.toString() ?? '';
     final description = plan.description[isAr ? 'ar' : 'en']?.toString() ?? '';
 
-    final state = context
-        .watch<SubscriptionCubit>()
-        .state;
-    final bool doesUserHaveAPlan = state.maybeWhen(
-      success: (subscriptions, activeSubscriptionId) =>
-      activeSubscriptionId != null,
-      orElse: () => false,
-    );
+    final cubit = context.watch<SubscriptionCubit>();
+    final state = cubit.state;
+    final currentSubscription = cubit.currentSubscription;
+    final bool doesUserHaveAPlan = currentSubscription != null;
     final bool isActive = state.maybeWhen(
       success: (subscriptions, activeSubscriptionId) =>
-      activeSubscriptionId == plan.id,
+          activeSubscriptionId == plan.id &&
+          currentSubscription?.status == 'active',
       orElse: () => false,
     );
+    final bool isPendingRequest = currentSubscription?.planId == plan.id &&
+        currentSubscription?.status == 'pending';
+    final remainingDays = currentSubscription?.expiresAt
+        ?.difference(DateTime.now().toUtc())
+        .inSeconds;
+    final remainingDaysRoundedUp = remainingDays != null && remainingDays > 0
+        ? (remainingDays / 86400).ceil()
+        : 0;
 
     return Container(
       width: context.screenWidth * .8,
@@ -103,6 +108,24 @@ class SubscriptionPlanCard extends StatelessWidget {
                 ),
             ],
           ),
+          if (isPendingRequest)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                isAr ? 'الاشتراك قيد الانتظار' : 'Request pending',
+                style: ThemingTypography.styleRegular14(context),
+              ),
+            ),
+          if (isActive)
+            Padding(
+              padding: const EdgeInsets.only(top: 8),
+              child: Text(
+                isAr
+                    ? 'الأيام المتبقية: $remainingDaysRoundedUp'
+                    : 'Remaining days: $remainingDaysRoundedUp',
+                style: ThemingTypography.styleRegular14(context),
+              ),
+            ),
           12.vGap,
           Text(
             title,
@@ -152,7 +175,13 @@ class SubscriptionPlanCard extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             height: 50,
-            child: isActive
+            child: isPendingRequest
+                ? SubscriptionButton(
+                    plan: plan,
+                    color: color,
+                    isCancelRequest: true,
+                  )
+                : isActive
                 ? OutlinedButton(
               onPressed: null,
               style: OutlinedButton.styleFrom(

@@ -4,6 +4,7 @@ import 'package:bekia_pay/core/utils/extensions/num_extensions.dart';
 import 'package:bekia_pay/core/utils/translations/locale_keys_g.dart';
 import 'package:bekia_pay/features/home/presentation/views/widgets/home_card.dart';
 import 'package:bekia_pay/features/home/presentation/views/widgets/points_card.dart';
+import 'package:bekia_pay/features/home/presentation/views/widgets/subscription_card.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
@@ -18,17 +19,7 @@ class HomeGrid extends StatelessWidget {
         children: [
           Row(
             mainAxisAlignment: .spaceBetween,
-            children: [
-              HomeCard(
-                title: LocaleKeys.subscription.tr(),
-                trailing: Icon(Icons.verified, color: AppColors.redColor),
-                subtitle: LocaleKeys.renew.tr(),
-                onTap: () {
-                  Navigator.pushNamed(context, AppRoutes.subscription.route);
-                },
-              ),
-              PointsCard(),
-            ],
+            children: [SubscriptionCard(), PointsCard()],
           ),
           10.vGap,
           Row(
