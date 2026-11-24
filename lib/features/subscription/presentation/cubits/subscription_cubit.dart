@@ -11,24 +11,20 @@ part 'subscription_cubit.freezed.dart';
 part 'subscription_state.dart';
 
 class SubscriptionCubit extends Cubit<SubscriptionState> {
-  final GetSubscriptionPlansUseCase _getPlans;
-  final SubscribeToPlanUseCase _subscribeToPlan;
-  final SubscriptionRepo _subscriptionRepo;
-  final CancelSubscriptionRequestUseCase _cancelSubscriptionRequest;
+  final GetSubscriptionPlansUseCase getPlansUseCase;
+  final SubscribeToPlanUseCase subscribeToPlanUseCase;
+  final SubscriptionRepo subscriptionRepository;
+  final CancelSubscriptionRequestUseCase cancelSubscriptionRequestUseCase;
   bool _isSubmitting = false;
   UserSubscriptionEntity? currentSubscription;
 
   SubscriptionCubit({
-    required GetSubscriptionPlansUseCase getPlans,
-    required SubscribeToPlanUseCase subscribeToPlan,
-    required SubscriptionRepo subscriptionRepo,
-    required CancelSubscriptionRequestUseCase cancelSubscriptionRequest,
-  }) : _getPlans = getPlans,
-      _subscribeToPlan = subscribeToPlan,
-      _subscriptionRepo = subscriptionRepo,
-      _cancelSubscriptionRequest = cancelSubscriptionRequest,
-      super(const SubscriptionState.loading()) {
-    this.getPlans();
+    required this.getPlansUseCase,
+    required this.subscribeToPlanUseCase,
+    required this.subscriptionRepository,
+    required this.cancelSubscriptionRequestUseCase,
+  }) : super(const SubscriptionState.loading()) {
+    getPlans();
   }
 
   Future<void> getPlans({bool showLoading = true}) async {
@@ -36,8 +32,9 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
       emit(const SubscriptionState.loading());
     }
     try {
-      final plans = await _getPlans();
-      currentSubscription = await _subscriptionRepo.getCurrentSubscription();
+      final plans = await getPlansUseCase();
+      currentSubscription = await subscriptionRepository
+          .getCurrentSubscription();
       final activePlanId = currentSubscription?.status == 'active'
           ? currentSubscription?.planId
           : null;
@@ -53,7 +50,7 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     }
     _isSubmitting = true;
     try {
-      await _subscribeToPlan(planId);
+      await subscribeToPlanUseCase(planId);
       await getPlans(showLoading: false);
       return true;
     } finally {
@@ -67,7 +64,7 @@ class SubscriptionCubit extends Cubit<SubscriptionState> {
     }
     _isSubmitting = true;
     try {
-      await _cancelSubscriptionRequest();
+      await cancelSubscriptionRequestUseCase();
       await getPlans(showLoading: false);
     } finally {
       _isSubmitting = false;

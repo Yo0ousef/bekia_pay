@@ -7,29 +7,25 @@ import 'package:bekia_pay/features/cart/presentation/logic/cart_cubit/cart_state
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartCubit extends Cubit<CartState> {
-  final GetCartItemsUseCase _getCartItems;
-  final AddItemUseCase _addItem;
-  final RemoveItemUseCase _removeItem;
-  final ClearCartUseCase _clearCart;
+  final GetCartItemsUseCase getCartItemsUseCase;
+  final AddItemUseCase addItemUseCase;
+  final RemoveItemUseCase removeItemUseCase;
+  final ClearCartUseCase clearCartUseCase;
   late final Future<void> _initialLoad;
 
   CartCubit({
-    required GetCartItemsUseCase getCartItems,
-    required AddItemUseCase addItem,
-    required RemoveItemUseCase removeItem,
-    required ClearCartUseCase clearCart,
-  }) : _getCartItems = getCartItems,
-       _addItem = addItem,
-       _removeItem = removeItem,
-       _clearCart = clearCart,
-       super(const CartState(isLoading: true)) {
+    required this.getCartItemsUseCase,
+    required this.addItemUseCase,
+    required this.removeItemUseCase,
+    required this.clearCartUseCase,
+  }) : super(const CartState(isLoading: true)) {
     _initialLoad = loadCart();
   }
 
   Future<void> loadCart() async {
     emit(state.copyWith(isLoading: true, clearError: true));
     try {
-      final items = await _getCartItems();
+      final items = await getCartItemsUseCase();
       if (!isClosed) {
         emit(state.copyWith(items: items, isLoading: false, clearError: true));
       }
@@ -45,7 +41,7 @@ class CartCubit extends Cubit<CartState> {
     if (isClosed || state.isSaving) return;
     emit(state.copyWith(isSaving: true, clearError: true));
     try {
-      final items = await _addItem(item);
+      final items = await addItemUseCase(item);
       if (!isClosed) emit(state.copyWith(items: items, isSaving: false));
     } catch (error) {
       if (!isClosed) {
@@ -59,7 +55,7 @@ class CartCubit extends Cubit<CartState> {
     if (isClosed || state.isSaving) return;
     emit(state.copyWith(isSaving: true, clearError: true));
     try {
-      final items = await _removeItem(item.productId);
+      final items = await removeItemUseCase(item.productId);
       if (!isClosed) emit(state.copyWith(items: items, isSaving: false));
     } catch (error) {
       if (!isClosed) {
@@ -73,7 +69,7 @@ class CartCubit extends Cubit<CartState> {
     if (isClosed || state.isSaving) return;
     emit(state.copyWith(isSaving: true, clearError: true));
     try {
-      await _clearCart();
+      await clearCartUseCase();
       if (!isClosed) {
         emit(
           state.copyWith(items: const [], isSaving: false, clearError: true),

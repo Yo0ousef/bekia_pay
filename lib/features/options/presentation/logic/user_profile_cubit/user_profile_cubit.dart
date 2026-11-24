@@ -8,20 +8,18 @@ part 'user_profile_cubit.freezed.dart';
 part 'user_profile_state.dart';
 
 class UserProfileCubit extends Cubit<UserProfileState> {
-  final GetUserProfileUseCase _getUserProfile;
-  final UpdateUserProfileUseCase _updateUserProfile;
+  final GetUserProfileUseCase getUserProfileUseCase;
+  final UpdateUserProfileUseCase updateUserProfileUseCase;
 
   UserProfileCubit({
-    required GetUserProfileUseCase getUserProfile,
-    required UpdateUserProfileUseCase updateUserProfile,
-  }) : _getUserProfile = getUserProfile,
-       _updateUserProfile = updateUserProfile,
-       super(const UserProfileState.loading());
+    required this.getUserProfileUseCase,
+    required this.updateUserProfileUseCase,
+  }) : super(const UserProfileState.loading());
 
   Future<void> fetchUserProfile() async {
     emit(const UserProfileState.loading());
     try {
-      final user = await _getUserProfile();
+      final user = await getUserProfileUseCase();
       if (isClosed) return;
       emit(UserProfileState.success(user));
     } catch (error) {
@@ -33,7 +31,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   Future<bool> updateUserProfile(UserEntity user) async {
     emit(const UserProfileState.updating());
     try {
-      await _updateUserProfile(user);
+      await updateUserProfileUseCase(user);
       if (isClosed) return false;
       emit(UserProfileState.success(user));
       return true;

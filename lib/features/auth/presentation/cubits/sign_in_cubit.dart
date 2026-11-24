@@ -16,12 +16,19 @@ class SignInCubit extends Cubit<SignInState> {
 
   Future<void> signIn() async {
     if (!(formKey.currentState?.validate() ?? false)) return;
+    await signInWithCredentials(
+      email: emailController.text.trim(),
+      password: passwordController.text,
+    );
+  }
+
+  Future<void> signInWithCredentials({
+    required String email,
+    required String password,
+  }) async {
     emit(const SignInState.loading());
     try {
-      await _signIn(
-        email: emailController.text.trim(),
-        password: passwordController.text,
-      );
+      await _signIn(email: email, password: password);
       if (isClosed) return;
       emit(const SignInState.success());
       emailController.clear();

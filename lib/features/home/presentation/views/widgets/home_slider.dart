@@ -43,7 +43,7 @@ class HomeSlider extends StatelessWidget {
                           imageUrl: offer.imageUrl,
                           placeholder: (_, _) => AppConstants.loading.center,
                           errorWidget: (_, _, _) =>
-                              Image.asset(ImageConstants.no_image, fit: .cover),
+                              Image.asset(ImageConstants.noImage, fit: .cover),
                         ),
                       ),
                     ),

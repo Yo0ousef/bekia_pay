@@ -11,7 +11,6 @@ import 'package:bekia_pay/features/auth/domain/repos/auth_repo.dart';
 import 'package:bekia_pay/features/auth/domain/use_cases/send_password_reset_email_use_case.dart';
 import 'package:bekia_pay/features/auth/domain/use_cases/sign_in_use_case.dart';
 import 'package:bekia_pay/features/auth/domain/use_cases/sign_up_use_case.dart';
-import 'package:bekia_pay/features/auth/presentation/cubits/forgot_password_cubit.dart';
 import 'package:bekia_pay/features/auth/presentation/cubits/sign_in_cubit.dart';
 import 'package:bekia_pay/features/auth/presentation/cubits/sign_up_cubit.dart';
 import 'package:bekia_pay/features/cart/data/data_sources/cart_local_data_source.dart';
@@ -119,10 +118,13 @@ class DependencyInjection {
       CartLocalDataSourceImpl.new,
     );
     getIt.registerLazySingleton<MaterialsRemoteDataSource>(
-      () => MaterialsRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
+      () => MaterialsRemoteDataSourceImpl(
+        databaseClient: getIt<DatabaseClient>(),
+      ),
     );
     getIt.registerLazySingleton<ProductsRemoteDataSource>(
-      () => ProductsRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
+      () =>
+          ProductsRemoteDataSourceImpl(databaseClient: getIt<DatabaseClient>()),
     );
     getIt.registerLazySingleton<SubscriptionRemoteDataSource>(
       () => SubscriptionRemoteDataSourceImpl(
@@ -192,9 +194,7 @@ class DependencyInjection {
       () => GetProductsUseCase(repository: getIt<ProductsRepo>()),
     );
     getIt.registerLazySingleton(
-      () => GetSubscriptionPlansUseCase(
-        repository: getIt<SubscriptionRepo>(),
-      ),
+      () => GetSubscriptionPlansUseCase(repository: getIt<SubscriptionRepo>()),
     );
     getIt.registerLazySingleton(
       () => SubscribeToPlanUseCase(getIt<PaymentService>()),
@@ -271,10 +271,11 @@ class DependencyInjection {
     );
     getIt.registerFactory<SubscriptionCubit>(
       () => SubscriptionCubit(
-        getPlans: getIt<GetSubscriptionPlansUseCase>(),
-        subscribeToPlan: getIt<SubscribeToPlanUseCase>(),
-        subscriptionRepo: getIt<SubscriptionRepo>(),
-        cancelSubscriptionRequest: getIt<CancelSubscriptionRequestUseCase>(),
+        getPlansUseCase: getIt<GetSubscriptionPlansUseCase>(),
+        subscribeToPlanUseCase: getIt<SubscribeToPlanUseCase>(),
+        subscriptionRepository: getIt<SubscriptionRepo>(),
+        cancelSubscriptionRequestUseCase:
+            getIt<CancelSubscriptionRequestUseCase>(),
       ),
     );
     getIt.registerFactory<ProductsCubit>(
@@ -290,10 +291,10 @@ class DependencyInjection {
     );
     getIt.registerLazySingleton<CartCubit>(
       () => CartCubit(
-        getCartItems: getIt<GetCartItemsUseCase>(),
-        addItem: getIt<AddItemUseCase>(),
-        removeItem: getIt<RemoveItemUseCase>(),
-        clearCart: getIt<ClearCartUseCase>(),
+        getCartItemsUseCase: getIt<GetCartItemsUseCase>(),
+        addItemUseCase: getIt<AddItemUseCase>(),
+        removeItemUseCase: getIt<RemoveItemUseCase>(),
+        clearCartUseCase: getIt<ClearCartUseCase>(),
       ),
     );
     getIt.registerFactory<CartCountCubit>(
@@ -313,8 +314,8 @@ class DependencyInjection {
     );
     getIt.registerFactory<UserProfileCubit>(
       () => UserProfileCubit(
-        getUserProfile: getIt<GetUserProfileUseCase>(),
-        updateUserProfile: getIt<UpdateUserProfileUseCase>(),
+        getUserProfileUseCase: getIt<GetUserProfileUseCase>(),
+        updateUserProfileUseCase: getIt<UpdateUserProfileUseCase>(),
       ),
     );
     getIt.registerFactory<UpdatePasswordCubit>(

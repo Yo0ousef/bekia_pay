@@ -45,7 +45,7 @@ class MaterialItem extends StatelessWidget {
               fit: BoxFit.cover,
               placeholder: (_, _) => AppConstants.loading.center,
               errorWidget: (_, _, _) =>
-                  Image.asset(ImageConstants.no_image, fit: .cover),
+                  Image.asset(ImageConstants.noImage, fit: .cover),
             ),
           ).expanded,
           8.vGap,

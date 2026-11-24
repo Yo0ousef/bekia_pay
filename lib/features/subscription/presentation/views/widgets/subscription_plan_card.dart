@@ -42,7 +42,8 @@ class SubscriptionPlanCard extends StatelessWidget {
           currentSubscription?.status == 'active',
       orElse: () => false,
     );
-    final bool isPendingRequest = currentSubscription?.planId == plan.id &&
+    final bool isPendingRequest =
+        currentSubscription?.planId == plan.id &&
         currentSubscription?.status == 'pending';
     final remainingDays = currentSubscription?.expiresAt
         ?.difference(DateTime.now().toUtc())
@@ -160,10 +161,11 @@ class SubscriptionPlanCard extends StatelessWidget {
                     Expanded(
                       child: Text(
                         features[index],
-                        style: ThemingTypography.styleRegular14(
-                          context,
-                        ).copyWith(
-                            color: AppColors.blackColor, fontFamily: 'Noto'),
+                        style: ThemingTypography.styleRegular14(context)
+                            .copyWith(
+                              color: AppColors.blackColor,
+                              fontFamily: 'Noto',
+                            ),
                       ),
                     ),
                   ],
@@ -183,30 +185,30 @@ class SubscriptionPlanCard extends StatelessWidget {
                   )
                 : isActive
                 ? OutlinedButton(
-              onPressed: null,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: color),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(
-                LocaleKeys.current_plan.tr(),
-                style: ThemingTypography.styleRegular14(context)
-                    .copyWith(color: color),
-              ),
-            )
+                    onPressed: null,
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: color),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(
+                      LocaleKeys.current_plan.tr(),
+                      style: ThemingTypography.styleRegular14(context)
+                          .copyWith(color: color),
+                    ),
+                  )
                 : doesUserHaveAPlan
                 ? OutlinedButton(
-              onPressed: null,
-              style: OutlinedButton.styleFrom(
-                side: BorderSide(color: color),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              child: Text(LocaleKeys.already_have_plan.tr()),
-            )
+                    onPressed: null,
+                    style: OutlinedButton.styleFrom(
+                      side: BorderSide(color: color),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                    ),
+                    child: Text(LocaleKeys.already_have_plan.tr()),
+                  )
                 : SubscriptionButton(plan: plan, color: color),
           ),
         ],

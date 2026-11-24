@@ -78,10 +78,7 @@ class SubscriptionRemoteDataSourceImpl implements SubscriptionRemoteDataSource {
 
     await databaseClient.deleteDataWhere(
       table: 'user_subscriptions',
-      queryParams: {
-        'user_id': user.id,
-        'status': 'pending',
-      },
+      queryParams: {'user_id': user.id, 'status': 'pending'},
     );
   }
 }

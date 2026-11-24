@@ -91,7 +91,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => DependencyInjection.getIt<SignInCubit>()),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<SignInCubit>(),
+              ),
               BlocProvider(
                 create: (_) => DependencyInjection.getIt<VisibilityCubit>(),
               ),
@@ -103,7 +105,9 @@ class AppRouter {
         return MaterialPageRoute(
           builder: (context) => MultiBlocProvider(
             providers: [
-              BlocProvider(create: (_) => DependencyInjection.getIt<SignUpCubit>()),
+              BlocProvider(
+                create: (_) => DependencyInjection.getIt<SignUpCubit>(),
+              ),
             ],
             child: const SignUpView(),
           ),

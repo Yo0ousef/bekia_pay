@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:phone_text_field/phone_text_field.dart';
 
 part 'sign_up_cubit.freezed.dart';
 part 'sign_up_state.dart';
@@ -39,7 +40,6 @@ class SignUpCubit extends Cubit<SignUpState> {
       );
       return;
     }
-    emit(const SignUpState.loading());
     final user = AuthUserEntity(
       fullName: nameController.text.trim(),
       phone: _phoneNumber,
@@ -53,8 +53,16 @@ class SignUpCubit extends Cubit<SignUpState> {
       floor: floorController.text.trim(),
       apartmentNumber: apartmentNumberController.text.trim(),
     );
+    await signUpWithUser(user: user, password: passwordController.text);
+  }
+
+  Future<void> signUpWithUser({
+    required AuthUserEntity user,
+    required String password,
+  }) async {
+    emit(const SignUpState.loading());
     try {
-      await _signUp(user: user, password: passwordController.text);
+      await _signUp(user: user, password: password);
       if (isClosed) return;
       nameController.clear();
       emailController.clear();
@@ -74,7 +82,7 @@ class SignUpCubit extends Cubit<SignUpState> {
     }
   }
 
-  void onPhoneNumberChanged(value) {
+  void onPhoneNumberChanged(PhoneNumber? value) {
     if (value != null) {
       _phoneNumber = value.completeNumber;
     }

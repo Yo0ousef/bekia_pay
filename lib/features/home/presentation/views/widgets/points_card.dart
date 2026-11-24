@@ -43,7 +43,7 @@ class PointsCard extends StatelessWidget {
                 Text(
                   LocaleKeys.my_points.tr(),
                   style: ThemingTypography.styleRegular14(context).copyWith(
-                    color: theme != .dark
+                    color: theme.brightness != Brightness.dark
                         ? AppColors.secondaryLightColor
                         : AppColors.secondaryDarkColor,
                   ),

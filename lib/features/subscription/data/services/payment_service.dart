@@ -25,7 +25,11 @@ class CashOnDeliveryPaymentService implements PaymentService {
     final now = DateTime.now().toUtc();
     final nextMonth = now.month == 12 ? 1 : now.month + 1;
     final nextMonthYear = now.month == 12 ? now.year + 1 : now.year;
-    final lastDayOfNextMonth = DateTime.utc(nextMonthYear, nextMonth + 1, 0).day;
+    final lastDayOfNextMonth = DateTime.utc(
+      nextMonthYear,
+      nextMonth + 1,
+      0,
+    ).day;
     final expiresAt = DateTime.utc(
       nextMonthYear,
       nextMonth,

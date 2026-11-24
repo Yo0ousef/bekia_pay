@@ -21,7 +21,7 @@ class ProductImage extends StatelessWidget {
         fit: BoxFit.cover,
         placeholder: (context, url) => AppConstants.loading.center,
         errorWidget: (_, _, _) =>
-            Image.asset(ImageConstants.no_image, fit: BoxFit.cover),
+            Image.asset(ImageConstants.noImage, fit: BoxFit.cover),
       ),
     );
   }
