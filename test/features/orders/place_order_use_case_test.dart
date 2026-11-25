@@ -30,6 +30,35 @@ void main() {
     verifyNoMoreInteractions(mockOrderRepo);
   });
 
+  test("failed because the quantity is frictional", () async {
+    await expectLater(
+      () => useCase(
+        items: [const OrderItemRequest(productId: 'product_1', quantity: 1.3)],
+      ),
+      throwsA(isA<ArgumentError>()),
+    );
+    verifyNever(() => mockOrderRepo.placeOrder(items: any(named: 'items')));
+  });
+  test("failed because the quantity is zero", () async {
+    await expectLater(
+      () => useCase(
+        items: [const OrderItemRequest(productId: 'product_1', quantity: 0)],
+      ),
+      throwsA(isA<ArgumentError>()),
+    );
+    verifyNever(() => mockOrderRepo.placeOrder(items: any(named: 'items')));
+  });
+  test('delegates to repository when productId contains spaces', () async {
+    final items = [const OrderItemRequest(productId: 'product 1', quantity: 4)];
+    when(() => mockOrderRepo.placeOrder(items: any(named: 'items')))
+        .thenAnswer((_) async {});
+
+    await useCase(items: items);
+
+    verify(() => mockOrderRepo.placeOrder(items: items)).called(1);
+    verifyNoMoreInteractions(mockOrderRepo);
+  });
+
   test(
     "throws ArgumentError when items list is empty and does not call repo",
     () async {
