@@ -58,6 +58,32 @@ void main() {
     verify(() => mockOrderRepo.placeOrder(items: items)).called(1);
     verifyNoMoreInteractions(mockOrderRepo);
   });
+  test(
+    'throws ArgumentError when productId is blank and does not call repo',
+    () async {
+      await expectLater(
+        () => useCase(
+          items: [const OrderItemRequest(productId: ' ', quantity: 4)],
+        ),
+        throwsA(isA<ArgumentError>()),
+      );
+
+      verifyNever(() => mockOrderRepo.placeOrder(items: any(named: 'items')));
+    },
+  );
+  test(
+    'throws ArgumentError when quantity is negative and does not call repo',
+    () async {
+      await expectLater(
+        () => useCase(
+          items: [const OrderItemRequest(productId: 'product_1', quantity: -4)],
+        ),
+        throwsA(isA<ArgumentError>()),
+      );
+
+      verifyNever(() => mockOrderRepo.placeOrder(items: any(named: 'items')));
+    },
+  );
 
   test(
     "throws ArgumentError when items list is empty and does not call repo",

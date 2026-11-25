@@ -31,6 +31,14 @@ void main() {
       verifyNever(() => mockOrderRepo.cancelOrder(any()));
     },
   );
+  test(
+    'throws ArgumentError when order id is blank and does not call repo',
+    () async {
+      await expectLater(() => useCase(' '), throwsA(isA<ArgumentError>()));
+
+      verifyNever(() => mockOrderRepo.cancelOrder(any()));
+    },
+  );
   test('throws SocketException when there is no internet connection', () async {
     when(() => mockOrderRepo.cancelOrder('order_id'))
         .thenThrow(const SocketException('No internet connection'));
